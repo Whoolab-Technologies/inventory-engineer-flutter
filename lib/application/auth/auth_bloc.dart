@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -15,22 +17,26 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final IAuthFacade _iAuthRepo;
   AuthBloc(this._iAuthRepo) : super(const AuthState.authInitial()) {
     on<AuthCheckRequested>((event, emit) async {
-      try {
-        final userOption = await _iAuthRepo.getSignedInUser();
+      log("AuthCheckRequested ");
+      await Future.delayed(const Duration(milliseconds: 3000), () async {
+        try {
+          final userOption = await _iAuthRepo.getSignedInUser();
 
-        emit(
-          userOption.fold(
-            () => const AuthState.unauthenticated(),
-            (_) => const AuthState.authenticated(),
-          ),
-        );
-      } catch (e) {
-        if (kDebugMode) {
-          print("$e");
+          log("emit ");
+          emit(
+            userOption.fold(
+              () => const AuthState.unauthenticated(),
+              (_) => const AuthState.authenticated(),
+            ),
+          );
+        } catch (e) {
+          if (kDebugMode) {
+            print("$e");
+          }
+          add(const SignedOut());
+          emit(const AuthState.unauthenticated());
         }
-        add(const SignedOut());
-        emit(const AuthState.unauthenticated());
-      }
+      });
     });
     on<SignedOut>((event, emit) async {
       // await _iPushNotificationRepository.removeFcmToken();

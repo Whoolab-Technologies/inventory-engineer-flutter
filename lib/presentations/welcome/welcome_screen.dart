@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mvp_engineer/application/auth/auth_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mvp_engineer/core/routes/routes.dart';
+import 'package:mvp_engineer/presentations/widgets/app_logo_widget.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -38,9 +39,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     .pushNamedAndRemoveUntil(AppRoutes.LOGIN, (_) => false);
               });
         },
-        child: const Center(
-          child: Text("Welcomescreen"),
-        ),
+        child: const Center(child: AppLogoWidget()),
       )),
     );
   }

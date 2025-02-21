@@ -125,22 +125,55 @@ class MaterialTheme {
   }
 
   static ThemeData theme(ColorScheme colorScheme) => ThemeData(
-      useMaterial3: true,
-      brightness: colorScheme.brightness,
-      colorScheme: colorScheme,
-      textTheme: textTheme.apply(
-        bodyColor: colorScheme.onSurface,
-        displayColor: colorScheme.onSurface,
-      ),
-      scaffoldBackgroundColor: colorScheme.surface,
-      canvasColor: colorScheme.surface,
-      appBarTheme: AppBarTheme(
-        backgroundColor: colorScheme.surface,
-        scrolledUnderElevation: 0,
-        iconTheme: IconThemeData(
-          color: colorScheme.primary,
+        useMaterial3: true,
+        brightness: colorScheme.brightness,
+        colorScheme: colorScheme,
+        textTheme: textTheme.apply(
+          bodyColor: colorScheme.onSurface,
+          displayColor: colorScheme.onSurface,
         ),
-      ));
+        scaffoldBackgroundColor: colorScheme.surface,
+        canvasColor: colorScheme.surface,
+        appBarTheme: AppBarTheme(
+          backgroundColor: colorScheme.surface,
+          scrolledUnderElevation: 0,
+          iconTheme: IconThemeData(
+            color: colorScheme.primary,
+          ),
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          prefixIconColor: colorScheme.primary,
+          labelStyle: TextStyle(color: colorScheme.primary),
+          border: OutlineInputBorder(
+              borderSide: BorderSide(color: colorScheme.primary),
+              borderRadius: BorderRadius.circular(12)),
+          enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: colorScheme.primary),
+              borderRadius: BorderRadius.circular(12)),
+          focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: colorScheme.primary),
+              borderRadius: BorderRadius.circular(12)),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+            backgroundColor: WidgetStateProperty.all(colorScheme.primary),
+            foregroundColor: WidgetStateProperty.all(Colors.white),
+            textStyle: WidgetStateProperty.all(
+              const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            shape: WidgetStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+            ),
+            minimumSize: WidgetStateProperty.all(
+              const Size(double.infinity, 52.0),
+            ),
+          ),
+        ),
+      );
 
   /// success
   static const success = ExtendedColor(
