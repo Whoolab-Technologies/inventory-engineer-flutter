@@ -1,0 +1,15 @@
+class Api {
+  static const apiUrlDev = "http://192.168.1.35:8000";
+  static const apiUrl = "http://192.168.1.35:8000";
+  static const apiPrefix = "/api/v1/storekeeper";
+  static const baseUrlDev = apiUrlDev + apiPrefix;
+  static const baseUrl = apiUrl + apiPrefix;
+  static const endPoints = {
+    "register": "/register",
+    "login": "/login",
+    "logout": "/logout",
+    "sendLink": "/sendLink",
+    "reset": "/reset",
+    "products": "/products",
+  };
+}

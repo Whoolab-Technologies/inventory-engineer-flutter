@@ -1,4 +1,4 @@
-package com.example.mvp_engineer
+package com.mvp.engineer
 
 import io.flutter.embedding.android.FlutterActivity
 
