@@ -12,8 +12,9 @@ class User {
   String? lastName;
   String? email;
   String? token;
+  String? imageUrl;
 
-  User({this.firstName, this.lastName, this.email, this.token});
+  User({this.firstName, this.lastName, this.email, this.token, this.imageUrl});
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 

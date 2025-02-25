@@ -135,8 +135,8 @@ class AuthRepo implements IAuthFacade {
       user = User.decode(storedUser);
       AppData.setUser(user);
     }
-    log("MVP getSignedInUser ${AppData.storekeeper?.encode()}");
-    return optionOf(AppData.storekeeper);
+    log("MVP getSignedInUser ${AppData.engineer?.encode()}");
+    return optionOf(AppData.engineer);
   }
 
   @override

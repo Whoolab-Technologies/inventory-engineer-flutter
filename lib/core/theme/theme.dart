@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
 
 class MaterialTheme {
   static late TextTheme textTheme;
@@ -135,6 +136,7 @@ class MaterialTheme {
         scaffoldBackgroundColor: colorScheme.surface,
         canvasColor: colorScheme.surface,
         appBarTheme: AppBarTheme(
+          centerTitle: true,
           backgroundColor: colorScheme.surface,
           scrolledUnderElevation: 0,
           iconTheme: IconThemeData(
@@ -153,13 +155,15 @@ class MaterialTheme {
           focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: colorScheme.primary),
               borderRadius: BorderRadius.circular(12)),
+          // Change the text size of the input value
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
             backgroundColor: WidgetStateProperty.all(colorScheme.primary),
             foregroundColor: WidgetStateProperty.all(Colors.white),
             textStyle: WidgetStateProperty.all(
-              const TextStyle(
+              TextStyle(
+                fontSize: 14.sp,
                 fontWeight: FontWeight.bold,
               ),
             ),

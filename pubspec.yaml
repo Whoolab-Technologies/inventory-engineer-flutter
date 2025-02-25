@@ -49,6 +49,7 @@ dependencies:
   shimmer: ^3.0.0
   qr_code_dart_scan: ^0.9.8
   qr_code_scanner_plus: ^2.0.9+1
+  cached_network_image: ^3.4.1
 
 dev_dependencies:
   flutter_test:

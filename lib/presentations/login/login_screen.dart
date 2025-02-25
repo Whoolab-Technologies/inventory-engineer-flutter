@@ -136,12 +136,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(height: 16.0.h),
                       TextField(
                         controller: _emailController,
+                        keyboardType: TextInputType.emailAddress,
                         decoration: const InputDecoration(
                           labelText: 'Email',
                           prefixIcon: Icon(Icons.email),
                           border: OutlineInputBorder(),
                         ),
-                        style: TextStyle(fontSize: 16.sp),
+                        style: TextStyle(fontSize: 14.sp),
                       ),
                       SizedBox(height: 16.0.h),
                       TextField(
@@ -161,7 +162,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           border: const OutlineInputBorder(),
                         ),
-                        style: TextStyle(fontSize: 16.sp),
+                        style: TextStyle(fontSize: 14.sp),
                       ),
                       SizedBox(height: 8.0.h),
                       Align(
@@ -183,7 +184,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           onPressed: _validateAndSubmit,
                           child: Text(
                             'Login',
-                            style: TextStyle(fontSize: 16.sp),
                           ),
                         ),
                       ),

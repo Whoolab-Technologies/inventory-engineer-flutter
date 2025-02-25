@@ -4,7 +4,7 @@ class AppData {
   AppData._();
   User? user;
   static final AppData instance = AppData._();
-  static User? get storekeeper => instance.user;
+  static User? get engineer => instance.user;
 
   static void clear() {
     instance.user = null;

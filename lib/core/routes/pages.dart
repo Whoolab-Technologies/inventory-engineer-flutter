@@ -7,8 +7,10 @@ import 'package:mvp_engineer/application/login/login_bloc.dart';
 import 'package:mvp_engineer/application/products/products_bloc.dart';
 import 'package:mvp_engineer/global.dart';
 import 'package:mvp_engineer/injection/injection.dart';
+import 'package:mvp_engineer/presentations/home/home_screen.dart';
 import 'package:mvp_engineer/presentations/login/login_screen.dart';
 import 'package:mvp_engineer/presentations/navigator/navigator_screen.dart';
+import 'package:mvp_engineer/presentations/products/products_screen.dart';
 // import 'package:mvp_engineer/injection/injection.dart';
 // import 'package:mvp_engineer/presentation/home/home_screen.dart';
 // import 'package:mvp_engineer/presentation/landing/landing_screen.dart';
@@ -46,18 +48,18 @@ class AppPages {
         ),
         PageEntity(
           route: AppRoutes.HOME,
-          page: const NavigatorScreen(),
+          page: const HomeScreen(),
           // bloc: BlocProvider(
           //   create: (context) => getIt<HomeBloc>(),
           // ),
         ),
-        // PageEntity(
-        //   route: AppRoutes.PRODUCTS,
-        //   page: const ProductsScreen(),
-        //   bloc: BlocProvider(
-        //     create: (context) => getIt<ProductsBloc>(),
-        //   ),
-        //),
+        PageEntity(
+          route: AppRoutes.PRODUCTS,
+          page: const ProductsScreen(),
+          bloc: BlocProvider(
+            create: (context) => getIt<ProductsBloc>(),
+          ),
+        ),
         // PageEntity(
         //   route: AppRoutes.TRANSACTIONS,
         //   page: const TransactionsScreen(),
