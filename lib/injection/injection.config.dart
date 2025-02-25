@@ -15,10 +15,10 @@ import 'package:mvp_engineer/application/login/login_bloc.dart' as _i837;
 import 'package:mvp_engineer/application/products/products_bloc.dart' as _i992;
 import 'package:mvp_engineer/domain/app-data/app_data.dart' as _i554;
 import 'package:mvp_engineer/domain/auth/i_auth_facade.dart' as _i129;
-import 'package:mvp_engineer/domain/store/i_store_facade.dart' as _i778;
+import 'package:mvp_engineer/domain/product/i_product_facade.dart' as _i983;
 import 'package:mvp_engineer/infrastructure/auth/auth_repo.dart' as _i597;
 import 'package:mvp_engineer/infrastructure/core/dio.dart' as _i429;
-import 'package:mvp_engineer/infrastructure/store/store_repo.dart' as _i2;
+import 'package:mvp_engineer/infrastructure/product/product_repo.dart' as _i127;
 import 'package:mvp_engineer/injection/injection_module.dart' as _i118;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -35,12 +35,12 @@ extension GetItInjectableX on _i174.GetIt {
     final injectionModule = _$InjectionModule();
     gh.lazySingleton<_i554.AppData>(() => injectionModule.appData);
     gh.lazySingleton<_i429.DioClient>(() => injectionModule.dioClient);
-    gh.lazySingleton<_i778.IStoreFacade>(() => _i2.StoreRepo());
     gh.lazySingleton<_i129.IAuthFacade>(
         () => _i597.AuthRepo(gh<_i554.AppData>()));
-    gh.factory<_i992.ProductsBloc>(
-        () => _i992.ProductsBloc(gh<_i778.IStoreFacade>()));
+    gh.lazySingleton<_i983.IProductFacade>(() => _i127.ProductRepo());
     gh.factory<_i730.AuthBloc>(() => _i730.AuthBloc(gh<_i129.IAuthFacade>()));
+    gh.factory<_i992.ProductsBloc>(
+        () => _i992.ProductsBloc(gh<_i983.IProductFacade>()));
     gh.factory<_i837.LoginBloc>(() => _i837.LoginBloc(gh<_i129.IAuthFacade>()));
     return this;
   }

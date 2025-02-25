@@ -1,22 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'store_response.dart';
+part of 'product_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-StoreResponse _$StoreResponseFromJson(Map<String, dynamic> json) =>
-    StoreResponse(
+ProductResponse _$ProductResponseFromJson(Map<String, dynamic> json) =>
+    ProductResponse(
       status: json['status'],
       error: json['error'],
       message: json['message'],
       data: (json['data'] as List<dynamic>?)
-          ?.map((e) => Store.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => Product.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$StoreResponseToJson(StoreResponse instance) =>
+Map<String, dynamic> _$ProductResponseToJson(ProductResponse instance) =>
     <String, dynamic>{
       'status': instance.status,
       'error': instance.error,

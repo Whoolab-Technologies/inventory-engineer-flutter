@@ -4,9 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvp_engineer/application/products/products_bloc.dart';
 import 'package:mvp_engineer/core/utils/utils.dart';
 import 'package:mvp_engineer/presentations/products/empty_product_list.dart';
-import 'package:mvp_engineer/presentations/products/multi_store_product_list_viewer.dart';
 import 'package:mvp_engineer/presentations/products/product_item_widget.dart';
-import 'package:mvp_engineer/presentations/products/single_store_product_list_viewer.dart';
+import 'package:mvp_engineer/presentations/products/product_list_viewer.dart';
 
 class ProductsScreen extends StatelessWidget {
   const ProductsScreen({super.key});
@@ -27,10 +26,10 @@ class ProductsScreen extends StatelessWidget {
           },
           child: BlocConsumer<ProductsBloc, ProductsState>(
             listenWhen: (previous, current) =>
-                previous.storeListFailureOrSuccess !=
-                current.storeListFailureOrSuccess,
+                previous.productListFailureOrSuccess !=
+                current.productListFailureOrSuccess,
             listener: (context, state) {
-              state.storeListFailureOrSuccess.fold(
+              state.productListFailureOrSuccess.fold(
                   () => null,
                   (a) => {
                         a.fold((f) {
@@ -50,15 +49,11 @@ class ProductsScreen extends StatelessWidget {
                 );
               }
 
-              return state.stores.isEmpty
+              return state.products.isEmpty
                   ? const EmptyProductList()
-                  : (state.stores.length == 1)
-                      ? SingleStoreProductListViewer(
-                          store: state.stores.first,
-                        )
-                      : MultiStoreProductListViewer(
-                          stores: state.stores,
-                        );
+                  : ProductListViewer(
+                      products: state.products,
+                    );
             },
           ),
         ));

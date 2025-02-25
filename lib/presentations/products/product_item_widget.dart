@@ -8,6 +8,7 @@ class ProductItemWidget extends StatelessWidget {
   final String imageUrl;
   final bool isStockIn;
   final int? stockCount;
+  final int stockWithOthers;
   final VoidCallback? onTap;
 
   const ProductItemWidget({
@@ -18,6 +19,7 @@ class ProductItemWidget extends StatelessWidget {
     required this.isStockIn,
     this.stockCount,
     this.onTap,
+    required this.stockWithOthers,
   });
 
   @override
@@ -81,21 +83,43 @@ class ProductItemWidget extends StatelessWidget {
                     ),
                     SizedBox(height: 5.h),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Icon(
-                          isStockIn ? Icons.check_circle : Icons.cancel,
-                          color: isStockIn ? Colors.green : Colors.red,
-                          size: 18.sp,
+                        Row(
+                          children: [
+                            Icon(
+                              isStockIn ? Icons.check_circle : Icons.cancel,
+                              color: isStockIn ? Colors.green : Colors.red,
+                              size: 18.sp,
+                            ),
+                            SizedBox(width: 5.w),
+                            Text(
+                              isStockIn ? 'Stock In: $stockCount' : 'Stock Out',
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                color: isStockIn ? Colors.green : Colors.red,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
                         ),
-                        SizedBox(width: 5.w),
-                        Text(
-                          isStockIn ? 'Stock In: $stockCount' : 'Stock Out',
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            color: isStockIn ? Colors.green : Colors.red,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                        Row(
+                          children: [
+                            const Text(
+                              "With Others: ",
+                            ),
+                            Text(
+                              "$stockWithOthers",
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                color: stockWithOthers > 0
+                                    ? Colors.green
+                                    : Colors.red,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )
+                          ],
+                        )
                       ],
                     ),
                   ],

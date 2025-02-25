@@ -290,8 +290,8 @@ abstract class _GetProducts implements ProductsEvent {
 /// @nodoc
 mixin _$ProductsState {
   bool get isloading => throw _privateConstructorUsedError;
-  List<Store> get stores => throw _privateConstructorUsedError;
-  Option<Either<AppFailure, List<Store>>> get storeListFailureOrSuccess =>
+  List<Product> get products => throw _privateConstructorUsedError;
+  Option<Either<AppFailure, List<Product>>> get productListFailureOrSuccess =>
       throw _privateConstructorUsedError;
 
   /// Create a copy of ProductsState
@@ -309,8 +309,8 @@ abstract class $ProductsStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isloading,
-      List<Store> stores,
-      Option<Either<AppFailure, List<Store>>> storeListFailureOrSuccess});
+      List<Product> products,
+      Option<Either<AppFailure, List<Product>>> productListFailureOrSuccess});
 }
 
 /// @nodoc
@@ -329,22 +329,22 @@ class _$ProductsStateCopyWithImpl<$Res, $Val extends ProductsState>
   @override
   $Res call({
     Object? isloading = null,
-    Object? stores = null,
-    Object? storeListFailureOrSuccess = null,
+    Object? products = null,
+    Object? productListFailureOrSuccess = null,
   }) {
     return _then(_value.copyWith(
       isloading: null == isloading
           ? _value.isloading
           : isloading // ignore: cast_nullable_to_non_nullable
               as bool,
-      stores: null == stores
-          ? _value.stores
-          : stores // ignore: cast_nullable_to_non_nullable
-              as List<Store>,
-      storeListFailureOrSuccess: null == storeListFailureOrSuccess
-          ? _value.storeListFailureOrSuccess
-          : storeListFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Option<Either<AppFailure, List<Store>>>,
+      products: null == products
+          ? _value.products
+          : products // ignore: cast_nullable_to_non_nullable
+              as List<Product>,
+      productListFailureOrSuccess: null == productListFailureOrSuccess
+          ? _value.productListFailureOrSuccess
+          : productListFailureOrSuccess // ignore: cast_nullable_to_non_nullable
+              as Option<Either<AppFailure, List<Product>>>,
     ) as $Val);
   }
 }
@@ -359,8 +359,8 @@ abstract class _$$ProductsStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {bool isloading,
-      List<Store> stores,
-      Option<Either<AppFailure, List<Store>>> storeListFailureOrSuccess});
+      List<Product> products,
+      Option<Either<AppFailure, List<Product>>> productListFailureOrSuccess});
 }
 
 /// @nodoc
@@ -377,22 +377,22 @@ class __$$ProductsStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isloading = null,
-    Object? stores = null,
-    Object? storeListFailureOrSuccess = null,
+    Object? products = null,
+    Object? productListFailureOrSuccess = null,
   }) {
     return _then(_$ProductsStateImpl(
       isloading: null == isloading
           ? _value.isloading
           : isloading // ignore: cast_nullable_to_non_nullable
               as bool,
-      stores: null == stores
-          ? _value._stores
-          : stores // ignore: cast_nullable_to_non_nullable
-              as List<Store>,
-      storeListFailureOrSuccess: null == storeListFailureOrSuccess
-          ? _value.storeListFailureOrSuccess
-          : storeListFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Option<Either<AppFailure, List<Store>>>,
+      products: null == products
+          ? _value._products
+          : products // ignore: cast_nullable_to_non_nullable
+              as List<Product>,
+      productListFailureOrSuccess: null == productListFailureOrSuccess
+          ? _value.productListFailureOrSuccess
+          : productListFailureOrSuccess // ignore: cast_nullable_to_non_nullable
+              as Option<Either<AppFailure, List<Product>>>,
     ));
   }
 }
@@ -402,26 +402,26 @@ class __$$ProductsStateImplCopyWithImpl<$Res>
 class _$ProductsStateImpl implements _ProductsState {
   const _$ProductsStateImpl(
       {required this.isloading,
-      required final List<Store> stores,
-      required this.storeListFailureOrSuccess})
-      : _stores = stores;
+      required final List<Product> products,
+      required this.productListFailureOrSuccess})
+      : _products = products;
 
   @override
   final bool isloading;
-  final List<Store> _stores;
+  final List<Product> _products;
   @override
-  List<Store> get stores {
-    if (_stores is EqualUnmodifiableListView) return _stores;
+  List<Product> get products {
+    if (_products is EqualUnmodifiableListView) return _products;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_stores);
+    return EqualUnmodifiableListView(_products);
   }
 
   @override
-  final Option<Either<AppFailure, List<Store>>> storeListFailureOrSuccess;
+  final Option<Either<AppFailure, List<Product>>> productListFailureOrSuccess;
 
   @override
   String toString() {
-    return 'ProductsState(isloading: $isloading, stores: $stores, storeListFailureOrSuccess: $storeListFailureOrSuccess)';
+    return 'ProductsState(isloading: $isloading, products: $products, productListFailureOrSuccess: $productListFailureOrSuccess)';
   }
 
   @override
@@ -431,15 +431,19 @@ class _$ProductsStateImpl implements _ProductsState {
             other is _$ProductsStateImpl &&
             (identical(other.isloading, isloading) ||
                 other.isloading == isloading) &&
-            const DeepCollectionEquality().equals(other._stores, _stores) &&
-            (identical(other.storeListFailureOrSuccess,
-                    storeListFailureOrSuccess) ||
-                other.storeListFailureOrSuccess == storeListFailureOrSuccess));
+            const DeepCollectionEquality().equals(other._products, _products) &&
+            (identical(other.productListFailureOrSuccess,
+                    productListFailureOrSuccess) ||
+                other.productListFailureOrSuccess ==
+                    productListFailureOrSuccess));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isloading,
-      const DeepCollectionEquality().hash(_stores), storeListFailureOrSuccess);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isloading,
+      const DeepCollectionEquality().hash(_products),
+      productListFailureOrSuccess);
 
   /// Create a copy of ProductsState
   /// with the given fields replaced by the non-null parameter values.
@@ -453,16 +457,16 @@ class _$ProductsStateImpl implements _ProductsState {
 abstract class _ProductsState implements ProductsState {
   const factory _ProductsState(
       {required final bool isloading,
-      required final List<Store> stores,
-      required final Option<Either<AppFailure, List<Store>>>
-          storeListFailureOrSuccess}) = _$ProductsStateImpl;
+      required final List<Product> products,
+      required final Option<Either<AppFailure, List<Product>>>
+          productListFailureOrSuccess}) = _$ProductsStateImpl;
 
   @override
   bool get isloading;
   @override
-  List<Store> get stores;
+  List<Product> get products;
   @override
-  Option<Either<AppFailure, List<Store>>> get storeListFailureOrSuccess;
+  Option<Either<AppFailure, List<Product>>> get productListFailureOrSuccess;
 
   /// Create a copy of ProductsState
   /// with the given fields replaced by the non-null parameter values.
