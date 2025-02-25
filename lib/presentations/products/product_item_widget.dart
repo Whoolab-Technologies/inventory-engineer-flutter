@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shimmer/shimmer.dart';
+import 'package:mvp_engineer/presentations/widgets/app_shimmer.dart';
 
 class ProductItemWidget extends StatelessWidget {
   final String productName;
@@ -146,9 +146,7 @@ class ProductItemShimmer extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Shimmer.fromColors(
-              baseColor: Colors.grey[300]!,
-              highlightColor: Colors.grey[100]!,
+            AppShimmer(
               child: Container(
                 width: 60.w,
                 height: 60.h,
@@ -163,9 +161,7 @@ class ProductItemShimmer extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Shimmer.fromColors(
-                    baseColor: Colors.grey[300]!,
-                    highlightColor: Colors.grey[100]!,
+                  AppShimmer(
                     child: Container(
                       width: double.infinity,
                       height: 16.h,
@@ -173,9 +169,7 @@ class ProductItemShimmer extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 5.h),
-                  Shimmer.fromColors(
-                    baseColor: Colors.grey[300]!,
-                    highlightColor: Colors.grey[100]!,
+                  AppShimmer(
                     child: Container(
                       width: double.infinity,
                       height: 14.h,
@@ -183,9 +177,7 @@ class ProductItemShimmer extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 5.h),
-                  Shimmer.fromColors(
-                    baseColor: Colors.grey[300]!,
-                    highlightColor: Colors.grey[100]!,
+                  AppShimmer(
                     child: Container(
                       width: double.infinity,
                       height: 14.h,
@@ -195,9 +187,7 @@ class ProductItemShimmer extends StatelessWidget {
                   SizedBox(height: 5.h),
                   Row(
                     children: [
-                      Shimmer.fromColors(
-                        baseColor: Colors.grey[300]!,
-                        highlightColor: Colors.grey[100]!,
+                      AppShimmer(
                         child: Container(
                           width: 18.w,
                           height: 18.h,
@@ -205,9 +195,7 @@ class ProductItemShimmer extends StatelessWidget {
                         ),
                       ),
                       SizedBox(width: 5.w),
-                      Shimmer.fromColors(
-                        baseColor: Colors.grey[300]!,
-                        highlightColor: Colors.grey[100]!,
+                      AppShimmer(
                         child: Container(
                           width: 80.w,
                           height: 14.h,

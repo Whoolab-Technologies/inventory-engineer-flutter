@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvp_engineer/application/products/products_bloc.dart';
 import 'package:mvp_engineer/core/routes/routes.dart';
 import 'package:mvp_engineer/domain/app-data/app_data.dart';
+import 'package:mvp_engineer/presentations/material_requests/material_request_screen.dart';
 import 'package:mvp_engineer/presentations/profile/profile_screen.dart';
 import 'package:mvp_engineer/presentations/widgets/app_profile_pic_widget.dart';
 // import 'package:mvp_engineer/presentation/scanner/qr_code_scanner.dart';
@@ -79,12 +80,11 @@ class HomeScreen extends StatelessWidget {
                       label: 'Scan Items',
                       primaryColor: primaryColor,
                       onTap: () {
-                        // Navigator.of(context).push(MaterialPageRoute(
-                        //   builder: (context) {
-                        //     return const QRViewExample();
-                        //     return const QrCodeScanner();
-                        //   },
-                        // ));
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) {
+                            return const MaterialRequestScreen();
+                          },
+                        ));
                       },
                     ),
                     HomeCard(
