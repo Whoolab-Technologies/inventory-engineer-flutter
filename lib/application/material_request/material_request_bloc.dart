@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -45,8 +47,38 @@ class MaterialRequestBloc
       emit(state.copyWith(description: event.description));
     });
 
-    on<MaterialRequestSubmitted>((event, emit) {
-      // Handle submission logic (e.g., API call)
+    on<MaterialRequestSubmitted>((event, emit) async {
+      // Show loading state
+      emit(state.copyWith(
+        isLoading: true,
+        materialRequestsFailureOrSuccess: none(),
+        materialRequestsCreateFailureOrSuccess: none(),
+      ));
+
+      // Call repository
+      final result =
+          await _iMaterialRequestRepo.postMaterialRequests(state.mrItems);
+
+      // Make a mutable copy of the materialRequests list
+      final updatedMaterialRequests =
+          List<MaterialRequest>.of(state.materialRequests);
+
+      // Add new request if successful
+      result.fold(
+        (failure) => null,
+        (newRequest) => updatedMaterialRequests.add(newRequest),
+      );
+      // Emit updated state
+      emit(state.copyWith(
+        isLoading: false,
+        mrItems: result.isRight()
+            ? []
+            : state.mrItems, // Clear items only on success
+        materialRequests: updatedMaterialRequests,
+        materialRequestsFailureOrSuccess:
+            optionOf(right(updatedMaterialRequests)),
+        materialRequestsCreateFailureOrSuccess: optionOf(result),
+      ));
     });
   }
 }

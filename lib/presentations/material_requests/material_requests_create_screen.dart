@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvp_engineer/application/material_request/material_request_bloc.dart';
-
 import 'package:mvp_engineer/application/products/products_bloc.dart';
 import 'package:mvp_engineer/core/utils/utils.dart';
 import 'package:mvp_engineer/core/values/strings.dart';
@@ -55,13 +54,24 @@ class _MaterialRequestFormState extends State<MaterialRequestForm> {
 
   void _addProduct() {
     if (selectedProduct != null && quantityController.text.isNotEmpty) {
-      setState(() {
-        MaterialRequestItem existingItem = items.firstWhere(
-          (item) => item.productId == selectedProduct!.id,
-        );
-        log("existingItem ${existingItem}");
+      List<MaterialRequestItem>? existingItem =
+          items.where((item) => item.productId == selectedProduct!.id).toList();
+      if (existingItem.isNotEmpty) {
         Utils.handleError(context, Strings.productAlreadyAdded);
-      });
+      } else {
+        MaterialRequestItem item = MaterialRequestItem(
+            productId: selectedProduct!.id,
+            productName: selectedProduct!.item,
+            quantity: int.parse(quantityController.text));
+        items.add(item);
+
+        quantityController.clear();
+        selectedProduct = null;
+        setState(() {});
+        context
+            .read<MaterialRequestBloc>()
+            .add(MaterialRequestEvent.productAdded(item));
+      }
 
       FocusScope.of(context).unfocus();
     }
@@ -69,115 +79,133 @@ class _MaterialRequestFormState extends State<MaterialRequestForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        children: [
-          Card(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.w),
-              child: Column(
-                children: [
-                  BlocBuilder<ProductsBloc, ProductsState>(
-                    builder: (context, state) {
-                      log("${state.products}");
-
-                      return state.isloading
-                          ? AppShimmer(
-                              child: Container(
-                                height: 54.h,
-                                color: Colors.grey[300],
-                              ),
-                            )
-                          : Padding(
-                              padding: EdgeInsets.symmetric(vertical: 8.h),
-                              child: AppCustomDropdown<Product>(
-                                items: state.products,
-                                value: selectedProduct,
-                                label: Strings.productLabel,
-                                placeholder: Strings.productPlaceHolder,
-                                itemToString: (p0) => p0.toString(),
-                                onChanged: (p0) {
-                                  setState(() {
-                                    selectedProduct = p0;
-                                  });
-                                },
-                                itemDisplayText: (p0) {
-                                  return "${p0.item} (${(p0.symbol ?? "").toUpperCase()})";
-                                },
-                              ),
-                            );
-                    },
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8.h),
-                    child: TextFormField(
-                      controller: quantityController,
-                      decoration: const InputDecoration(
-                          labelText: Strings.quantityLabel),
-                      keyboardType: TextInputType.number,
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8.h),
-                    child: OutlinedButton(
-                      onPressed: _addProduct,
-                      child: const Text(Strings.addProduct),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Expanded(
-            child: ListView.builder(
-              padding: EdgeInsets.only(top: 24.h),
-              itemCount: items.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  child: ListTile(
-                    title: Text(
-                      items[index].productName ?? "",
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.primary,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    subtitle: Text(
-                      '${Strings.quantityLabel}: ${items[index].quantity}',
-                      style: TextStyle(
-                          fontSize: 12.sp, fontWeight: FontWeight.w400),
-                    ),
-                    trailing: IconButton(
-                      icon: Icon(
-                        Icons.delete,
-                        color: Theme.of(context).colorScheme.error,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          items.removeAt(index);
-                        });
-                        context.read<MaterialRequestBloc>().add(
-                            MaterialRequestEvent.productAdded(items[index]));
+    return BlocListener<MaterialRequestBloc, MaterialRequestState>(
+      listenWhen: (previous, current) =>
+          previous.isLoading != current.isLoading,
+      listener: (context, state) {
+        state.materialRequestsCreateFailureOrSuccess.fold(
+            () => null,
+            (a) => a.fold((l) {
+                  String message = l.map(customError: (error) => error.message);
+                  Utils.handleError(context, message);
+                }, (r) {
+                  setState(() {
+                    items = [];
+                    selectedProduct = null;
+                  });
+                  quantityController.clear();
+                  Navigator.of(context).pop(true);
+                  Utils.handleSuccess(context, Strings.mrCreateSuccess);
+                }));
+      },
+      child: Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            Card(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.w),
+                child: Column(
+                  children: [
+                    BlocBuilder<ProductsBloc, ProductsState>(
+                      builder: (context, state) {
+                        return state.isloading
+                            ? AppShimmer(
+                                child: Container(
+                                  height: 54.h,
+                                  color: Colors.grey[300],
+                                ),
+                              )
+                            : Padding(
+                                padding: EdgeInsets.symmetric(vertical: 8.h),
+                                child: AppCustomDropdown<Product>(
+                                  items: state.products,
+                                  value: selectedProduct,
+                                  label: Strings.productLabel,
+                                  placeholder: Strings.productPlaceHolder,
+                                  itemToString: (p0) => p0.toString(),
+                                  onChanged: (p0) {
+                                    setState(() {
+                                      selectedProduct = p0;
+                                    });
+                                  },
+                                  itemDisplayText: (p0) {
+                                    return "${p0.item} (${(p0.symbol ?? "").toUpperCase()})";
+                                  },
+                                ),
+                              );
                       },
                     ),
-                  ),
-                );
-              },
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8.h),
+                      child: TextFormField(
+                        controller: quantityController,
+                        decoration: const InputDecoration(
+                            labelText: Strings.quantityLabel),
+                        keyboardType: TextInputType.number,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8.h),
+                      child: OutlinedButton(
+                        onPressed: _addProduct,
+                        child: const Text(Strings.addProduct),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                context
-                    .read<MaterialRequestBloc>()
-                    .add(const MaterialRequestSubmitted());
-              }
-            },
-            child: const Text(Strings.submit),
-          )
-        ],
+            Expanded(
+              child: ListView.builder(
+                padding: EdgeInsets.only(top: 24.h),
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    child: ListTile(
+                      title: Text(
+                        items[index].productName ?? "",
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      subtitle: Text(
+                        '${Strings.quantityLabel}: ${items[index].quantity}',
+                        style: TextStyle(
+                            fontSize: 12.sp, fontWeight: FontWeight.w400),
+                      ),
+                      trailing: IconButton(
+                        icon: Icon(
+                          Icons.delete,
+                          color: Theme.of(context).colorScheme.error,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            items.removeAt(index);
+                          });
+                          context.read<MaterialRequestBloc>().add(
+                              MaterialRequestEvent.productAdded(items[index]));
+                        },
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  context
+                      .read<MaterialRequestBloc>()
+                      .add(const MaterialRequestSubmitted());
+                }
+              },
+              child: const Text(Strings.submit),
+            )
+          ],
+        ),
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mvp_engineer/application/material_request/material_request_bloc.dart';
 import 'package:mvp_engineer/application/products/products_bloc.dart';
 import 'package:mvp_engineer/core/routes/routes.dart';
 import 'package:mvp_engineer/domain/app-data/app_data.dart';
@@ -94,14 +95,9 @@ class HomeScreen extends StatelessWidget {
                       label: 'Requests',
                       primaryColor: primaryColor,
                       onTap: () {
-                        // Navigator.of(context).pushNamed(AppRoutes.REPORTS);
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return const MaterialRequestScreen();
-                            },
-                          ),
-                        );
+                        context.read<MaterialRequestBloc>().add(
+                            const MaterialRequestEvent.fetchMaterialRequests());
+                        Navigator.of(context).pushNamed(AppRoutes.MR);
                       },
                     ),
                     HomeCard(

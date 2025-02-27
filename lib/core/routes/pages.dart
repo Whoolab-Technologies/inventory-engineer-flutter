@@ -4,11 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mvp_engineer/application/auth/auth_bloc.dart';
 import 'package:mvp_engineer/application/login/login_bloc.dart';
+import 'package:mvp_engineer/application/material_request/material_request_bloc.dart';
 import 'package:mvp_engineer/application/products/products_bloc.dart';
 import 'package:mvp_engineer/global.dart';
 import 'package:mvp_engineer/injection/injection.dart';
 import 'package:mvp_engineer/presentations/home/home_screen.dart';
 import 'package:mvp_engineer/presentations/login/login_screen.dart';
+import 'package:mvp_engineer/presentations/material_requests/material_request_screen.dart';
+import 'package:mvp_engineer/presentations/material_requests/material_requests_create_screen.dart';
 import 'package:mvp_engineer/presentations/navigator/navigator_screen.dart';
 import 'package:mvp_engineer/presentations/products/products_screen.dart';
 // import 'package:mvp_engineer/injection/injection.dart';
@@ -60,13 +63,13 @@ class AppPages {
             create: (context) => getIt<ProductsBloc>(),
           ),
         ),
-        // PageEntity(
-        //   route: AppRoutes.TRANSACTIONS,
-        //   page: const TransactionsScreen(),
-        //   // bloc: BlocProvider(
-        //   //   create: (context) => getIt<RegisterBloc>(),
-        //   // ),
-        // ),
+        PageEntity(
+          route: AppRoutes.MR,
+          page: const MaterialRequestScreen(),
+          bloc: BlocProvider(
+            create: (context) => getIt<MaterialRequestBloc>(),
+          ),
+        ),
         // PageEntity(
         //   route: AppRoutes.REPORTS,
         //   page: const ReportsScreen(),
@@ -94,7 +97,6 @@ class AppPages {
   }
 
   static PageTransition onGenerateRoute(RouteSettings settings) {
-    log("MVP ${settings.name}");
     if (settings.name != null) {
       final result =
           AppPages.pages().where((element) => element.route == settings.name);

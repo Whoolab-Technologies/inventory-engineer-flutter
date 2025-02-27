@@ -885,6 +885,9 @@ mixin _$MaterialRequestState {
   Option<Either<AppFailure, List<MaterialRequest>>>
       get materialRequestsFailureOrSuccess =>
           throw _privateConstructorUsedError;
+  Option<Either<AppFailure, MaterialRequest>>
+      get materialRequestsCreateFailureOrSuccess =>
+          throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
 
   /// Create a copy of MaterialRequestState
@@ -906,6 +909,8 @@ abstract class $MaterialRequestStateCopyWith<$Res> {
       List<MaterialRequest> materialRequests,
       Option<Either<AppFailure, List<MaterialRequest>>>
           materialRequestsFailureOrSuccess,
+      Option<Either<AppFailure, MaterialRequest>>
+          materialRequestsCreateFailureOrSuccess,
       bool isLoading});
 }
 
@@ -929,6 +934,7 @@ class _$MaterialRequestStateCopyWithImpl<$Res,
     Object? description = null,
     Object? materialRequests = null,
     Object? materialRequestsFailureOrSuccess = null,
+    Object? materialRequestsCreateFailureOrSuccess = null,
     Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
@@ -948,6 +954,11 @@ class _$MaterialRequestStateCopyWithImpl<$Res,
           ? _value.materialRequestsFailureOrSuccess
           : materialRequestsFailureOrSuccess // ignore: cast_nullable_to_non_nullable
               as Option<Either<AppFailure, List<MaterialRequest>>>,
+      materialRequestsCreateFailureOrSuccess: null ==
+              materialRequestsCreateFailureOrSuccess
+          ? _value.materialRequestsCreateFailureOrSuccess
+          : materialRequestsCreateFailureOrSuccess // ignore: cast_nullable_to_non_nullable
+              as Option<Either<AppFailure, MaterialRequest>>,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -970,6 +981,8 @@ abstract class _$$MaterialRequestStateImplCopyWith<$Res>
       List<MaterialRequest> materialRequests,
       Option<Either<AppFailure, List<MaterialRequest>>>
           materialRequestsFailureOrSuccess,
+      Option<Either<AppFailure, MaterialRequest>>
+          materialRequestsCreateFailureOrSuccess,
       bool isLoading});
 }
 
@@ -990,6 +1003,7 @@ class __$$MaterialRequestStateImplCopyWithImpl<$Res>
     Object? description = null,
     Object? materialRequests = null,
     Object? materialRequestsFailureOrSuccess = null,
+    Object? materialRequestsCreateFailureOrSuccess = null,
     Object? isLoading = null,
   }) {
     return _then(_$MaterialRequestStateImpl(
@@ -1009,6 +1023,11 @@ class __$$MaterialRequestStateImplCopyWithImpl<$Res>
           ? _value.materialRequestsFailureOrSuccess
           : materialRequestsFailureOrSuccess // ignore: cast_nullable_to_non_nullable
               as Option<Either<AppFailure, List<MaterialRequest>>>,
+      materialRequestsCreateFailureOrSuccess: null ==
+              materialRequestsCreateFailureOrSuccess
+          ? _value.materialRequestsCreateFailureOrSuccess
+          : materialRequestsCreateFailureOrSuccess // ignore: cast_nullable_to_non_nullable
+              as Option<Either<AppFailure, MaterialRequest>>,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -1025,6 +1044,7 @@ class _$MaterialRequestStateImpl implements _MaterialRequestState {
       required this.description,
       required final List<MaterialRequest> materialRequests,
       required this.materialRequestsFailureOrSuccess,
+      required this.materialRequestsCreateFailureOrSuccess,
       required this.isLoading})
       : _mrItems = mrItems,
         _materialRequests = materialRequests;
@@ -1052,11 +1072,14 @@ class _$MaterialRequestStateImpl implements _MaterialRequestState {
   final Option<Either<AppFailure, List<MaterialRequest>>>
       materialRequestsFailureOrSuccess;
   @override
+  final Option<Either<AppFailure, MaterialRequest>>
+      materialRequestsCreateFailureOrSuccess;
+  @override
   final bool isLoading;
 
   @override
   String toString() {
-    return 'MaterialRequestState(mrItems: $mrItems, description: $description, materialRequests: $materialRequests, materialRequestsFailureOrSuccess: $materialRequestsFailureOrSuccess, isLoading: $isLoading)';
+    return 'MaterialRequestState(mrItems: $mrItems, description: $description, materialRequests: $materialRequests, materialRequestsFailureOrSuccess: $materialRequestsFailureOrSuccess, materialRequestsCreateFailureOrSuccess: $materialRequestsCreateFailureOrSuccess, isLoading: $isLoading)';
   }
 
   @override
@@ -1073,6 +1096,10 @@ class _$MaterialRequestStateImpl implements _MaterialRequestState {
                     materialRequestsFailureOrSuccess) ||
                 other.materialRequestsFailureOrSuccess ==
                     materialRequestsFailureOrSuccess) &&
+            (identical(other.materialRequestsCreateFailureOrSuccess,
+                    materialRequestsCreateFailureOrSuccess) ||
+                other.materialRequestsCreateFailureOrSuccess ==
+                    materialRequestsCreateFailureOrSuccess) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading));
   }
@@ -1084,6 +1111,7 @@ class _$MaterialRequestStateImpl implements _MaterialRequestState {
       description,
       const DeepCollectionEquality().hash(_materialRequests),
       materialRequestsFailureOrSuccess,
+      materialRequestsCreateFailureOrSuccess,
       isLoading);
 
   /// Create a copy of MaterialRequestState
@@ -1104,6 +1132,8 @@ abstract class _MaterialRequestState implements MaterialRequestState {
       required final List<MaterialRequest> materialRequests,
       required final Option<Either<AppFailure, List<MaterialRequest>>>
           materialRequestsFailureOrSuccess,
+      required final Option<Either<AppFailure, MaterialRequest>>
+          materialRequestsCreateFailureOrSuccess,
       required final bool isLoading}) = _$MaterialRequestStateImpl;
 
   @override
@@ -1115,6 +1145,9 @@ abstract class _MaterialRequestState implements MaterialRequestState {
   @override
   Option<Either<AppFailure, List<MaterialRequest>>>
       get materialRequestsFailureOrSuccess;
+  @override
+  Option<Either<AppFailure, MaterialRequest>>
+      get materialRequestsCreateFailureOrSuccess;
   @override
   bool get isLoading;
 

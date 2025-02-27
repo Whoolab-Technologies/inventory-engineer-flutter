@@ -7,7 +7,6 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> buildCustomSnackBar({
   required String message,
   error = false,
 }) {
-  log("MVP buildCustomSnackBar ");
   return ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       behavior: SnackBarBehavior.floating,

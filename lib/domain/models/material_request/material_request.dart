@@ -5,18 +5,19 @@ part 'material_request.g.dart';
 
 @JsonSerializable()
 class MaterialRequest {
-  final String id;
-  final String title;
-  final String description;
-  final DateTime createdAt;
-  final List<MaterialRequestItem> items;
+  int? id;
+  @JsonKey(name: 'request_number')
+  String? requestNumber;
+  String? description;
+  @JsonKey(name: 'created_at')
+  DateTime? createdAt;
+  List<MaterialRequestItem>? items;
 
   MaterialRequest({
-    required this.id,
-    required this.title,
-    required this.description,
-    required this.createdAt,
-    required this.items,
+    this.id,
+    this.requestNumber,
+    this.description,
+    this.items,
   });
 
   factory MaterialRequest.fromJson(Map<String, dynamic> json) =>

@@ -8,20 +8,21 @@ part of 'material_request.dart';
 
 MaterialRequest _$MaterialRequestFromJson(Map<String, dynamic> json) =>
     MaterialRequest(
-      id: json['id'] as String,
-      title: json['title'] as String,
-      description: json['description'] as String,
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      items: (json['items'] as List<dynamic>)
-          .map((e) => MaterialRequestItem.fromJson(e as Map<String, dynamic>))
+      id: (json['id'] as num?)?.toInt(),
+      requestNumber: json['request_number'] as String?,
+      description: json['description'] as String?,
+      items: (json['items'] as List<dynamic>?)
+          ?.map((e) => MaterialRequestItem.fromJson(e as Map<String, dynamic>))
           .toList(),
-    );
+    )..createdAt = json['created_at'] == null
+        ? null
+        : DateTime.parse(json['created_at'] as String);
 
 Map<String, dynamic> _$MaterialRequestToJson(MaterialRequest instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'title': instance.title,
+      'request_number': instance.requestNumber,
       'description': instance.description,
-      'createdAt': instance.createdAt.toIso8601String(),
+      'created_at': instance.createdAt?.toIso8601String(),
       'items': instance.items,
     };

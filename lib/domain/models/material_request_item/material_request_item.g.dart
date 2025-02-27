@@ -10,7 +10,8 @@ MaterialRequestItem _$MaterialRequestItemFromJson(Map<String, dynamic> json) =>
     MaterialRequestItem(
       id: (json['id'] as num?)?.toInt(),
       productId: (json['product_id'] as num?)?.toInt(),
-      productName: json['product_ame'] as String?,
+      productName: json['product_name'] as String?,
+      productImage: json['product_image'] as String?,
       quantity: (json['quantity'] as num?)?.toInt(),
     );
 
@@ -19,6 +20,7 @@ Map<String, dynamic> _$MaterialRequestItemToJson(
     <String, dynamic>{
       'id': instance.id,
       'product_id': instance.productId,
-      'product_ame': instance.productName,
+      'product_name': instance.productName,
+      'product_image': instance.productImage,
       'quantity': instance.quantity,
     };

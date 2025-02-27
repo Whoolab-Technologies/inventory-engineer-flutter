@@ -8,6 +8,8 @@ class MaterialRequestState with _$MaterialRequestState {
     required List<MaterialRequest> materialRequests,
     required Option<Either<AppFailure, List<MaterialRequest>>>
         materialRequestsFailureOrSuccess,
+    required Option<Either<AppFailure, MaterialRequest>>
+        materialRequestsCreateFailureOrSuccess,
     required bool isLoading,
   }) = _MaterialRequestState;
 
@@ -17,5 +19,6 @@ class MaterialRequestState with _$MaterialRequestState {
         materialRequests: [],
         isLoading: false,
         materialRequestsFailureOrSuccess: none(),
+        materialRequestsCreateFailureOrSuccess: none(),
       );
 }

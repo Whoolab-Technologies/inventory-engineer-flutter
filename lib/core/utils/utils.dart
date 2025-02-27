@@ -80,18 +80,15 @@ class Utils {
     BuildContext context,
     AuthFailures failure,
   ) {
-    log("MVP handleAuthError");
     String message = _getAuthFailure(failure);
     buildCustomSnackBar(context: context, message: message, error: true);
   }
 
   static handleSuccess(BuildContext context, String message) {
-    log("MVP handleSuccess");
     buildCustomSnackBar(context: context, message: message, error: false);
   }
 
   static handleError(BuildContext context, String message) {
-    log("MVP handleError $message");
     buildCustomSnackBar(context: context, message: message, error: true);
   }
 

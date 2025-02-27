@@ -31,4 +31,6 @@ class Strings {
   static const String productPlaceHolder = "Products";
   static const String addProduct = "Add Product";
   static const String submit = "Submit";
+
+  static const String mrCreateSuccess = "MR created successfully";
 }

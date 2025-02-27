@@ -1,16 +1,22 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvp_engineer/application/material_request/material_request_bloc.dart';
 import 'package:mvp_engineer/application/products/products_bloc.dart';
 import 'package:mvp_engineer/domain/models/material_request/material_request.dart';
-import 'package:mvp_engineer/injection/injection.dart';
 import 'package:mvp_engineer/presentations/material_requests/material_requests_create_screen.dart';
 import 'package:mvp_engineer/presentations/widgets/app_shimmer.dart';
 
-class MaterialRequestScreen extends StatelessWidget {
+class MaterialRequestScreen extends StatefulWidget {
   const MaterialRequestScreen({super.key});
 
+  @override
+  State<MaterialRequestScreen> createState() => _MaterialRequestScreenState();
+}
+
+class _MaterialRequestScreenState extends State<MaterialRequestScreen> {
   @override
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).primaryColor;
@@ -20,13 +26,9 @@ class MaterialRequestScreen extends StatelessWidget {
         'Material Requests',
         style: TextStyle(color: primaryColor, fontWeight: FontWeight.bold),
       )),
-      body: BlocProvider(
-        create: (context) => getIt<MaterialRequestBloc>()
-          ..add(const MaterialRequestEvent.fetchMaterialRequests()),
-        child: Padding(
-          padding: EdgeInsets.all(8.w),
-          child: const MaterialRequestList(),
-        ),
+      body: Padding(
+        padding: EdgeInsets.all(8.w),
+        child: const MaterialRequestList(),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
@@ -38,7 +40,13 @@ class MaterialRequestScreen extends StatelessWidget {
                 return const MaterialRequestCreateScreen();
               },
             ),
-          );
+          ).then((value) {
+            if (value) {
+              context
+                  .read<MaterialRequestBloc>()
+                  .add(const MaterialRequestEvent.fetchMaterialRequests());
+            }
+          });
         },
         label: const Text(
           "Create",
@@ -49,14 +57,9 @@ class MaterialRequestScreen extends StatelessWidget {
   }
 }
 
-class MaterialRequestList extends StatefulWidget {
+class MaterialRequestList extends StatelessWidget {
   const MaterialRequestList({super.key});
 
-  @override
-  State<MaterialRequestList> createState() => _MaterialRequestListState();
-}
-
-class _MaterialRequestListState extends State<MaterialRequestList> {
   @override
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).primaryColor;
@@ -161,10 +164,17 @@ class MaterialRequestTile extends StatelessWidget {
     return Card(
       clipBehavior: Clip.hardEdge,
       child: ListTile(
-        title: Text(request.title),
-        subtitle: Text(request.description),
+        title: Text(request.requestNumber ?? ""),
+        subtitle: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(request.description ?? ""),
+            Text("${request.createdAt}"),
+          ],
+        ),
         trailing: Text(
-          "${request.items.length} items",
+          "${(request.items ?? []).length} items",
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         onTap: () => _showMaterialRequestDetails(context, request),
@@ -185,16 +195,16 @@ class MaterialRequestTile extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 10),
             Text(
-              "Title: ${request.title}",
+              "Title: ${request.requestNumber}",
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
-            Text("Description: ${request.description}"),
+            Text(request.description ?? ""),
             const Divider(),
             ListView.builder(
               shrinkWrap: true,
-              itemCount: request.items.length,
+              itemCount: (request.items ?? []).length,
               itemBuilder: (context, index) {
-                final prdt = request.items[index];
+                final prdt = request.items![index];
                 return ListTile(
                   leading: const Icon(Icons.inventory),
                   title: Text(prdt.productName ?? ""),

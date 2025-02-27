@@ -91,7 +91,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    log("MVP lbuild");
     return Scaffold(
       // backgroundColor: Theme.of(context).colorScheme.primary,
 
@@ -204,11 +203,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         () => null,
                         (a) => a.fold(
                           (l) {
-                            log("MVP loginFailureOrSuccess error");
                             Utils.handleAuthError(context, l);
                           },
                           (_) {
-                            log("MVP success ");
                             Utils.handleSuccess(
                               context,
                               Strings.loginSuccessMessage,

@@ -17,12 +17,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final IAuthFacade _iAuthRepo;
   AuthBloc(this._iAuthRepo) : super(const AuthState.authInitial()) {
     on<AuthCheckRequested>((event, emit) async {
-      log("AuthCheckRequested ");
       await Future.delayed(const Duration(milliseconds: 3000), () async {
         try {
           final userOption = await _iAuthRepo.getSignedInUser();
 
-          log("emit ");
           emit(
             userOption.fold(
               () => const AuthState.unauthenticated(),
