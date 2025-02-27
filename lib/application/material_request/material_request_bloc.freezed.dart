@@ -19,8 +19,8 @@ mixin _$MaterialRequestEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() fetchMaterialRequests,
-    required TResult Function(String product, int quantity) productAdded,
-    required TResult Function(String product) productRemoved,
+    required TResult Function(MaterialRequestItem item) productAdded,
+    required TResult Function(MaterialRequestItem item) productRemoved,
     required TResult Function(String description) descriptionChanged,
     required TResult Function() submitted,
   }) =>
@@ -28,8 +28,8 @@ mixin _$MaterialRequestEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? fetchMaterialRequests,
-    TResult? Function(String product, int quantity)? productAdded,
-    TResult? Function(String product)? productRemoved,
+    TResult? Function(MaterialRequestItem item)? productAdded,
+    TResult? Function(MaterialRequestItem item)? productRemoved,
     TResult? Function(String description)? descriptionChanged,
     TResult? Function()? submitted,
   }) =>
@@ -37,8 +37,8 @@ mixin _$MaterialRequestEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetchMaterialRequests,
-    TResult Function(String product, int quantity)? productAdded,
-    TResult Function(String product)? productRemoved,
+    TResult Function(MaterialRequestItem item)? productAdded,
+    TResult Function(MaterialRequestItem item)? productRemoved,
     TResult Function(String description)? descriptionChanged,
     TResult Function()? submitted,
     required TResult orElse(),
@@ -146,8 +146,8 @@ class _$FetchMaterialRequestsImpl implements FetchMaterialRequests {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() fetchMaterialRequests,
-    required TResult Function(String product, int quantity) productAdded,
-    required TResult Function(String product) productRemoved,
+    required TResult Function(MaterialRequestItem item) productAdded,
+    required TResult Function(MaterialRequestItem item) productRemoved,
     required TResult Function(String description) descriptionChanged,
     required TResult Function() submitted,
   }) {
@@ -158,8 +158,8 @@ class _$FetchMaterialRequestsImpl implements FetchMaterialRequests {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? fetchMaterialRequests,
-    TResult? Function(String product, int quantity)? productAdded,
-    TResult? Function(String product)? productRemoved,
+    TResult? Function(MaterialRequestItem item)? productAdded,
+    TResult? Function(MaterialRequestItem item)? productRemoved,
     TResult? Function(String description)? descriptionChanged,
     TResult? Function()? submitted,
   }) {
@@ -170,8 +170,8 @@ class _$FetchMaterialRequestsImpl implements FetchMaterialRequests {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetchMaterialRequests,
-    TResult Function(String product, int quantity)? productAdded,
-    TResult Function(String product)? productRemoved,
+    TResult Function(MaterialRequestItem item)? productAdded,
+    TResult Function(MaterialRequestItem item)? productRemoved,
     TResult Function(String description)? descriptionChanged,
     TResult Function()? submitted,
     required TResult orElse(),
@@ -239,7 +239,7 @@ abstract class _$$MaterialRequestProductAddedImplCopyWith<$Res> {
           $Res Function(_$MaterialRequestProductAddedImpl) then) =
       __$$MaterialRequestProductAddedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String product, int quantity});
+  $Res call({MaterialRequestItem item});
 }
 
 /// @nodoc
@@ -257,18 +257,13 @@ class __$$MaterialRequestProductAddedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? product = null,
-    Object? quantity = null,
+    Object? item = null,
   }) {
     return _then(_$MaterialRequestProductAddedImpl(
-      null == product
-          ? _value.product
-          : product // ignore: cast_nullable_to_non_nullable
-              as String,
-      null == quantity
-          ? _value.quantity
-          : quantity // ignore: cast_nullable_to_non_nullable
-              as int,
+      null == item
+          ? _value.item
+          : item // ignore: cast_nullable_to_non_nullable
+              as MaterialRequestItem,
     ));
   }
 }
@@ -276,16 +271,14 @@ class __$$MaterialRequestProductAddedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$MaterialRequestProductAddedImpl implements MaterialRequestProductAdded {
-  const _$MaterialRequestProductAddedImpl(this.product, this.quantity);
+  const _$MaterialRequestProductAddedImpl(this.item);
 
   @override
-  final String product;
-  @override
-  final int quantity;
+  final MaterialRequestItem item;
 
   @override
   String toString() {
-    return 'MaterialRequestEvent.productAdded(product: $product, quantity: $quantity)';
+    return 'MaterialRequestEvent.productAdded(item: $item)';
   }
 
   @override
@@ -293,13 +286,11 @@ class _$MaterialRequestProductAddedImpl implements MaterialRequestProductAdded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MaterialRequestProductAddedImpl &&
-            (identical(other.product, product) || other.product == product) &&
-            (identical(other.quantity, quantity) ||
-                other.quantity == quantity));
+            (identical(other.item, item) || other.item == item));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, product, quantity);
+  int get hashCode => Object.hash(runtimeType, item);
 
   /// Create a copy of MaterialRequestEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -314,38 +305,38 @@ class _$MaterialRequestProductAddedImpl implements MaterialRequestProductAdded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() fetchMaterialRequests,
-    required TResult Function(String product, int quantity) productAdded,
-    required TResult Function(String product) productRemoved,
+    required TResult Function(MaterialRequestItem item) productAdded,
+    required TResult Function(MaterialRequestItem item) productRemoved,
     required TResult Function(String description) descriptionChanged,
     required TResult Function() submitted,
   }) {
-    return productAdded(product, quantity);
+    return productAdded(item);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? fetchMaterialRequests,
-    TResult? Function(String product, int quantity)? productAdded,
-    TResult? Function(String product)? productRemoved,
+    TResult? Function(MaterialRequestItem item)? productAdded,
+    TResult? Function(MaterialRequestItem item)? productRemoved,
     TResult? Function(String description)? descriptionChanged,
     TResult? Function()? submitted,
   }) {
-    return productAdded?.call(product, quantity);
+    return productAdded?.call(item);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetchMaterialRequests,
-    TResult Function(String product, int quantity)? productAdded,
-    TResult Function(String product)? productRemoved,
+    TResult Function(MaterialRequestItem item)? productAdded,
+    TResult Function(MaterialRequestItem item)? productRemoved,
     TResult Function(String description)? descriptionChanged,
     TResult Function()? submitted,
     required TResult orElse(),
   }) {
     if (productAdded != null) {
-      return productAdded(product, quantity);
+      return productAdded(item);
     }
     return orElse();
   }
@@ -397,12 +388,10 @@ class _$MaterialRequestProductAddedImpl implements MaterialRequestProductAdded {
 }
 
 abstract class MaterialRequestProductAdded implements MaterialRequestEvent {
-  const factory MaterialRequestProductAdded(
-          final String product, final int quantity) =
+  const factory MaterialRequestProductAdded(final MaterialRequestItem item) =
       _$MaterialRequestProductAddedImpl;
 
-  String get product;
-  int get quantity;
+  MaterialRequestItem get item;
 
   /// Create a copy of MaterialRequestEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -418,7 +407,7 @@ abstract class _$$MaterialRequestProductRemovedImplCopyWith<$Res> {
           $Res Function(_$MaterialRequestProductRemovedImpl) then) =
       __$$MaterialRequestProductRemovedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String product});
+  $Res call({MaterialRequestItem item});
 }
 
 /// @nodoc
@@ -436,13 +425,13 @@ class __$$MaterialRequestProductRemovedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? product = null,
+    Object? item = null,
   }) {
     return _then(_$MaterialRequestProductRemovedImpl(
-      null == product
-          ? _value.product
-          : product // ignore: cast_nullable_to_non_nullable
-              as String,
+      null == item
+          ? _value.item
+          : item // ignore: cast_nullable_to_non_nullable
+              as MaterialRequestItem,
     ));
   }
 }
@@ -451,14 +440,14 @@ class __$$MaterialRequestProductRemovedImplCopyWithImpl<$Res>
 
 class _$MaterialRequestProductRemovedImpl
     implements MaterialRequestProductRemoved {
-  const _$MaterialRequestProductRemovedImpl(this.product);
+  const _$MaterialRequestProductRemovedImpl(this.item);
 
   @override
-  final String product;
+  final MaterialRequestItem item;
 
   @override
   String toString() {
-    return 'MaterialRequestEvent.productRemoved(product: $product)';
+    return 'MaterialRequestEvent.productRemoved(item: $item)';
   }
 
   @override
@@ -466,11 +455,11 @@ class _$MaterialRequestProductRemovedImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MaterialRequestProductRemovedImpl &&
-            (identical(other.product, product) || other.product == product));
+            (identical(other.item, item) || other.item == item));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, product);
+  int get hashCode => Object.hash(runtimeType, item);
 
   /// Create a copy of MaterialRequestEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -486,38 +475,38 @@ class _$MaterialRequestProductRemovedImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() fetchMaterialRequests,
-    required TResult Function(String product, int quantity) productAdded,
-    required TResult Function(String product) productRemoved,
+    required TResult Function(MaterialRequestItem item) productAdded,
+    required TResult Function(MaterialRequestItem item) productRemoved,
     required TResult Function(String description) descriptionChanged,
     required TResult Function() submitted,
   }) {
-    return productRemoved(product);
+    return productRemoved(item);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? fetchMaterialRequests,
-    TResult? Function(String product, int quantity)? productAdded,
-    TResult? Function(String product)? productRemoved,
+    TResult? Function(MaterialRequestItem item)? productAdded,
+    TResult? Function(MaterialRequestItem item)? productRemoved,
     TResult? Function(String description)? descriptionChanged,
     TResult? Function()? submitted,
   }) {
-    return productRemoved?.call(product);
+    return productRemoved?.call(item);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetchMaterialRequests,
-    TResult Function(String product, int quantity)? productAdded,
-    TResult Function(String product)? productRemoved,
+    TResult Function(MaterialRequestItem item)? productAdded,
+    TResult Function(MaterialRequestItem item)? productRemoved,
     TResult Function(String description)? descriptionChanged,
     TResult Function()? submitted,
     required TResult orElse(),
   }) {
     if (productRemoved != null) {
-      return productRemoved(product);
+      return productRemoved(item);
     }
     return orElse();
   }
@@ -569,10 +558,10 @@ class _$MaterialRequestProductRemovedImpl
 }
 
 abstract class MaterialRequestProductRemoved implements MaterialRequestEvent {
-  const factory MaterialRequestProductRemoved(final String product) =
+  const factory MaterialRequestProductRemoved(final MaterialRequestItem item) =
       _$MaterialRequestProductRemovedImpl;
 
-  String get product;
+  MaterialRequestItem get item;
 
   /// Create a copy of MaterialRequestEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -658,8 +647,8 @@ class _$MaterialRequestDescriptionChangedImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() fetchMaterialRequests,
-    required TResult Function(String product, int quantity) productAdded,
-    required TResult Function(String product) productRemoved,
+    required TResult Function(MaterialRequestItem item) productAdded,
+    required TResult Function(MaterialRequestItem item) productRemoved,
     required TResult Function(String description) descriptionChanged,
     required TResult Function() submitted,
   }) {
@@ -670,8 +659,8 @@ class _$MaterialRequestDescriptionChangedImpl
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? fetchMaterialRequests,
-    TResult? Function(String product, int quantity)? productAdded,
-    TResult? Function(String product)? productRemoved,
+    TResult? Function(MaterialRequestItem item)? productAdded,
+    TResult? Function(MaterialRequestItem item)? productRemoved,
     TResult? Function(String description)? descriptionChanged,
     TResult? Function()? submitted,
   }) {
@@ -682,8 +671,8 @@ class _$MaterialRequestDescriptionChangedImpl
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetchMaterialRequests,
-    TResult Function(String product, int quantity)? productAdded,
-    TResult Function(String product)? productRemoved,
+    TResult Function(MaterialRequestItem item)? productAdded,
+    TResult Function(MaterialRequestItem item)? productRemoved,
     TResult Function(String description)? descriptionChanged,
     TResult Function()? submitted,
     required TResult orElse(),
@@ -801,8 +790,8 @@ class _$MaterialRequestSubmittedImpl implements MaterialRequestSubmitted {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() fetchMaterialRequests,
-    required TResult Function(String product, int quantity) productAdded,
-    required TResult Function(String product) productRemoved,
+    required TResult Function(MaterialRequestItem item) productAdded,
+    required TResult Function(MaterialRequestItem item) productRemoved,
     required TResult Function(String description) descriptionChanged,
     required TResult Function() submitted,
   }) {
@@ -813,8 +802,8 @@ class _$MaterialRequestSubmittedImpl implements MaterialRequestSubmitted {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? fetchMaterialRequests,
-    TResult? Function(String product, int quantity)? productAdded,
-    TResult? Function(String product)? productRemoved,
+    TResult? Function(MaterialRequestItem item)? productAdded,
+    TResult? Function(MaterialRequestItem item)? productRemoved,
     TResult? Function(String description)? descriptionChanged,
     TResult? Function()? submitted,
   }) {
@@ -825,8 +814,8 @@ class _$MaterialRequestSubmittedImpl implements MaterialRequestSubmitted {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetchMaterialRequests,
-    TResult Function(String product, int quantity)? productAdded,
-    TResult Function(String product)? productRemoved,
+    TResult Function(MaterialRequestItem item)? productAdded,
+    TResult Function(MaterialRequestItem item)? productRemoved,
     TResult Function(String description)? descriptionChanged,
     TResult Function()? submitted,
     required TResult orElse(),
@@ -889,7 +878,7 @@ abstract class MaterialRequestSubmitted implements MaterialRequestEvent {
 
 /// @nodoc
 mixin _$MaterialRequestState {
-  List<Map<String, dynamic>> get mrItems => throw _privateConstructorUsedError;
+  List<MaterialRequestItem> get mrItems => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   List<MaterialRequest> get materialRequests =>
       throw _privateConstructorUsedError;
@@ -912,7 +901,7 @@ abstract class $MaterialRequestStateCopyWith<$Res> {
       _$MaterialRequestStateCopyWithImpl<$Res, MaterialRequestState>;
   @useResult
   $Res call(
-      {List<Map<String, dynamic>> mrItems,
+      {List<MaterialRequestItem> mrItems,
       String description,
       List<MaterialRequest> materialRequests,
       Option<Either<AppFailure, List<MaterialRequest>>>
@@ -946,7 +935,7 @@ class _$MaterialRequestStateCopyWithImpl<$Res,
       mrItems: null == mrItems
           ? _value.mrItems
           : mrItems // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, dynamic>>,
+              as List<MaterialRequestItem>,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -976,7 +965,7 @@ abstract class _$$MaterialRequestStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<Map<String, dynamic>> mrItems,
+      {List<MaterialRequestItem> mrItems,
       String description,
       List<MaterialRequest> materialRequests,
       Option<Either<AppFailure, List<MaterialRequest>>>
@@ -1007,7 +996,7 @@ class __$$MaterialRequestStateImplCopyWithImpl<$Res>
       mrItems: null == mrItems
           ? _value._mrItems
           : mrItems // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, dynamic>>,
+              as List<MaterialRequestItem>,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -1032,7 +1021,7 @@ class __$$MaterialRequestStateImplCopyWithImpl<$Res>
 
 class _$MaterialRequestStateImpl implements _MaterialRequestState {
   const _$MaterialRequestStateImpl(
-      {required final List<Map<String, dynamic>> mrItems,
+      {required final List<MaterialRequestItem> mrItems,
       required this.description,
       required final List<MaterialRequest> materialRequests,
       required this.materialRequestsFailureOrSuccess,
@@ -1040,9 +1029,9 @@ class _$MaterialRequestStateImpl implements _MaterialRequestState {
       : _mrItems = mrItems,
         _materialRequests = materialRequests;
 
-  final List<Map<String, dynamic>> _mrItems;
+  final List<MaterialRequestItem> _mrItems;
   @override
-  List<Map<String, dynamic>> get mrItems {
+  List<MaterialRequestItem> get mrItems {
     if (_mrItems is EqualUnmodifiableListView) return _mrItems;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_mrItems);
@@ -1110,7 +1099,7 @@ class _$MaterialRequestStateImpl implements _MaterialRequestState {
 
 abstract class _MaterialRequestState implements MaterialRequestState {
   const factory _MaterialRequestState(
-      {required final List<Map<String, dynamic>> mrItems,
+      {required final List<MaterialRequestItem> mrItems,
       required final String description,
       required final List<MaterialRequest> materialRequests,
       required final Option<Either<AppFailure, List<MaterialRequest>>>
@@ -1118,7 +1107,7 @@ abstract class _MaterialRequestState implements MaterialRequestState {
       required final bool isLoading}) = _$MaterialRequestStateImpl;
 
   @override
-  List<Map<String, dynamic>> get mrItems;
+  List<MaterialRequestItem> get mrItems;
   @override
   String get description;
   @override

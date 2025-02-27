@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mvp_engineer/domain/material_request/i_material_request_facade.dart';
 import 'package:mvp_engineer/domain/models/material_request/material_request.dart';
+import 'package:mvp_engineer/domain/models/material_request_item/material_request_item.dart';
 import 'package:mvp_engineer/infrastructure/core/app_failure.dart';
 
 part 'material_request_event.dart';
@@ -28,14 +29,15 @@ class MaterialRequestBloc
     });
 
     on<MaterialRequestProductAdded>((event, emit) {
-      final updatedProducts = List<Map<String, dynamic>>.from(state.mrItems)
-        ..add({'product': event.product, 'quantity': event.quantity});
+      final updatedProducts = List<MaterialRequestItem>.from(state.mrItems)
+        ..add(event.item);
       emit(state.copyWith(mrItems: updatedProducts));
     });
 
     on<MaterialRequestProductRemoved>((event, emit) {
-      final updatedProducts =
-          state.mrItems.where((p) => p['product'] != event.product).toList();
+      final updatedProducts = state.mrItems
+          .where((p) => p.productId != event.item.productId)
+          .toList();
       emit(state.copyWith(mrItems: updatedProducts));
     });
 

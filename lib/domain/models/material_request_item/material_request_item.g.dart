@@ -8,15 +8,17 @@ part of 'material_request_item.dart';
 
 MaterialRequestItem _$MaterialRequestItemFromJson(Map<String, dynamic> json) =>
     MaterialRequestItem(
-      productId: json['productId'] as String,
-      productName: json['productName'] as String,
-      quantity: (json['quantity'] as num).toInt(),
+      id: (json['id'] as num?)?.toInt(),
+      productId: (json['product_id'] as num?)?.toInt(),
+      productName: json['product_ame'] as String?,
+      quantity: (json['quantity'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$MaterialRequestItemToJson(
         MaterialRequestItem instance) =>
     <String, dynamic>{
-      'productId': instance.productId,
-      'productName': instance.productName,
+      'id': instance.id,
+      'product_id': instance.productId,
+      'product_ame': instance.productName,
       'quantity': instance.quantity,
     };

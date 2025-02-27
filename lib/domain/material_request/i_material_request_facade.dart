@@ -4,4 +4,6 @@ import 'package:mvp_engineer/infrastructure/core/app_failure.dart';
 
 abstract class IMaterialRequestFacade {
   Future<Either<AppFailure, List<MaterialRequest>>> fetchMaterialRequests();
+  Future<Either<AppFailure, MaterialRequest>> postMaterialRequests(
+      MaterialRequest mr);
 }

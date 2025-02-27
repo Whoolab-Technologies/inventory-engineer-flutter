@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvp_engineer/application/material_request/material_request_bloc.dart';
+import 'package:mvp_engineer/application/products/products_bloc.dart';
 import 'package:mvp_engineer/domain/models/material_request/material_request.dart';
 import 'package:mvp_engineer/injection/injection.dart';
+import 'package:mvp_engineer/presentations/material_requests/material_requests_create_screen.dart';
 import 'package:mvp_engineer/presentations/widgets/app_shimmer.dart';
 
 class MaterialRequestScreen extends StatelessWidget {
@@ -24,6 +26,23 @@ class MaterialRequestScreen extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(8.w),
           child: const MaterialRequestList(),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          context.read<ProductsBloc>().add(const ProductsEvent.getProducts());
+
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) {
+                return const MaterialRequestCreateScreen();
+              },
+            ),
+          );
+        },
+        label: const Text(
+          "Create",
+          style: TextStyle(color: Colors.white),
         ),
       ),
     );
@@ -175,11 +194,11 @@ class MaterialRequestTile extends StatelessWidget {
               shrinkWrap: true,
               itemCount: request.items.length,
               itemBuilder: (context, index) {
-                final item = request.items[index];
+                final prdt = request.items[index];
                 return ListTile(
                   leading: const Icon(Icons.inventory),
-                  title: Text(item.productName),
-                  trailing: Text("Qty: ${item.quantity}"),
+                  title: Text(prdt.productName ?? ""),
+                  trailing: Text("Qty: ${prdt.quantity}"),
                 );
               },
             ),

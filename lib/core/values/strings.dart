@@ -24,4 +24,11 @@ class Strings {
   static const String somethingWentWrong = "Something went wrong";
 
   static const String loginSuccessMessage = "Login successful";
+
+  static const String productAlreadyAdded = "Product already added";
+  static const String productLabel = "Select Product";
+  static const String quantityLabel = "Quantity";
+  static const String productPlaceHolder = "Products";
+  static const String addProduct = "Add Product";
+  static const String submit = "Submit";
 }

@@ -80,11 +80,13 @@ class HomeScreen extends StatelessWidget {
                       label: 'Scan Items',
                       primaryColor: primaryColor,
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) {
-                            return const MaterialRequestScreen();
-                          },
-                        ));
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return const MaterialRequestScreen();
+                            },
+                          ),
+                        );
                       },
                     ),
                     HomeCard(
@@ -92,7 +94,14 @@ class HomeScreen extends StatelessWidget {
                       label: 'Requests',
                       primaryColor: primaryColor,
                       onTap: () {
-                        Navigator.of(context).pushNamed(AppRoutes.REPORTS);
+                        // Navigator.of(context).pushNamed(AppRoutes.REPORTS);
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return const MaterialRequestScreen();
+                            },
+                          ),
+                        );
                       },
                     ),
                     HomeCard(

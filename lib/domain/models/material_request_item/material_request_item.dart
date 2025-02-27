@@ -1,16 +1,21 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:mvp_engineer/domain/models/product/product.dart';
 part 'material_request_item.g.dart';
 
 @JsonSerializable()
 class MaterialRequestItem {
-  final String productId;
-  final String productName;
-  final int quantity;
+  int? id;
+  @JsonKey(name: 'product_id')
+  int? productId;
+  @JsonKey(name: 'product_ame')
+  String? productName;
+  int? quantity;
 
   MaterialRequestItem({
-    required this.productId,
-    required this.productName,
-    required this.quantity,
+    this.id,
+    this.productId,
+    this.productName,
+    this.quantity,
   });
 
   factory MaterialRequestItem.fromJson(Map<String, dynamic> json) =>

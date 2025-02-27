@@ -44,8 +44,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i129.IAuthFacade>(
         () => _i597.AuthRepo(gh<_i554.AppData>()));
     gh.lazySingleton<_i973.IMaterialRequestFacade>(
-        () => _i49.MaterialRequestRepo());
-    gh.lazySingleton<_i983.IProductFacade>(() => _i127.ProductRepo());
+        () => _i49.MaterialRequestRepo(gh<_i429.DioClient>()));
+    gh.lazySingleton<_i983.IProductFacade>(
+        () => _i127.ProductRepo(gh<_i429.DioClient>()));
     gh.factory<_i730.AuthBloc>(() => _i730.AuthBloc(gh<_i129.IAuthFacade>()));
     gh.factory<_i992.ProductsBloc>(
         () => _i992.ProductsBloc(gh<_i983.IProductFacade>()));

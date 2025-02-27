@@ -5,9 +5,9 @@ class MaterialRequestEvent with _$MaterialRequestEvent {
   const factory MaterialRequestEvent.fetchMaterialRequests() =
       FetchMaterialRequests;
 
-  const factory MaterialRequestEvent.productAdded(
-      String product, int quantity) = MaterialRequestProductAdded;
-  const factory MaterialRequestEvent.productRemoved(String product) =
+  const factory MaterialRequestEvent.productAdded(MaterialRequestItem item) =
+      MaterialRequestProductAdded;
+  const factory MaterialRequestEvent.productRemoved(MaterialRequestItem item) =
       MaterialRequestProductRemoved;
   const factory MaterialRequestEvent.descriptionChanged(String description) =
       MaterialRequestDescriptionChanged;

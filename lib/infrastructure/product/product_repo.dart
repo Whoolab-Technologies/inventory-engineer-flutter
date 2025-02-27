@@ -11,8 +11,8 @@ import 'package:mvp_engineer/infrastructure/core/dio.dart';
 
 @LazySingleton(as: IProductFacade)
 class ProductRepo implements IProductFacade {
-  final DioClient _client = DioClient.instance;
-  ProductRepo();
+  final DioClient _client;
+  ProductRepo(this._client);
 
   @override
   Future<Either<AppFailure, List<Product>>> getProducts() async {
