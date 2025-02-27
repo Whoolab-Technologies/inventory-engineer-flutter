@@ -5,8 +5,8 @@ import 'package:mvp_engineer/application/material_request/material_request_bloc.
 import 'package:mvp_engineer/application/products/products_bloc.dart';
 import 'package:mvp_engineer/core/routes/routes.dart';
 import 'package:mvp_engineer/domain/app-data/app_data.dart';
-import 'package:mvp_engineer/presentations/material_requests/material_request_screen.dart';
 import 'package:mvp_engineer/presentations/profile/profile_screen.dart';
+import 'package:mvp_engineer/presentations/scanner/qr_scnner_page.dart';
 import 'package:mvp_engineer/presentations/widgets/app_profile_pic_widget.dart';
 // import 'package:mvp_engineer/presentation/scanner/qr_code_scanner.dart';
 // import 'package:mvp_engineer/presentation/scanner/qr_view.dart';
@@ -82,11 +82,9 @@ class HomeScreen extends StatelessWidget {
                       primaryColor: primaryColor,
                       onTap: () {
                         Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return const MaterialRequestScreen();
-                            },
-                          ),
+                          MaterialPageRoute(builder: (context) {
+                            return const QRVScannerPage();
+                          }),
                         );
                       },
                     ),
@@ -105,7 +103,7 @@ class HomeScreen extends StatelessWidget {
                       label: 'Inventory Transfer',
                       primaryColor: primaryColor,
                       onTap: () {
-                        Navigator.of(context).pushNamed(AppRoutes.TRANSACTIONS);
+                        // Navigator.of(context).pushNamed(AppRoutes.TRANSACTIONS);
                       },
                     ),
                   ],
