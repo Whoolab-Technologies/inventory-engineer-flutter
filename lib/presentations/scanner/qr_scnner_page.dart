@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvp_engineer/core/utils/utils.dart';
 import 'package:qr_code_scanner_plus/qr_code_scanner_plus.dart';
 
@@ -85,21 +86,21 @@ class _QRVScannerPageState extends State<QRVScannerPage>
           ),
 
           // Text showing scanned QR code
-          // Positioned(
-          //   bottom: 50,
-          //   left: 0,
-          //   right: 0,
-          //   child: Center(
-          //     child: Container(
-          //       padding: EdgeInsets.all(10),
-          //       color: Colors.black54,
-          //       child: Text(
-          //         qrText,
-          //         style: TextStyle(color: Colors.white, fontSize: 18),
-          //       ),
-          //     ),
-          //   ),
-          // ),
+          Positioned(
+            bottom: 50,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: Container(
+                padding: EdgeInsets.all(10.w),
+                color: Colors.black54,
+                child: Text(
+                  qrText,
+                  style: TextStyle(color: Colors.white, fontSize: 18.sp),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
