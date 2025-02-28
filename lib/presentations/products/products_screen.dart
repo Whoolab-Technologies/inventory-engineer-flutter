@@ -27,7 +27,13 @@ class ProductsScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(8.w),
               child: TextField(
+                onChanged: (query) {
+                  context
+                      .read<ProductsBloc>()
+                      .add(ProductsEvent.getProducts(query: query));
+                },
                 decoration: InputDecoration(
+                  prefixIcon: const Icon(Icons.search),
                   hintText: Strings.seachProduct,
                   suffixIcon: IconButton(
                     icon: Icon(

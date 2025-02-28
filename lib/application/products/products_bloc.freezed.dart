@@ -19,19 +19,19 @@ mixin _$ProductsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() getProducts,
+    required TResult Function(String? query) getProducts,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? getProducts,
+    TResult? Function(String? query)? getProducts,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? getProducts,
+    TResult Function(String? query)? getProducts,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -119,7 +119,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() getProducts,
+    required TResult Function(String? query) getProducts,
   }) {
     return started();
   }
@@ -128,7 +128,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? getProducts,
+    TResult? Function(String? query)? getProducts,
   }) {
     return started?.call();
   }
@@ -137,7 +137,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? getProducts,
+    TResult Function(String? query)? getProducts,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -187,6 +187,8 @@ abstract class _$$GetProductsImplCopyWith<$Res> {
   factory _$$GetProductsImplCopyWith(
           _$GetProductsImpl value, $Res Function(_$GetProductsImpl) then) =
       __$$GetProductsImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String? query});
 }
 
 /// @nodoc
@@ -199,54 +201,79 @@ class __$$GetProductsImplCopyWithImpl<$Res>
 
   /// Create a copy of ProductsEvent
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? query = freezed,
+  }) {
+    return _then(_$GetProductsImpl(
+      query: freezed == query
+          ? _value.query
+          : query // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$GetProductsImpl implements _GetProducts {
-  const _$GetProductsImpl();
+  const _$GetProductsImpl({this.query});
+
+  @override
+  final String? query;
 
   @override
   String toString() {
-    return 'ProductsEvent.getProducts()';
+    return 'ProductsEvent.getProducts(query: $query)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$GetProductsImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$GetProductsImpl &&
+            (identical(other.query, query) || other.query == query));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, query);
+
+  /// Create a copy of ProductsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetProductsImplCopyWith<_$GetProductsImpl> get copyWith =>
+      __$$GetProductsImplCopyWithImpl<_$GetProductsImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() getProducts,
+    required TResult Function(String? query) getProducts,
   }) {
-    return getProducts();
+    return getProducts(query);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? getProducts,
+    TResult? Function(String? query)? getProducts,
   }) {
-    return getProducts?.call();
+    return getProducts?.call(query);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? getProducts,
+    TResult Function(String? query)? getProducts,
     required TResult orElse(),
   }) {
     if (getProducts != null) {
-      return getProducts();
+      return getProducts(query);
     }
     return orElse();
   }
@@ -284,7 +311,15 @@ class _$GetProductsImpl implements _GetProducts {
 }
 
 abstract class _GetProducts implements ProductsEvent {
-  const factory _GetProducts() = _$GetProductsImpl;
+  const factory _GetProducts({final String? query}) = _$GetProductsImpl;
+
+  String? get query;
+
+  /// Create a copy of ProductsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$GetProductsImplCopyWith<_$GetProductsImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
