@@ -94,8 +94,13 @@ class MaterialRequestList extends StatelessWidget {
                             fontSize: 16.sp,
                           ),
                         ))
-                      : ListView.builder(
+                      : ListView.separated(
                           itemCount: requests.length,
+                          separatorBuilder: (context, index) {
+                            return SizedBox(
+                              height: 8.h,
+                            );
+                          },
                           itemBuilder: (context, index) {
                             final request = requests[index];
                             return MaterialRequestTile(
@@ -169,7 +174,7 @@ class MaterialRequestTile extends StatelessWidget {
         title: Text(
           request.requestNumber ?? "",
           style: TextStyle(
-            fontSize: 18.sp,
+            fontSize: 16.sp,
             color: Theme.of(context).colorScheme.primary,
             fontWeight: FontWeight.w600,
           ),
@@ -179,7 +184,7 @@ class MaterialRequestTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(request.description ?? ""),
-            Text("${request.createdAt}"),
+            Text(request.createdDateTime),
           ],
         ),
         trailing: Text(
@@ -204,20 +209,50 @@ class MaterialRequestTile extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 10),
             Text(
-              "Title: ${request.requestNumber}",
+              "${request.requestNumber}",
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             Text(request.description ?? ""),
             const Divider(),
-            ListView.builder(
+            ListView.separated(
               shrinkWrap: true,
               itemCount: (request.items ?? []).length,
+              separatorBuilder: (context, index) {
+                return const Divider();
+              },
               itemBuilder: (context, index) {
                 final prdt = request.items![index];
                 return ListTile(
-                  leading: const Icon(Icons.inventory),
-                  title: Text(prdt.productName ?? ""),
-                  trailing: Text("Qty: ${prdt.quantity}"),
+                  leading: SizedBox(
+                    width: 24.w,
+                    height: 24.w,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10.r),
+                      child: prdt.productImage != null &&
+                              prdt.productImage!.isNotEmpty
+                          ? Image.network(
+                              prdt.productImage!,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Icon(Icons.image,
+                                    size: 24.sp, color: Colors.grey);
+                              },
+                            )
+                          : Icon(Icons.image, size: 24.sp, color: Colors.grey),
+                    ),
+                  ),
+                  title: Text(
+                    prdt.productName ?? "",
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                  trailing: Text(
+                    "Qty: ${prdt.quantity} (${prdt.unit ?? ""})",
+                    style: const TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
                 );
               },
             ),

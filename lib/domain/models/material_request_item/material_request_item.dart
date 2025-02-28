@@ -10,6 +10,7 @@ class MaterialRequestItem {
   String? productName;
   @JsonKey(name: 'product_image')
   String? productImage;
+  String? unit;
   int? quantity;
 
   MaterialRequestItem({
@@ -17,6 +18,7 @@ class MaterialRequestItem {
     this.productId,
     this.productName,
     this.productImage,
+    this.unit,
     this.quantity,
   });
 

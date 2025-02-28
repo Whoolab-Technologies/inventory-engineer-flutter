@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:mvp_engineer/domain/models/material_request_item/material_request_item.dart';
-
+import 'package:intl/intl.dart';
 part 'material_request.g.dart';
 
 @JsonSerializable()
@@ -23,4 +23,7 @@ class MaterialRequest {
   factory MaterialRequest.fromJson(Map<String, dynamic> json) =>
       _$MaterialRequestFromJson(json);
   Map<String, dynamic> toJson() => _$MaterialRequestToJson(this);
+
+  String get createdDateTime =>
+      DateFormat('yyyy/MM/dd hh:mm a').format(createdAt!.toLocal());
 }

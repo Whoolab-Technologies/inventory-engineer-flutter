@@ -17,7 +17,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     on<_GetProducts>((event, emit) async {
       emit(state.copyWith(isloading: true, products: []));
       Either<AppFailure, List<Product>> productListFailureOrSuccess =
-          await _iProductFacade.getProducts();
+          await _iProductFacade.getProducts(searchTerm: event.searchTerm);
 
       emit(
         state.copyWith(

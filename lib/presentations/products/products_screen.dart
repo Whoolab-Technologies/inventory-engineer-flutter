@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,9 +10,26 @@ import 'package:mvp_engineer/presentations/products/empty_product_list.dart';
 import 'package:mvp_engineer/presentations/products/product_item_widget.dart';
 import 'package:mvp_engineer/presentations/products/product_list_viewer.dart';
 import 'package:mvp_engineer/presentations/scanner/qr_scnner_page.dart';
+import 'package:mvp_engineer/presentations/widgets/app_search_field.dart';
 
 class ProductsScreen extends StatelessWidget {
   const ProductsScreen({super.key});
+  Widget _buildScannerButton(BuildContext context, Color primaryColor) {
+    return IconButton(
+      icon: Icon(
+        Icons.qr_code_scanner,
+        color: primaryColor,
+      ),
+      onPressed: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (cxt) {
+            return const QRVScannerPage();
+          }),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).primaryColor;
@@ -24,35 +43,15 @@ class ProductsScreen extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Padding(
-              padding: EdgeInsets.all(8.w),
-              child: TextField(
-                onChanged: (query) {
-                  context
-                      .read<ProductsBloc>()
-                      .add(ProductsEvent.getProducts(query: query));
-                },
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.search),
-                  hintText: Strings.seachProduct,
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      Icons.qr_code_scanner,
-                      color: primaryColor,
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) {
-                          return const QRVScannerPage();
-                        }),
-                      );
-                    },
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                ),
-              ),
+            AppSearchField(
+              hintText: Strings.seachProduct,
+              suffixIcon: _buildScannerButton(context, primaryColor),
+              onChange: (String? searchTerm) {
+                log("searchTerm $searchTerm");
+                context.read<ProductsBloc>().add(
+                      ProductsEvent.getProducts(searchTerm: searchTerm),
+                    );
+              },
             ),
             Expanded(
               child: RefreshIndicator(

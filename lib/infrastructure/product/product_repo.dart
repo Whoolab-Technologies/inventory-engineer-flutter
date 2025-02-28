@@ -15,9 +15,17 @@ class ProductRepo implements IProductFacade {
   ProductRepo(this._client);
 
   @override
-  Future<Either<AppFailure, List<Product>>> getProducts() async {
+  Future<Either<AppFailure, List<Product>>> getProducts(
+      {String? searchTerm}) async {
     try {
-      Response response = await _client.dio.get(Api.endPoints["products"]!);
+      Map<String, dynamic> queryParams = <String, dynamic>{};
+      if (searchTerm != null && searchTerm.isNotEmpty) {
+        queryParams.putIfAbsent("search", () => searchTerm);
+      }
+      Response response = await _client.dio.get(
+        Api.endPoints["products"]!,
+        queryParameters: queryParams,
+      );
       ProductResponse productResponse = ProductResponse.fromJson(response.data);
       if (!productResponse.error) {
         return right(productResponse.data!);
