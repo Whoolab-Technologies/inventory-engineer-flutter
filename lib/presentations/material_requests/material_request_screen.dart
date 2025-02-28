@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,36 +20,40 @@ class _MaterialRequestScreenState extends State<MaterialRequestScreen> {
     final primaryColor = Theme.of(context).primaryColor;
     return Scaffold(
       appBar: AppBar(
-          title: Text(
-        'Material Requests',
-        style: TextStyle(color: primaryColor, fontWeight: FontWeight.bold),
-      )),
+        title: Text(
+          'Material Requests',
+          style: TextStyle(color: primaryColor, fontWeight: FontWeight.bold),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              context
+                  .read<ProductsBloc>()
+                  .add(const ProductsEvent.getProducts());
+
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const MaterialRequestCreateScreen();
+                  },
+                ),
+              ).then((value) {
+                if (value != null) {
+                  context
+                      .read<MaterialRequestBloc>()
+                      .add(const MaterialRequestEvent.fetchMaterialRequests());
+                }
+              });
+            },
+            icon: const Icon(
+              Icons.add_circle_outline,
+            ),
+          )
+        ],
+      ),
       body: Padding(
         padding: EdgeInsets.all(8.w),
         child: const MaterialRequestList(),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          context.read<ProductsBloc>().add(const ProductsEvent.getProducts());
-
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) {
-                return const MaterialRequestCreateScreen();
-              },
-            ),
-          ).then((value) {
-            if (value) {
-              context
-                  .read<MaterialRequestBloc>()
-                  .add(const MaterialRequestEvent.fetchMaterialRequests());
-            }
-          });
-        },
-        label: const Text(
-          "Create",
-          style: TextStyle(color: Colors.white),
-        ),
       ),
     );
   }
@@ -164,7 +166,14 @@ class MaterialRequestTile extends StatelessWidget {
     return Card(
       clipBehavior: Clip.hardEdge,
       child: ListTile(
-        title: Text(request.requestNumber ?? ""),
+        title: Text(
+          request.requestNumber ?? "",
+          style: TextStyle(
+            fontSize: 18.sp,
+            color: Theme.of(context).colorScheme.primary,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
         subtitle: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,

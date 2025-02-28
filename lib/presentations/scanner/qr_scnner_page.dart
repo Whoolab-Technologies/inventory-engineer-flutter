@@ -117,7 +117,7 @@ class _QRVScannerPageState extends State<QRVScannerPage>
 
   @override
   void dispose() {
-    controller?.dispose();
+    _animationController.dispose();
     super.dispose();
   }
 }
