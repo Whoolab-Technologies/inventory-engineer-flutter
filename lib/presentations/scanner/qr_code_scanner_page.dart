@@ -3,14 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvp_engineer/core/utils/utils.dart';
 import 'package:qr_code_scanner_plus/qr_code_scanner_plus.dart';
 
-class QRVScannerPage extends StatefulWidget {
-  const QRVScannerPage({super.key});
+class QRCodeScannerPage extends StatefulWidget {
+  const QRCodeScannerPage({super.key});
 
   @override
-  State<StatefulWidget> createState() => _QRVScannerPageState();
+  State<StatefulWidget> createState() => _QRCodeScannerPageState();
 }
 
-class _QRVScannerPageState extends State<QRVScannerPage>
+class _QRCodeScannerPageState extends State<QRCodeScannerPage>
     with SingleTickerProviderStateMixin {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   QRViewController? controller;

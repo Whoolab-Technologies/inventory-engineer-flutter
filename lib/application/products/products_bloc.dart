@@ -16,12 +16,14 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   ProductsBloc(this._iProductFacade) : super(ProductsState.state()) {
     on<_GetProducts>((event, emit) async {
       emit(state.copyWith(isloading: true, products: []));
+
       Either<AppFailure, List<Product>> productListFailureOrSuccess =
           await _iProductFacade.getProducts(searchTerm: event.searchTerm);
 
       emit(
         state.copyWith(
           isloading: false,
+          searchTerm: event.searchTerm,
           products: productListFailureOrSuccess.fold((l) => [], (r) => r),
           productListFailureOrSuccess: optionOf(productListFailureOrSuccess),
         ),

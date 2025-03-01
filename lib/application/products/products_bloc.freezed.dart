@@ -327,6 +327,7 @@ abstract class _GetProducts implements ProductsEvent {
 mixin _$ProductsState {
   bool get isloading => throw _privateConstructorUsedError;
   List<Product> get products => throw _privateConstructorUsedError;
+  String? get searchTerm => throw _privateConstructorUsedError;
   Option<Either<AppFailure, List<Product>>> get productListFailureOrSuccess =>
       throw _privateConstructorUsedError;
 
@@ -346,6 +347,7 @@ abstract class $ProductsStateCopyWith<$Res> {
   $Res call(
       {bool isloading,
       List<Product> products,
+      String? searchTerm,
       Option<Either<AppFailure, List<Product>>> productListFailureOrSuccess});
 }
 
@@ -366,6 +368,7 @@ class _$ProductsStateCopyWithImpl<$Res, $Val extends ProductsState>
   $Res call({
     Object? isloading = null,
     Object? products = null,
+    Object? searchTerm = freezed,
     Object? productListFailureOrSuccess = null,
   }) {
     return _then(_value.copyWith(
@@ -377,6 +380,10 @@ class _$ProductsStateCopyWithImpl<$Res, $Val extends ProductsState>
           ? _value.products
           : products // ignore: cast_nullable_to_non_nullable
               as List<Product>,
+      searchTerm: freezed == searchTerm
+          ? _value.searchTerm
+          : searchTerm // ignore: cast_nullable_to_non_nullable
+              as String?,
       productListFailureOrSuccess: null == productListFailureOrSuccess
           ? _value.productListFailureOrSuccess
           : productListFailureOrSuccess // ignore: cast_nullable_to_non_nullable
@@ -396,6 +403,7 @@ abstract class _$$ProductsStateImplCopyWith<$Res>
   $Res call(
       {bool isloading,
       List<Product> products,
+      String? searchTerm,
       Option<Either<AppFailure, List<Product>>> productListFailureOrSuccess});
 }
 
@@ -414,6 +422,7 @@ class __$$ProductsStateImplCopyWithImpl<$Res>
   $Res call({
     Object? isloading = null,
     Object? products = null,
+    Object? searchTerm = freezed,
     Object? productListFailureOrSuccess = null,
   }) {
     return _then(_$ProductsStateImpl(
@@ -425,6 +434,10 @@ class __$$ProductsStateImplCopyWithImpl<$Res>
           ? _value._products
           : products // ignore: cast_nullable_to_non_nullable
               as List<Product>,
+      searchTerm: freezed == searchTerm
+          ? _value.searchTerm
+          : searchTerm // ignore: cast_nullable_to_non_nullable
+              as String?,
       productListFailureOrSuccess: null == productListFailureOrSuccess
           ? _value.productListFailureOrSuccess
           : productListFailureOrSuccess // ignore: cast_nullable_to_non_nullable
@@ -439,6 +452,7 @@ class _$ProductsStateImpl implements _ProductsState {
   const _$ProductsStateImpl(
       {required this.isloading,
       required final List<Product> products,
+      required this.searchTerm,
       required this.productListFailureOrSuccess})
       : _products = products;
 
@@ -453,11 +467,13 @@ class _$ProductsStateImpl implements _ProductsState {
   }
 
   @override
+  final String? searchTerm;
+  @override
   final Option<Either<AppFailure, List<Product>>> productListFailureOrSuccess;
 
   @override
   String toString() {
-    return 'ProductsState(isloading: $isloading, products: $products, productListFailureOrSuccess: $productListFailureOrSuccess)';
+    return 'ProductsState(isloading: $isloading, products: $products, searchTerm: $searchTerm, productListFailureOrSuccess: $productListFailureOrSuccess)';
   }
 
   @override
@@ -468,6 +484,8 @@ class _$ProductsStateImpl implements _ProductsState {
             (identical(other.isloading, isloading) ||
                 other.isloading == isloading) &&
             const DeepCollectionEquality().equals(other._products, _products) &&
+            (identical(other.searchTerm, searchTerm) ||
+                other.searchTerm == searchTerm) &&
             (identical(other.productListFailureOrSuccess,
                     productListFailureOrSuccess) ||
                 other.productListFailureOrSuccess ==
@@ -479,6 +497,7 @@ class _$ProductsStateImpl implements _ProductsState {
       runtimeType,
       isloading,
       const DeepCollectionEquality().hash(_products),
+      searchTerm,
       productListFailureOrSuccess);
 
   /// Create a copy of ProductsState
@@ -494,6 +513,7 @@ abstract class _ProductsState implements ProductsState {
   const factory _ProductsState(
       {required final bool isloading,
       required final List<Product> products,
+      required final String? searchTerm,
       required final Option<Either<AppFailure, List<Product>>>
           productListFailureOrSuccess}) = _$ProductsStateImpl;
 
@@ -501,6 +521,8 @@ abstract class _ProductsState implements ProductsState {
   bool get isloading;
   @override
   List<Product> get products;
+  @override
+  String? get searchTerm;
   @override
   Option<Either<AppFailure, List<Product>>> get productListFailureOrSuccess;
 
