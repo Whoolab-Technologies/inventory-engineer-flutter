@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mvp_engineer/application/auth/auth_bloc.dart';
+import 'package:mvp_engineer/application/home/home_bloc.dart';
 import 'package:mvp_engineer/application/login/login_bloc.dart';
 import 'package:mvp_engineer/application/material_request/material_request_bloc.dart';
 import 'package:mvp_engineer/application/products/products_bloc.dart';
@@ -49,9 +50,9 @@ class AppPages {
         PageEntity(
           route: AppRoutes.HOME,
           page: const HomeScreen(),
-          // bloc: BlocProvider(
-          //   create: (context) => getIt<HomeBloc>(),
-          // ),
+          bloc: BlocProvider(
+            create: (context) => getIt<HomeBloc>(),
+          ),
         ),
         PageEntity(
           route: AppRoutes.PRODUCTS,

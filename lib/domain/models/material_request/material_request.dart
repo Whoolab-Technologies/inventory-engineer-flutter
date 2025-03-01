@@ -11,19 +11,23 @@ class MaterialRequest {
   String? description;
   @JsonKey(name: 'created_at')
   DateTime? createdAt;
+  String? status;
   List<MaterialRequestItem>? items;
 
   MaterialRequest({
     this.id,
     this.requestNumber,
     this.description,
+    this.status,
     this.items,
   });
 
   factory MaterialRequest.fromJson(Map<String, dynamic> json) =>
       _$MaterialRequestFromJson(json);
   Map<String, dynamic> toJson() => _$MaterialRequestToJson(this);
-
+  String get createdDate =>
+      DateFormat('yyyy-MM-dd').format(createdAt!.toLocal());
+  String get createdTime => DateFormat('hh:mm a').format(createdAt!.toLocal());
   String get createdDateTime =>
-      DateFormat('yyyy/MM/dd hh:mm a').format(createdAt!.toLocal());
+      DateFormat('yyyy-MM-dd hh:mm a').format(createdAt!.toLocal());
 }

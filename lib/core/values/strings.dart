@@ -35,4 +35,8 @@ class Strings {
   static const String mrCreateSuccess = "MR created successfully";
 
   static const String seachProduct = 'Search products...';
+  static const String noOutOfStockProducts =
+      "All requested products are currently in stock.";
+  static const String noRequestApproved =
+      "No pending requests have been approved.";
 }

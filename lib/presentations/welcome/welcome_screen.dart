@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:mvp_engineer/application/auth/auth_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mvp_engineer/core/routes/routes.dart';
+import 'package:mvp_engineer/core/values/constants.dart';
+import 'package:mvp_engineer/global.dart';
 import 'package:mvp_engineer/presentations/widgets/app_logo_widget.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -29,7 +31,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           state.map(
               authInitial: (authInitial) => null,
               authenticated: (authenticated) {
-                log('Authenticated');
+                AppGlobal.storageService.setBoolean(STORAGE_IS_LOGGED_IN, true);
+
                 Navigator.of(context)
                     .pushNamedAndRemoveUntil(AppRoutes.HOME, (_) => false);
               },

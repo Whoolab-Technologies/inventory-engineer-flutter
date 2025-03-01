@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'engineers_stock.dart';
+part of 'engineer_stocks.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-EngineersStock _$EngineersStockFromJson(Map<String, dynamic> json) =>
-    EngineersStock(
+EngineerStocks _$EngineerStocksFromJson(Map<String, dynamic> json) =>
+    EngineerStocks(
       id: (json['id'] as num?)?.toInt(),
       engineerId: (json['engineer_id'] as num?)?.toInt(),
       storeId: (json['store_id'] as num?)?.toInt(),
@@ -18,7 +18,7 @@ EngineersStock _$EngineersStockFromJson(Map<String, dynamic> json) =>
           : Engineer.fromJson(json['engineer'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$EngineersStockToJson(EngineersStock instance) =>
+Map<String, dynamic> _$EngineerStocksToJson(EngineerStocks instance) =>
     <String, dynamic>{
       'id': instance.id,
       'engineer_id': instance.engineerId,

@@ -11,6 +11,7 @@ MaterialRequest _$MaterialRequestFromJson(Map<String, dynamic> json) =>
       id: (json['id'] as num?)?.toInt(),
       requestNumber: json['request_number'] as String?,
       description: json['description'] as String?,
+      status: json['status'] as String?,
       items: (json['items'] as List<dynamic>?)
           ?.map((e) => MaterialRequestItem.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -24,5 +25,6 @@ Map<String, dynamic> _$MaterialRequestToJson(MaterialRequest instance) =>
       'request_number': instance.requestNumber,
       'description': instance.description,
       'created_at': instance.createdAt?.toIso8601String(),
+      'status': instance.status,
       'items': instance.items,
     };

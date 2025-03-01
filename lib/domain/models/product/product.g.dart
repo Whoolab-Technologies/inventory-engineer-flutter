@@ -19,8 +19,8 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       code: json['code'] as String?,
       symbol: json['symbol'] as String?,
       imageUrl: json['image_url'] as String?,
-      engineersStock: (json['engineers_stock'] as List<dynamic>?)
-          ?.map((e) => EngineersStock.fromJson(e as Map<String, dynamic>))
+      engineerStocks: (json['engineers_stock'] as List<dynamic>?)
+          ?.map((e) => EngineerStocks.fromJson(e as Map<String, dynamic>))
           .toList(),
       stocks: (json['stocks'] as List<dynamic>?)
           ?.map((e) => Stock.fromJson(e as Map<String, dynamic>))
@@ -42,7 +42,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
       'code': instance.code,
       'symbol': instance.symbol,
       'image_url': instance.imageUrl,
-      'engineers_stock': instance.engineersStock,
+      'engineers_stock': instance.engineerStocks,
       'stocks': instance.stocks,
       'my_stock': instance.myStock,
       'stock_with_others': instance.stockWithOthers,

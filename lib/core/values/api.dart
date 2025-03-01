@@ -12,5 +12,6 @@ class Api {
     "reset": "/reset",
     "products": "/products",
     "mr": "/mr",
+    "home": "/home",
   };
 }

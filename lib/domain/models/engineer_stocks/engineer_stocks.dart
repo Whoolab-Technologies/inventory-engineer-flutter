@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 import '../engineer/engineer.dart';
-part 'engineers_stock.g.dart';
+part 'engineer_stocks.g.dart';
 
 @JsonSerializable()
-class EngineersStock {
+class EngineerStocks {
   int? id;
   @JsonKey(name: 'engineer_id')
   int? engineerId;
@@ -14,7 +14,7 @@ class EngineersStock {
   int? quantity;
   Engineer? engineer;
 
-  EngineersStock({
+  EngineerStocks({
     this.id,
     this.engineerId,
     this.storeId,
@@ -23,9 +23,9 @@ class EngineersStock {
     this.engineer,
   });
 
-  factory EngineersStock.fromJson(Map<String, dynamic> json) {
-    return _$EngineersStockFromJson(json);
+  factory EngineerStocks.fromJson(Map<String, dynamic> json) {
+    return _$EngineerStocksFromJson(json);
   }
 
-  Map<String, dynamic> toJson() => _$EngineersStockToJson(this);
+  Map<String, dynamic> toJson() => _$EngineerStocksToJson(this);
 }

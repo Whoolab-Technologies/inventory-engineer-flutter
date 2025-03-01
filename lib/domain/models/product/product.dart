@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:mvp_engineer/domain/models/engineer_stocks/engineer_stocks.dart';
 
-import '../engineer_stock/engineers_stock.dart';
 import '../stock/stock.dart';
 part 'product.g.dart';
 
@@ -24,7 +24,7 @@ class Product {
   @JsonKey(name: 'image_url')
   String? imageUrl;
   @JsonKey(name: 'engineers_stock')
-  List<EngineersStock>? engineersStock;
+  List<EngineerStocks>? engineerStocks;
   List<Stock>? stocks;
 
   @JsonKey(name: 'my_stock')
@@ -45,7 +45,7 @@ class Product {
     this.code,
     this.symbol,
     this.imageUrl,
-    this.engineersStock,
+    this.engineerStocks,
     this.stocks,
     this.myStock,
     this.stockWithOthers,
