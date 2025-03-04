@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvp_engineer/application/material_request/material_request_bloc.dart';
 import 'package:mvp_engineer/application/products/products_bloc.dart';
+import 'package:mvp_engineer/core/values/strings.dart';
 import 'package:mvp_engineer/domain/models/material_request/material_request.dart';
 import 'package:mvp_engineer/presentations/material_requests/material_requests_create_screen.dart';
 import 'package:mvp_engineer/presentations/widgets/app_shimmer.dart';
@@ -21,8 +22,11 @@ class _MaterialRequestScreenState extends State<MaterialRequestScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Material Requests',
-          style: TextStyle(color: primaryColor, fontWeight: FontWeight.bold),
+          Strings.materialRequests,
+          style: TextStyle(
+            color: primaryColor,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         actions: [
           IconButton(

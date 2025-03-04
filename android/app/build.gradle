@@ -57,6 +57,24 @@ android {
             signingConfig = signingConfigs.debug
         }
     }
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            def newApkName =  "mvp-engineer"
+      
+            def buildType = variant.buildType.name
+            def newName
+
+            if (buildType == 'debug') {
+                newName = "app-${variant.flavorName}-debug.apk"
+            } else {
+                newName = "${newApkName}-${defaultConfig.versionName}-${variant.name}.apk"
+            }
+
+            outputFileName = newName
+
+        }
+    }
+    
 }
 
 flutter {

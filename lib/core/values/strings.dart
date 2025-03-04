@@ -1,5 +1,6 @@
 class Strings {
   static const String gallery = "Gallery";
+
   static const String camera = "Camera";
 
   static const String invalidEmail = "Invalid email address";
@@ -26,17 +27,26 @@ class Strings {
   static const String loginSuccessMessage = "Login successful";
 
   static const String productAlreadyAdded = "Product already added";
+
   static const String productLabel = "Select Product";
+
   static const String quantityLabel = "Quantity";
+
   static const String productPlaceHolder = "Products";
+
   static const String addProduct = "Add Product";
+
   static const String submit = "Submit";
 
   static const String mrCreateSuccess = "MR created successfully";
 
   static const String seachProduct = 'Search products...';
+
   static const String noOutOfStockProducts =
       "All requested products are currently in stock.";
+
   static const String noRequestApproved =
       "No pending requests have been approved.";
+
+  static const String materialRequests = "Material Requests";
 }
