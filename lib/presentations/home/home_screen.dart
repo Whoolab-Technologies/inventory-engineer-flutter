@@ -14,7 +14,7 @@ import 'package:mvp_engineer/presentations/home/product_card.dart';
 import 'package:mvp_engineer/presentations/home/recent_request_item.dart';
 import 'package:mvp_engineer/presentations/home/user_card.dart';
 import 'package:mvp_engineer/presentations/scanner/qr_code_scanner_page.dart';
-import 'package:mvp_engineer/presentations/widgets/no_data_available_card.dart';
+import 'package:mvp_shared_components/widgets/no_data_available_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

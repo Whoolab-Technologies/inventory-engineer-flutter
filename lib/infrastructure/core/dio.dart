@@ -3,12 +3,12 @@ import "dart:developer";
 
 import "package:dio/dio.dart";
 import "package:flutter/foundation.dart";
-import "package:mvp_engineer/core/services/storage.dart";
 import "package:mvp_engineer/core/utils/utils.dart";
 import "package:mvp_engineer/global.dart";
 import "package:mvp_engineer/core/values/api.dart";
 
 import "base_response/base_response.dart";
+import 'package:mvp_shared_components/core/services/storage.dart';
 
 class DioClient {
   DioClient._(); // private constructor

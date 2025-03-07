@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvp_engineer/application/auth/auth_bloc.dart';
 import 'package:mvp_engineer/core/routes/routes.dart';
+import 'package:mvp_engineer/core/values/constants.dart';
 import 'package:mvp_engineer/domain/app-data/app_data.dart';
-import 'package:mvp_engineer/presentations/widgets/app_profile_pic_widget.dart';
+import 'package:mvp_engineer/global.dart';
+import 'package:mvp_shared_components/widgets/app_profile_pic_widget.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -111,6 +113,10 @@ class ProfileScreen extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {
                       context.read<AuthBloc>().add(const AuthEvent.signedOut());
+                      AppGlobal.storageService.setBoolean(
+                        STORAGE_IS_LOGGED_IN,
+                        false,
+                      );
                       Navigator.of(context).pushNamedAndRemoveUntil(
                           AppRoutes.LOGIN, (_) => false);
                     },

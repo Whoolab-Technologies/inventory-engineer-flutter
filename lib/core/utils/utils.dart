@@ -6,7 +6,7 @@ import "package:mvp_engineer/domain/auth/auth_failures.dart";
 import "package:mvp_engineer/domain/context/app_context.dart";
 import "package:image_picker/image_picker.dart";
 import "package:mvp_engineer/core/values/strings.dart";
-import "package:mvp_engineer/presentations/widgets/custom_snackbar.dart";
+import "package:mvp_shared_components/widgets/custom_snackbar.dart";
 
 class Utils {
   static onLogOut() {

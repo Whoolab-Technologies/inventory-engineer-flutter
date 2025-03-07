@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mvp_engineer/presentations/widgets/app_shimmer.dart';
+import 'package:mvp_shared_components/widgets/app_shimmer.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class UserCardShimmer extends StatelessWidget {

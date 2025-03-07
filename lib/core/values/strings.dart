@@ -49,4 +49,7 @@ class Strings {
       "No pending requests have been approved.";
 
   static const String materialRequests = "Material Requests";
+
+  static const String noProductsAvailable = "No products available";
+  static const String noMRsAvailable = "No requests found";
 }

@@ -6,7 +6,8 @@ import 'package:mvp_engineer/application/products/products_bloc.dart';
 import 'package:mvp_engineer/core/values/strings.dart';
 import 'package:mvp_engineer/domain/models/material_request/material_request.dart';
 import 'package:mvp_engineer/presentations/material_requests/material_requests_create_screen.dart';
-import 'package:mvp_engineer/presentations/widgets/app_shimmer.dart';
+import 'package:mvp_shared_components/widgets/app_empty_list_container.dart';
+import 'package:mvp_shared_components/widgets/app_shimmer.dart';
 
 class MaterialRequestScreen extends StatefulWidget {
   const MaterialRequestScreen({super.key});
@@ -68,7 +69,6 @@ class MaterialRequestList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Theme.of(context).primaryColor;
     return BlocBuilder<MaterialRequestBloc, MaterialRequestState>(
       builder: (context, state) {
         return state.isLoading
@@ -90,14 +90,8 @@ class MaterialRequestList extends StatelessWidget {
                     );
                   },
                   (requests) => requests.isEmpty
-                      ? Center(
-                          child: Text(
-                          "No material requests found.",
-                          style: TextStyle(
-                            color: primaryColor,
-                            fontSize: 16.sp,
-                          ),
-                        ))
+                      ? const AppEmptyListContainer(
+                          message: Strings.noMRsAvailable)
                       : ListView.separated(
                           itemCount: requests.length,
                           separatorBuilder: (context, index) {

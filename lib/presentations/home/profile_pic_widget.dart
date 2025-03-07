@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mvp_engineer/presentations/widgets/app_profile_pic_widget.dart';
+import 'package:mvp_shared_components/widgets/app_profile_pic_widget.dart';
 
 class ProfilePicWidget extends StatelessWidget {
   const ProfilePicWidget({

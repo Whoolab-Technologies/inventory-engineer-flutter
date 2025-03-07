@@ -8,8 +8,8 @@ import 'package:mvp_engineer/core/values/strings.dart';
 import 'package:mvp_engineer/domain/models/material_request_item/material_request_item.dart';
 import 'package:mvp_engineer/domain/models/product/product.dart';
 import 'package:mvp_engineer/injection/injection.dart';
-import 'package:mvp_engineer/presentations/widgets/app_custom_dropdown.dart';
-import 'package:mvp_engineer/presentations/widgets/app_shimmer.dart';
+import 'package:mvp_shared_components/widgets/app_custom_dropdown.dart';
+import 'package:mvp_shared_components/widgets/app_shimmer.dart';
 
 class MaterialRequestCreateScreen extends StatelessWidget {
   const MaterialRequestCreateScreen({super.key});

@@ -2,7 +2,7 @@ import 'package:mvp_engineer/injection/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
-import 'package:mvp_engineer/core/services/storage.dart';
+import 'package:mvp_shared_components/core/services/storage.dart';
 
 class AppGlobal {
   static late StorageService storageService;

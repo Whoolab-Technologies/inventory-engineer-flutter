@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:mvp_engineer/application/auth/auth_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mvp_engineer/core/routes/routes.dart';
-import 'package:mvp_engineer/core/values/constants.dart';
 import 'package:mvp_engineer/global.dart';
-import 'package:mvp_engineer/presentations/widgets/app_logo_widget.dart';
+import 'package:mvp_shared_components/core/constants.dart';
+import 'package:mvp_shared_components/widgets/app_logo_widget.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});

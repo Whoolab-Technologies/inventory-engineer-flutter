@@ -3,7 +3,6 @@ import "package:flutter/services.dart";
 
 import "package:dartz/dartz.dart";
 import "package:injectable/injectable.dart";
-import "package:mvp_engineer/core/services/storage.dart";
 import "package:mvp_engineer/core/values/api.dart";
 import "package:mvp_engineer/core/values/strings.dart";
 import "package:mvp_engineer/domain/app-data/app_data.dart";
@@ -16,6 +15,7 @@ import "package:mvp_engineer/global.dart";
 import "package:mvp_engineer/infrastructure/core/base_response/base_response.dart";
 import "package:mvp_engineer/infrastructure/core/dio.dart";
 import "package:mvp_engineer/injection/errors.dart";
+import 'package:mvp_shared_components/core/services/storage.dart';
 
 @LazySingleton(as: IAuthFacade)
 class AuthRepo implements IAuthFacade {

@@ -5,11 +5,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvp_engineer/application/login/login_bloc.dart';
 import 'package:mvp_engineer/core/routes/names.dart';
 import 'package:mvp_engineer/core/utils/utils.dart';
-import 'package:mvp_engineer/core/values/constants.dart';
 import 'package:mvp_engineer/core/values/strings.dart';
 import 'package:mvp_engineer/domain/auth/auth_value_objects.dart';
 import 'package:mvp_engineer/global.dart';
 import 'package:mvp_engineer/injection/failures.dart';
+import 'package:mvp_shared_components/core/constants.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

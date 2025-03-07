@@ -3,10 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvp_engineer/core/routes/routes.dart';
-import 'package:mvp_engineer/core/theme/theme.dart';
-import 'package:mvp_engineer/core/theme/util.dart';
+
 import 'package:mvp_engineer/domain/context/app_context.dart';
 import 'package:mvp_engineer/global.dart';
+import 'package:mvp_shared_components/core/theme/theme.dart';
+import 'package:mvp_shared_components/core/theme/util.dart';
 
 void main() async {
   await AppGlobal.init();

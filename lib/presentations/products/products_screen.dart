@@ -6,11 +6,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvp_engineer/application/products/products_bloc.dart';
 import 'package:mvp_engineer/core/utils/utils.dart';
 import 'package:mvp_engineer/core/values/strings.dart';
-import 'package:mvp_engineer/presentations/products/empty_product_list.dart';
+
 import 'package:mvp_engineer/presentations/products/product_item_widget.dart';
 import 'package:mvp_engineer/presentations/products/product_list_viewer.dart';
 import 'package:mvp_engineer/presentations/scanner/qr_code_scanner_page.dart';
-import 'package:mvp_engineer/presentations/widgets/app_search_field.dart';
+import 'package:mvp_shared_components/widgets/app_search_field.dart';
+import 'package:mvp_shared_components/widgets/app_empty_list_container.dart';
 
 class ProductsScreen extends StatelessWidget {
   const ProductsScreen({super.key});
@@ -71,7 +72,9 @@ class ProductsScreen extends StatelessWidget {
                     }
 
                     return state.products.isEmpty
-                        ? const EmptyProductList()
+                        ? const AppEmptyListContainer(
+                            message: Strings.noProductsAvailable,
+                          )
                         : ProductListViewer(
                             products: state.products,
                           );
