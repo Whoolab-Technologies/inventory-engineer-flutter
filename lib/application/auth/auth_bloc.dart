@@ -44,7 +44,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<ForcedSignedOut>((event, emit) async {
       //  await _iPushNotificationRepository.removeFcmToken(forced: true);
       // await _iAuthRepo.signOut();
-
+      AppData.clear();
       emit(const AuthState.unauthenticated());
     });
   }
