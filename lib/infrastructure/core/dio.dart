@@ -61,6 +61,7 @@ class DioClient {
           }
           options.headers["Authorization"] = "Bearer $_token";
         }
+        options.headers['Accept'] = 'application/json';
         log("MVP ${options.uri}");
         log("MVP token => $_token");
         return handler.next(options);
@@ -69,7 +70,6 @@ class DioClient {
         return handler.next(response);
       },
       onError: (DioException e, handler) async {
-        log("MVP ${e}");
         if (e.response?.data is Uint8List) {
           String jsonString = utf8.decode(e.response?.data);
           e.response?.data = json.decode(jsonString);

@@ -6,6 +6,7 @@ import "package:mvp_engineer/domain/auth/auth_failures.dart";
 import "package:mvp_engineer/domain/context/app_context.dart";
 import "package:image_picker/image_picker.dart";
 import "package:mvp_engineer/core/values/strings.dart";
+import "package:mvp_engineer/global.dart";
 import "package:mvp_shared_components/widgets/custom_snackbar.dart";
 
 class Utils {
@@ -20,17 +21,17 @@ class Utils {
     }
   }
 
-  static onServerLogOut(String message) {
+  static onServerLogOut(String message) async {
     BuildContext? context = AppContext.navigatorKey.currentContext;
 
     if (context != null) {
       context.read<AuthBloc>().add(const AuthEvent.forcedSignedOut());
-
       buildCustomSnackBar(
         context: context,
         message: message,
         error: true,
       );
+      await AppGlobal.storageService.clearAll();
       Navigator.of(context)
           .pushNamedAndRemoveUntil(AppRoutes.LOGIN, (route) => false);
     }

@@ -10,7 +10,6 @@ import 'package:mvp_engineer/injection/injection.dart';
 import 'package:mvp_engineer/presentations/home/home_screen.dart';
 import 'package:mvp_engineer/presentations/login/login_screen.dart';
 import 'package:mvp_engineer/presentations/material_requests/material_request_screen.dart';
-import 'package:mvp_engineer/presentations/navigator/navigator_screen.dart';
 import 'package:mvp_engineer/presentations/products/products_screen.dart';
 // import 'package:mvp_engineer/injection/injection.dart';
 // import 'package:mvp_engineer/presentation/home/home_screen.dart';
@@ -104,7 +103,7 @@ class AppPages {
           bool isLoggedIn = AppGlobal.storageService.isLoggedIn();
           if (isLoggedIn) {
             return PageTransition(
-              child: const NavigatorScreen(),
+              child: const HomeScreen(),
               type: PageTransitionType.fade,
               settings: settings,
             );
