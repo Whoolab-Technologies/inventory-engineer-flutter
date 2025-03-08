@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -25,16 +23,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       );
       Either<AppFailure, HomeData> homeDataFailuresOrSuccess =
           await _iHomeFacade.fetchData();
-      homeDataFailuresOrSuccess.fold(
-        (failure) {
-          log('Fetch data failed: $failure');
-          return null;
-        },
-        (data) {
-          log('Fetch data succeeded: $data');
-          return null;
-        },
-      );
 
       emit(
         state.copyWith(

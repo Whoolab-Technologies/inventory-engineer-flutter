@@ -9,6 +9,8 @@ class ProductListViewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
       padding: EdgeInsets.all(8.w),
       itemCount: products.length,
       itemBuilder: (context, productIndex) {

@@ -61,24 +61,35 @@ class ProductsScreen extends StatelessWidget {
                     context.read<ProductsBloc>().add(ProductsEvent.getProducts(
                         searchTerm: state.searchTerm));
                   },
-                  child: Builder(builder: (_) {
-                    if (state.isloading) {
-                      return ListView.separated(
-                        padding: EdgeInsets.all(8.w),
-                        itemBuilder: (context, i) => const ProductItemShimmer(),
-                        separatorBuilder: (context, i) => const Divider(),
-                        itemCount: 5,
+                  child: Builder(
+                    builder: (_) {
+                      if (state.isloading) {
+                        return ListView.separated(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          padding: EdgeInsets.all(8.w),
+                          itemBuilder: (context, i) =>
+                              const ProductItemShimmer(),
+                          separatorBuilder: (context, i) => const Divider(),
+                          itemCount: 5,
+                        );
+                      }
+                      return SingleChildScrollView(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        child: Column(
+                          children: [
+                            state.products.isEmpty
+                                ? const AppEmptyListContainer(
+                                    message: Strings.noProductsAvailable,
+                                  )
+                                : ProductListViewer(
+                                    products: state.products,
+                                  )
+                          ],
+                        ),
                       );
-                    }
-
-                    return state.products.isEmpty
-                        ? const AppEmptyListContainer(
-                            message: Strings.noProductsAvailable,
-                          )
-                        : ProductListViewer(
-                            products: state.products,
-                          );
-                  }),
+                    },
+                  ),
                 ),
               ),
             ],

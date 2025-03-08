@@ -30,24 +30,26 @@ class UserCard extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Hello, ${AppData.engineer?.name ?? ""}!',
-                  style: TextStyle(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.bold,
-                      color: primaryColor),
-                ),
-                Text(
-                  'Welcome back!',
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    color: Theme.of(context).colorScheme.secondary,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Hello!',
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
                   ),
-                ),
-              ],
+                  Text(
+                    AppData.engineer?.name ?? "",
+                    style: TextStyle(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.bold,
+                        color: primaryColor),
+                  ),
+                ],
+              ),
             ),
             Material(
               elevation: 12,

@@ -30,16 +30,16 @@ class UserCardShimmer extends StatelessWidget {
               children: [
                 AppShimmer(
                   child: Container(
-                    width: 150.w,
-                    height: 20.h,
+                    width: 100.w,
+                    height: 14.h,
                     color: Colors.white,
                   ),
                 ),
-                SizedBox(height: 8.h),
+                SizedBox(height: 4.h),
                 AppShimmer(
                   child: Container(
-                    width: 100.w,
-                    height: 16.h,
+                    width: 150.w,
+                    height: 20.h,
                     color: Colors.white,
                   ),
                 ),
@@ -47,8 +47,8 @@ class UserCardShimmer extends StatelessWidget {
             ),
             AppShimmer(
               child: Container(
-                width: 60.w,
-                height: 60.w,
+                width: 70.w,
+                height: 70.w,
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.white,
