@@ -1,3 +1,4 @@
+import "package:dartz/dartz.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:mvp_engineer/application/auth/auth_bloc.dart";
@@ -7,6 +8,7 @@ import "package:mvp_engineer/domain/context/app_context.dart";
 import "package:image_picker/image_picker.dart";
 import "package:mvp_engineer/core/values/strings.dart";
 import "package:mvp_engineer/global.dart";
+import "package:mvp_engineer/infrastructure/core/app_failure.dart";
 import "package:mvp_shared_components/widgets/custom_snackbar.dart";
 
 class Utils {
@@ -105,5 +107,28 @@ class Utils {
       invalidEmailAndPasswordCombination: (value) =>
           Strings.invalidEmailOrPassword,
     );
+  }
+
+  static handleApiResponse(
+      String entity, Either<AppFailure, dynamic> response) {
+    if (AppContext.navigatorKey.currentContext != null) {
+      BuildContext context = AppContext.navigatorKey.currentContext!;
+      response.fold(
+        (l) {
+          buildCustomSnackBar(
+            context: context,
+            message: "$entity fetch failed",
+          );
+          return null;
+        },
+        (r) {
+          buildCustomSnackBar(
+              context: context,
+              message: "$entity fetched successfully",
+              error: false);
+          return null;
+        },
+      );
+    }
   }
 }

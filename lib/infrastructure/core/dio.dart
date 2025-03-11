@@ -11,12 +11,11 @@ import "base_response/base_response.dart";
 import 'package:mvp_shared_components/core/services/storage.dart';
 
 class DioClient {
-  DioClient._(); // private constructor
+  DioClient._();
 
-  static final DioClient _instance =
-      DioClient._(); // single instance of DioClient
+  static final DioClient _instance = DioClient._();
 
-  static DioClient get instance => _instance; // getter to access the instance
+  static DioClient get instance => _instance;
 
   final Dio _dio = Dio();
   final StorageService storage = AppGlobal.storageService;
