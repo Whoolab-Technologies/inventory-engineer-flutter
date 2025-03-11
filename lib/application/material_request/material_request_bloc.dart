@@ -61,7 +61,7 @@ class MaterialRequestBloc
       // Add new request if successful
       result.fold(
         (failure) => null,
-        (newRequest) => updatedMaterialRequests.add(newRequest),
+        (newRequest) => updatedMaterialRequests.insert(0, newRequest),
       );
       // Emit updated state
       emit(state.copyWith(
