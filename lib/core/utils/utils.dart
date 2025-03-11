@@ -118,6 +118,7 @@ class Utils {
           buildCustomSnackBar(
             context: context,
             message: "$entity fetch failed",
+            error: true,
           );
           return null;
         },

@@ -8,6 +8,7 @@ import 'package:mvp_engineer/domain/models/material_request/material_request.dar
 import 'package:mvp_engineer/presentations/material_requests/material_requests_create_screen.dart';
 import 'package:mvp_shared_components/widgets/app_empty_list_container.dart';
 import 'package:mvp_shared_components/widgets/app_shimmer.dart';
+import 'package:mvp_shared_components/widgets/app_status_container.dart';
 
 class MaterialRequestScreen extends StatefulWidget {
   const MaterialRequestScreen({super.key});
@@ -184,27 +185,54 @@ class MaterialRequestTile extends StatelessWidget {
     return Card(
       clipBehavior: Clip.hardEdge,
       child: ListTile(
-        title: Text(
-          request.requestNumber ?? "",
-          style: TextStyle(
-            fontSize: 16.sp,
-            color: Theme.of(context).colorScheme.primary,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        subtitle: Column(
+        onTap: () => _showMaterialRequestDetails(context, request),
+        title: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(request.description ?? ""),
-            Text(request.createdDateTime),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  request.requestNumber ?? "",
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    color: Theme.of(context).colorScheme.primary,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                AppStatusContainer(
+                    status: (request.status ?? ""),
+                    child: Text(
+                      (request.status ?? "").toUpperCase(),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12.sp,
+                      ),
+                    )),
+              ],
+            ),
+            SizedBox(height: 4.h),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  request.createdDateTime,
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                  ),
+                ),
+                Text(
+                  "${(request.items ?? []).length} items",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12.sp,
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
-        trailing: Text(
-          "${(request.items ?? []).length} items",
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
-        onTap: () => _showMaterialRequestDetails(context, request),
       ),
     );
   }
