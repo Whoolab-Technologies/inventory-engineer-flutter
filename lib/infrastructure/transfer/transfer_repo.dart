@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
@@ -25,7 +23,6 @@ class TransferRepo implements ITransferFacade {
       if (transferResponse.error) {
         return left(AppFailure.customError(message: transferResponse.message));
       }
-      log("${transferResponse.data?.length}");
       return right(transferResponse.data!);
     } on DioException catch (e) {
       return left(AppFailure.customError(message: e.message!));

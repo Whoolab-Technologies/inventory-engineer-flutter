@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -49,7 +47,6 @@ class ProductsScreen extends StatelessWidget {
                 hintText: Strings.seachProduct,
                 suffixIcon: _buildScannerButton(context, primaryColor),
                 onChange: (String? searchTerm) {
-                  log("searchTerm $searchTerm");
                   context.read<ProductsBloc>().add(
                         ProductsEvent.getProducts(searchTerm: searchTerm),
                       );

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:mvp_engineer/application/auth/auth_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,7 +35,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     .pushNamedAndRemoveUntil(AppRoutes.HOME, (_) => false);
               },
               unauthenticated: (unauthenticated) {
-                log('Unauthenticated');
                 Navigator.of(context)
                     .pushNamedAndRemoveUntil(AppRoutes.LOGIN, (_) => false);
               });

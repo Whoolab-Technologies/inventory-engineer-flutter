@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -14,7 +15,7 @@ part 'transfer_state.dart';
 class TransferBloc extends Bloc<TransferEvent, TransferState> {
   final ITransferFacade _iTransferFacade;
   TransferBloc(this._iTransferFacade) : super(TransferState.initial()) {
-    on<_GetTransfers>(_onGetTransfers);
+    on<_GetTransfers>(_onGetTransfers, transformer: restartable());
   }
 
   FutureOr<void> _onGetTransfers(

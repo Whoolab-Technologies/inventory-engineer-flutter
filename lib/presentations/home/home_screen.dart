@@ -178,8 +178,10 @@ class OutofStockProducts extends StatelessWidget {
         SizedBox(
           height: 160.h,
           child: (products.isEmpty)
-              ? const NoDataAvailableCard(
-                  message: Strings.noOutOfStockProducts,
+              ? NoDataAvailableCard(
+                  message: (data.materialRequests ?? []).isEmpty
+                      ? "You haven’t requested any materials yet. Create a material request to see stock availability"
+                      : Strings.noOutOfStockProducts,
                 )
               : ListView.separated(
                   padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 4.w),
