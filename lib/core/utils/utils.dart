@@ -111,25 +111,25 @@ class Utils {
 
   static handleApiResponse(
       String entity, Either<AppFailure, dynamic> response) {
-    if (AppContext.navigatorKey.currentContext != null) {
-      BuildContext context = AppContext.navigatorKey.currentContext!;
-      response.fold(
-        (l) {
-          buildCustomSnackBar(
-            context: context,
-            message: "$entity fetch failed",
-            error: true,
-          );
-          return null;
-        },
-        (r) {
-          buildCustomSnackBar(
-              context: context,
-              message: "$entity fetched successfully",
-              error: false);
-          return null;
-        },
-      );
-    }
+    // if (AppContext.navigatorKey.currentContext != null) {
+    //   BuildContext context = AppContext.navigatorKey.currentContext!;
+    //   response.fold(
+    //     (l) {
+    //       buildCustomSnackBar(
+    //         context: context,
+    //         message: "$entity fetch failed",
+    //         error: true,
+    //       );
+    //       return null;
+    //     },
+    //     (r) {
+    //       buildCustomSnackBar(
+    //           context: context,
+    //           message: "$entity fetched successfully",
+    //           error: false);
+    //       return null;
+    //     },
+    //   );
+    // }
   }
 }

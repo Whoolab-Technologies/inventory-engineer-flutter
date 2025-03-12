@@ -22,12 +22,15 @@ import 'package:mvp_engineer/domain/home/i_home_facade.dart' as _i172;
 import 'package:mvp_engineer/domain/material_request/i_material_request_facade.dart'
     as _i973;
 import 'package:mvp_engineer/domain/product/i_product_facade.dart' as _i983;
+import 'package:mvp_engineer/domain/transfer/i_transfer_facade.dart' as _i631;
 import 'package:mvp_engineer/infrastructure/auth/auth_repo.dart' as _i597;
 import 'package:mvp_engineer/infrastructure/core/dio.dart' as _i429;
 import 'package:mvp_engineer/infrastructure/home/home_repo.dart' as _i264;
 import 'package:mvp_engineer/infrastructure/material_request/material_request_repo.dart'
     as _i49;
 import 'package:mvp_engineer/infrastructure/product/product_repo.dart' as _i127;
+import 'package:mvp_engineer/infrastructure/transfer/transfer_repo.dart'
+    as _i911;
 import 'package:mvp_engineer/injection/injection_module.dart' as _i118;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -55,6 +58,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i264.HomeRepo(gh<_i429.DioClient>()));
     gh.factory<_i992.ProductsBloc>(
         () => _i992.ProductsBloc(gh<_i983.IProductFacade>()));
+    gh.lazySingleton<_i631.ITransferFacade>(
+        () => _i911.TransferRepo(gh<_i429.DioClient>()));
     gh.factory<_i837.LoginBloc>(() => _i837.LoginBloc(gh<_i129.IAuthFacade>()));
     gh.factory<_i566.MaterialRequestBloc>(
         () => _i566.MaterialRequestBloc(gh<_i973.IMaterialRequestFacade>()));
