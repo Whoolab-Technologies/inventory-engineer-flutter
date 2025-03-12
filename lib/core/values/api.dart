@@ -13,5 +13,6 @@ class Api {
     "products": "/products",
     "mr": "/mr",
     "home": "/home",
+    "transactions": "/transactions",
   };
 }

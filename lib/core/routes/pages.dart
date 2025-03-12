@@ -5,12 +5,14 @@ import 'package:mvp_engineer/application/home/home_bloc.dart';
 import 'package:mvp_engineer/application/login/login_bloc.dart';
 import 'package:mvp_engineer/application/material_request/material_request_bloc.dart';
 import 'package:mvp_engineer/application/products/products_bloc.dart';
+import 'package:mvp_engineer/application/transfer/transfer_bloc.dart';
 import 'package:mvp_engineer/global.dart';
 import 'package:mvp_engineer/injection/injection.dart';
 import 'package:mvp_engineer/presentations/home/home_screen.dart';
 import 'package:mvp_engineer/presentations/login/login_screen.dart';
 import 'package:mvp_engineer/presentations/material_requests/material_request_screen.dart';
 import 'package:mvp_engineer/presentations/products/products_screen.dart';
+import 'package:mvp_engineer/presentations/transfer/transfer_screen.dart';
 // import 'package:mvp_engineer/injection/injection.dart';
 // import 'package:mvp_engineer/presentation/home/home_screen.dart';
 // import 'package:mvp_engineer/presentation/landing/landing_screen.dart';
@@ -32,13 +34,6 @@ class AppPages {
             create: (context) => getIt<AuthBloc>(),
           ),
         ),
-        // PageEntity(
-        //   route: AppRoutes.REGISTER,
-        //   page: const RegisterScreen(),
-        //   // bloc: BlocProvider(
-        //   //   create: (context) => getIt<RegisterBloc>(),
-        //   // ),
-        // ),
         PageEntity(
           route: AppRoutes.LOGIN,
           page: const LoginScreen(),
@@ -67,13 +62,13 @@ class AppPages {
             create: (context) => getIt<MaterialRequestBloc>(),
           ),
         ),
-        // PageEntity(
-        //   route: AppRoutes.REPORTS,
-        //   page: const ReportsScreen(),
-        //   // bloc: BlocProvider(
-        //   //   create: (context) => getIt<RegisterBloc>(),
-        //   // ),
-        // ),
+        PageEntity(
+          route: AppRoutes.TRANSFERS,
+          page: const TransferScreen(),
+          bloc: BlocProvider(
+            create: (context) => getIt<TransferBloc>(),
+          ),
+        ),
       ];
 
   static List<dynamic> allBlocProviders(BuildContext context) {

@@ -4,7 +4,7 @@ class AppRoutes {
   static String LOGIN = "login";
   static String REGISTER = "register";
   static String PRODUCTS = "products";
-  static String TRANSACTIONS = "transactions";
+  static String TRANSFERS = "transfers";
   static String REPORTS = "reports";
   static String MR = "mr";
 

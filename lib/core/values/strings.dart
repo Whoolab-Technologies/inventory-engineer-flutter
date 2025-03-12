@@ -51,5 +51,9 @@ class Strings {
   static const String materialRequests = "Material Requests";
 
   static const String noProductsAvailable = "No products available";
+
   static const String noMRsAvailable = "No requests found";
+
+  static const String noTransferAvailable =
+      "No MR transfers available at the moment";
 }

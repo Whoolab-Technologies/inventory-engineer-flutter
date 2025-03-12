@@ -18,33 +18,33 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TransferEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() gettransfers,
+    required TResult Function() getTransfers,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? gettransfers,
+    TResult? Function()? getTransfers,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? gettransfers,
+    TResult Function()? getTransfers,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetTransfers value) gettransfers,
+    required TResult Function(_GetTransfers value) getTransfers,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_GetTransfers value)? gettransfers,
+    TResult? Function(_GetTransfers value)? getTransfers,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetTransfers value)? gettransfers,
+    TResult Function(_GetTransfers value)? getTransfers,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -97,7 +97,7 @@ class _$GetTransfersImpl implements _GetTransfers {
 
   @override
   String toString() {
-    return 'TransferEvent.gettransfers()';
+    return 'TransferEvent.getTransfers()';
   }
 
   @override
@@ -112,27 +112,27 @@ class _$GetTransfersImpl implements _GetTransfers {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() gettransfers,
+    required TResult Function() getTransfers,
   }) {
-    return gettransfers();
+    return getTransfers();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? gettransfers,
+    TResult? Function()? getTransfers,
   }) {
-    return gettransfers?.call();
+    return getTransfers?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? gettransfers,
+    TResult Function()? getTransfers,
     required TResult orElse(),
   }) {
-    if (gettransfers != null) {
-      return gettransfers();
+    if (getTransfers != null) {
+      return getTransfers();
     }
     return orElse();
   }
@@ -140,27 +140,27 @@ class _$GetTransfersImpl implements _GetTransfers {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetTransfers value) gettransfers,
+    required TResult Function(_GetTransfers value) getTransfers,
   }) {
-    return gettransfers(this);
+    return getTransfers(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_GetTransfers value)? gettransfers,
+    TResult? Function(_GetTransfers value)? getTransfers,
   }) {
-    return gettransfers?.call(this);
+    return getTransfers?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetTransfers value)? gettransfers,
+    TResult Function(_GetTransfers value)? getTransfers,
     required TResult orElse(),
   }) {
-    if (gettransfers != null) {
-      return gettransfers(this);
+    if (getTransfers != null) {
+      return getTransfers(this);
     }
     return orElse();
   }

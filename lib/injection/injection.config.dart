@@ -16,6 +16,7 @@ import 'package:mvp_engineer/application/login/login_bloc.dart' as _i837;
 import 'package:mvp_engineer/application/material_request/material_request_bloc.dart'
     as _i566;
 import 'package:mvp_engineer/application/products/products_bloc.dart' as _i992;
+import 'package:mvp_engineer/application/transfer/transfer_bloc.dart' as _i68;
 import 'package:mvp_engineer/domain/app-data/app_data.dart' as _i554;
 import 'package:mvp_engineer/domain/auth/i_auth_facade.dart' as _i129;
 import 'package:mvp_engineer/domain/home/i_home_facade.dart' as _i172;
@@ -64,6 +65,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i566.MaterialRequestBloc>(
         () => _i566.MaterialRequestBloc(gh<_i973.IMaterialRequestFacade>()));
     gh.factory<_i1014.HomeBloc>(() => _i1014.HomeBloc(gh<_i172.IHomeFacade>()));
+    gh.factory<_i68.TransferBloc>(
+        () => _i68.TransferBloc(gh<_i631.ITransferFacade>()));
     return this;
   }
 }

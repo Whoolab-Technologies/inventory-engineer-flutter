@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvp_engineer/application/home/home_bloc.dart';
 import 'package:mvp_engineer/application/material_request/material_request_bloc.dart';
 import 'package:mvp_engineer/application/products/products_bloc.dart';
+import 'package:mvp_engineer/application/transfer/transfer_bloc.dart';
 import 'package:mvp_engineer/core/routes/routes.dart';
 import 'package:mvp_engineer/core/utils/utils.dart';
 import 'package:mvp_engineer/core/values/strings.dart';
@@ -121,7 +122,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                 label: 'Inventory Transfer',
                                 primaryColor: primaryColor,
                                 onTap: () {
-                                  // Navigator.of(context).pushNamed(AppRoutes.TRANSACTIONS);
+                                  context.read<TransferBloc>().add(
+                                        const TransferEvent.getTransfers(),
+                                      );
+                                  Navigator.of(context)
+                                      .pushNamed(AppRoutes.TRANSFERS);
                                 },
                               ),
                             ],
