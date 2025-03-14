@@ -180,11 +180,12 @@ class _MaterialRequestFormState extends State<MaterialRequestForm> {
                           color: Theme.of(context).colorScheme.error,
                         ),
                         onPressed: () {
+                          context.read<MaterialRequestBloc>().add(
+                              MaterialRequestEvent.productRemoved(
+                                  items[index]));
                           setState(() {
                             items.removeAt(index);
                           });
-                          context.read<MaterialRequestBloc>().add(
-                              MaterialRequestEvent.productAdded(items[index]));
                         },
                       ),
                     ),
