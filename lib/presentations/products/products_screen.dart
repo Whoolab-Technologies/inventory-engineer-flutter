@@ -4,10 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvp_engineer/application/products/products_bloc.dart';
 import 'package:mvp_engineer/core/utils/utils.dart';
 import 'package:mvp_engineer/core/values/strings.dart';
+import 'package:mvp_engineer/domain/models/engineer/engineer.dart';
 
 import 'package:mvp_engineer/presentations/products/product_item_widget.dart';
 import 'package:mvp_engineer/presentations/products/product_list_viewer.dart';
 import 'package:mvp_engineer/presentations/scanner/qr_code_scanner_page.dart';
+import 'package:mvp_shared_components/widgets/app_custom_dropdown.dart';
 import 'package:mvp_shared_components/widgets/app_search_field.dart';
 import 'package:mvp_shared_components/widgets/app_empty_list_container.dart';
 
@@ -52,11 +54,37 @@ class ProductsScreen extends StatelessWidget {
                       );
                 },
               ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.w),
+                child: AppCustomDropdown<Engineer>(
+                  emptyMessage: "No engineers available",
+                  items: state.engineers,
+                  value: state.selectedEngineer,
+                  label: "Select Engineer",
+                  placeholder: "Select Engineer",
+                  onChanged: (engineer) {
+                    context.read<ProductsBloc>().add(
+                          ProductsEvent.setSelectedEngineer(engineer),
+                        );
+                    context.read<ProductsBloc>().add(
+                          ProductsEvent.getProducts(
+                            searchTerm: state.searchTerm,
+                            engineerId: "${engineer?.id ?? ""}",
+                          ),
+                        );
+                  },
+                  showClear: true,
+                  itemToString: (enginer) => enginer.toString(),
+                  itemDisplayText: (engineer) => engineer.name,
+                ),
+              ),
               Expanded(
                 child: RefreshIndicator(
                   onRefresh: () async {
                     context.read<ProductsBloc>().add(ProductsEvent.getProducts(
-                        searchTerm: state.searchTerm));
+                          searchTerm: state.searchTerm,
+                          engineerId: "${state.selectedEngineer?.id ?? ""}",
+                        ));
                   },
                   child: Builder(
                     builder: (_) {

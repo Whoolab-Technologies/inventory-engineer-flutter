@@ -3,5 +3,14 @@ part of 'products_bloc.dart';
 @freezed
 class ProductsEvent with _$ProductsEvent {
   const factory ProductsEvent.started() = _Started;
-  const factory ProductsEvent.getProducts({String? searchTerm}) = _GetProducts;
+  const factory ProductsEvent.getProducts(
+      {String? searchTerm, String? engineerId}) = _GetProducts;
+  const factory ProductsEvent.getProduct({required String productId}) =
+      _GetProduct;
+  const factory ProductsEvent.getStoresAndEngineer() = _GetStoresAndEngineers;
+
+  const factory ProductsEvent.setSelectedEngineer(Engineer? enginer) =
+      _OnSetSelectedEngineer;
+  const factory ProductsEvent.setSelectedStore(Store? store) =
+      _OnSetSelectedStore;
 }

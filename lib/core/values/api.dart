@@ -1,5 +1,5 @@
 class Api {
-  static const apiUrlDev = "http://192.168.1.45:8000";
+  static const apiUrlDev = "http://192.168.37.33:8000";
   static const apiUrl = "https://inventory.seethis.net";
   static const apiPrefix = "/api/v1/engineer";
   static const baseUrlDev = apiUrlDev + apiPrefix;
@@ -14,5 +14,6 @@ class Api {
     "mr": "/mr",
     "home": "/home",
     "transactions": "/transactions",
+    "stores_engineers": "/stores_engineers",
   };
 }

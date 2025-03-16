@@ -11,9 +11,7 @@ ProductResponse _$ProductResponseFromJson(Map<String, dynamic> json) =>
       status: json['status'],
       error: json['error'],
       message: json['message'],
-      data: (json['data'] as List<dynamic>?)
-          ?.map((e) => Product.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      data: json['data'],
     );
 
 Map<String, dynamic> _$ProductResponseToJson(ProductResponse instance) =>

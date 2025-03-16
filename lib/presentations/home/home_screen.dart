@@ -87,6 +87,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 label: 'Products',
                                 primaryColor: primaryColor,
                                 onTap: () {
+                                  context.read<ProductsBloc>().add(
+                                        const ProductsEvent
+                                            .getStoresAndEngineer(),
+                                      );
                                   context
                                       .read<ProductsBloc>()
                                       .add(const ProductsEvent.getProducts());

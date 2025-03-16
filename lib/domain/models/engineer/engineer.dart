@@ -26,4 +26,9 @@ class Engineer {
   }
 
   Map<String, dynamic> toJson() => _$EngineerToJson(this);
+
+  String get name => [firstName, lastName]
+      .where((name) => name != null && name.isNotEmpty)
+      .join(' ')
+      .trim();
 }

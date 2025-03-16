@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mvp_engineer/core/utils/utils.dart';
+import 'package:mvp_engineer/application/products/products_bloc.dart';
+import 'package:mvp_engineer/presentations/products/product_details_page.dart';
 import 'package:qr_code_scanner_plus/qr_code_scanner_plus.dart';
 
 class QRCodeScannerPage extends StatefulWidget {
@@ -44,7 +48,7 @@ class _QRCodeScannerPageState extends State<QRCodeScannerPage>
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width - 100;
+    double width = 250;
 
     return Scaffold(
       body: Stack(
@@ -52,27 +56,31 @@ class _QRCodeScannerPageState extends State<QRCodeScannerPage>
           QRView(
             key: qrKey,
             onQRViewCreated: _onQRViewCreated,
+            // overlay: QrScannerOverlayShape(),
           ),
 
-          // Overlay with a transparent square at the center
+          //  Overlay with a transparent square at the center
           Positioned.fill(
             child: Column(
               children: [
                 Expanded(
                   child: Container(
-                    color: _showReloadButton
-                        ? Colors.white
-                        : Colors.black.withOpacity(0.6),
+                    color: Colors.black.withOpacity(0.6),
+                    // color: _showReloadButton
+                    //     ? Colors.white
+                    //     : Colors.black.withOpacity(0.6),
                   ),
                 ),
                 Row(
                   children: [
                     Expanded(
                       child: Container(
-                          height: width,
-                          color: _showReloadButton
-                              ? Colors.white
-                              : Colors.black.withOpacity(0.6)),
+                        height: width,
+                        color: Colors.black.withOpacity(0.6),
+                        // color: _showReloadButton
+                        //     ? Colors.white
+                        //     : Colors.black.withOpacity(0.6),
+                      ),
                     ),
                     (_showReloadButton)
                         ? Container(
@@ -106,9 +114,10 @@ class _QRCodeScannerPageState extends State<QRCodeScannerPage>
                     Expanded(
                       child: Container(
                         height: width,
-                        color: _showReloadButton
-                            ? Colors.white
-                            : Colors.black.withOpacity(0.6),
+                        color: Colors.black.withOpacity(0.6),
+                        // color: _showReloadButton
+                        //     ? Colors.white
+                        //     : Colors.black.withOpacity(0.6),
                       ),
                     ),
                   ],
@@ -116,30 +125,32 @@ class _QRCodeScannerPageState extends State<QRCodeScannerPage>
                 Expanded(
                   flex: 1,
                   child: Container(
-                      color: _showReloadButton
-                          ? Colors.white
-                          : Colors.black.withOpacity(0.6)),
+                    color: Colors.black.withOpacity(0.6),
+                    // color: _showReloadButton
+                    //     ? Colors.white
+                    //     : Colors.black.withOpacity(0.6),
+                  ),
                 ),
               ],
             ),
           ),
 
-          // Text showing scanned QR code
-          Positioned(
-            bottom: 50,
-            left: 0,
-            right: 0,
-            child: Center(
-              child: Container(
-                padding: EdgeInsets.all(10.w),
-                color: Colors.black54,
-                child: Text(
-                  qrText,
-                  style: TextStyle(color: Colors.white, fontSize: 18.sp),
-                ),
-              ),
-            ),
-          ),
+          // // Text showing scanned QR code
+          // Positioned(
+          //   bottom: 50,
+          //   left: 0,
+          //   right: 0,
+          //   child: Center(
+          //     child: Container(
+          //       padding: EdgeInsets.all(10.w),
+          //       color: Colors.black54,
+          //       child: Text(
+          //         qrText,
+          //         style: TextStyle(color: Colors.white, fontSize: 18.sp),
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
@@ -147,42 +158,35 @@ class _QRCodeScannerPageState extends State<QRCodeScannerPage>
 
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
-    controller.scannedDataStream.listen(
-      (scanData) async {
-        Utils.handleError(context, scanData.code ?? 'No Data');
-        await controller.pauseCamera();
-        setState(() {
-          qrText = scanData.code ?? 'No Data';
-          _showPopup(scanData.code ?? 'No Data');
-        });
-      },
-    );
+    controller.scannedDataStream.listen((scanData) async {
+      // Utils.handleError(context, scanData.code ?? 'No Data');
+      await controller.pauseCamera();
+      _animationController.stop();
+      setState(() {
+        _showReloadButton = true;
+        qrText = scanData.code ?? 'No Data';
+        _showPopup(scanData.code ?? "-1");
+      });
+    }, onError: (error, s) {
+      log(error.toString());
+    });
   }
 
-  void _showPopup(String data) {
-    showDialog(
+  void _showPopup(String productId) {
+    context
+        .read<ProductsBloc>()
+        .add(ProductsEvent.getProduct(productId: productId));
+    showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Scanned Data'),
-          content: Text(data),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                setState(() {
-                  _showReloadButton = true;
-                });
-              },
-              child: Text('OK'),
-            ),
-          ],
-        );
+        return const ProductDetailsPage();
       },
     );
   }
 
   void _restartScanner() {
+    _animationController.reset();
+    _animationController.forward();
     setState(() {
       _showReloadButton = false;
       qrText = 'Scan a QR Code';
@@ -226,14 +230,16 @@ class ScannerSection extends StatelessWidget {
             animation: _animation,
             builder: (context, child) {
               return Align(
-                alignment: Alignment(
-                    0, _animation.value * 2 - 1), // Moves from top to bottom
+                alignment: Alignment(0, _animation.value * 2 - 1),
                 child: Container(
                   width: width,
                   height: 2,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [Colors.green, Colors.green.withOpacity(0)],
+                      colors: [
+                        Colors.green,
+                        Colors.green.withOpacity(0),
+                      ],
                       begin: Alignment.centerLeft,
                       end: Alignment.centerRight,
                     ),

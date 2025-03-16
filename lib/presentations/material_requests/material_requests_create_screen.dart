@@ -82,19 +82,23 @@ class _MaterialRequestFormState extends State<MaterialRequestForm> {
           previous.isLoading != current.isLoading,
       listener: (context, state) {
         state.materialRequestsCreateFailureOrSuccess.fold(
-            () => null,
-            (a) => a.fold((l) {
-                  String message = l.map(customError: (error) => error.message);
-                  Utils.handleError(context, message);
-                }, (r) {
-                  setState(() {
-                    items = [];
-                    selectedProduct = null;
-                  });
-                  quantityController.clear();
-                  Navigator.of(context).pop(true);
-                  Utils.handleSuccess(context, Strings.mrCreateSuccess);
-                }));
+          () => null,
+          (a) => a.fold(
+            (l) {
+              String message = l.map(customError: (error) => error.message);
+              Utils.handleError(context, message);
+            },
+            (r) {
+              setState(() {
+                items = [];
+                selectedProduct = null;
+              });
+              quantityController.clear();
+              Navigator.of(context).pop(true);
+              Utils.handleSuccess(context, Strings.mrCreateSuccess);
+            },
+          ),
+        );
       },
       child: Form(
         key: _formKey,

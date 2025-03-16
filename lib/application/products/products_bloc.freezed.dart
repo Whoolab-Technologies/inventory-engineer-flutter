@@ -19,19 +19,32 @@ mixin _$ProductsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String? searchTerm) getProducts,
+    required TResult Function(String? searchTerm, String? engineerId)
+        getProducts,
+    required TResult Function(String productId) getProduct,
+    required TResult Function() getStoresAndEngineer,
+    required TResult Function(Engineer? enginer) setSelectedEngineer,
+    required TResult Function(Store? store) setSelectedStore,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String? searchTerm)? getProducts,
+    TResult? Function(String? searchTerm, String? engineerId)? getProducts,
+    TResult? Function(String productId)? getProduct,
+    TResult? Function()? getStoresAndEngineer,
+    TResult? Function(Engineer? enginer)? setSelectedEngineer,
+    TResult? Function(Store? store)? setSelectedStore,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String? searchTerm)? getProducts,
+    TResult Function(String? searchTerm, String? engineerId)? getProducts,
+    TResult Function(String productId)? getProduct,
+    TResult Function()? getStoresAndEngineer,
+    TResult Function(Engineer? enginer)? setSelectedEngineer,
+    TResult Function(Store? store)? setSelectedStore,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +52,31 @@ mixin _$ProductsEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetProducts value) getProducts,
+    required TResult Function(_GetProduct value) getProduct,
+    required TResult Function(_GetStoresAndEngineers value)
+        getStoresAndEngineer,
+    required TResult Function(_OnSetSelectedEngineer value) setSelectedEngineer,
+    required TResult Function(_OnSetSelectedStore value) setSelectedStore,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetProducts value)? getProducts,
+    TResult? Function(_GetProduct value)? getProduct,
+    TResult? Function(_GetStoresAndEngineers value)? getStoresAndEngineer,
+    TResult? Function(_OnSetSelectedEngineer value)? setSelectedEngineer,
+    TResult? Function(_OnSetSelectedStore value)? setSelectedStore,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetProducts value)? getProducts,
+    TResult Function(_GetProduct value)? getProduct,
+    TResult Function(_GetStoresAndEngineers value)? getStoresAndEngineer,
+    TResult Function(_OnSetSelectedEngineer value)? setSelectedEngineer,
+    TResult Function(_OnSetSelectedStore value)? setSelectedStore,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -119,7 +145,12 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String? searchTerm) getProducts,
+    required TResult Function(String? searchTerm, String? engineerId)
+        getProducts,
+    required TResult Function(String productId) getProduct,
+    required TResult Function() getStoresAndEngineer,
+    required TResult Function(Engineer? enginer) setSelectedEngineer,
+    required TResult Function(Store? store) setSelectedStore,
   }) {
     return started();
   }
@@ -128,7 +159,11 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String? searchTerm)? getProducts,
+    TResult? Function(String? searchTerm, String? engineerId)? getProducts,
+    TResult? Function(String productId)? getProduct,
+    TResult? Function()? getStoresAndEngineer,
+    TResult? Function(Engineer? enginer)? setSelectedEngineer,
+    TResult? Function(Store? store)? setSelectedStore,
   }) {
     return started?.call();
   }
@@ -137,7 +172,11 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String? searchTerm)? getProducts,
+    TResult Function(String? searchTerm, String? engineerId)? getProducts,
+    TResult Function(String productId)? getProduct,
+    TResult Function()? getStoresAndEngineer,
+    TResult Function(Engineer? enginer)? setSelectedEngineer,
+    TResult Function(Store? store)? setSelectedStore,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -151,6 +190,11 @@ class _$StartedImpl implements _Started {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetProducts value) getProducts,
+    required TResult Function(_GetProduct value) getProduct,
+    required TResult Function(_GetStoresAndEngineers value)
+        getStoresAndEngineer,
+    required TResult Function(_OnSetSelectedEngineer value) setSelectedEngineer,
+    required TResult Function(_OnSetSelectedStore value) setSelectedStore,
   }) {
     return started(this);
   }
@@ -160,6 +204,10 @@ class _$StartedImpl implements _Started {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetProducts value)? getProducts,
+    TResult? Function(_GetProduct value)? getProduct,
+    TResult? Function(_GetStoresAndEngineers value)? getStoresAndEngineer,
+    TResult? Function(_OnSetSelectedEngineer value)? setSelectedEngineer,
+    TResult? Function(_OnSetSelectedStore value)? setSelectedStore,
   }) {
     return started?.call(this);
   }
@@ -169,6 +217,10 @@ class _$StartedImpl implements _Started {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetProducts value)? getProducts,
+    TResult Function(_GetProduct value)? getProduct,
+    TResult Function(_GetStoresAndEngineers value)? getStoresAndEngineer,
+    TResult Function(_OnSetSelectedEngineer value)? setSelectedEngineer,
+    TResult Function(_OnSetSelectedStore value)? setSelectedStore,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -188,7 +240,7 @@ abstract class _$$GetProductsImplCopyWith<$Res> {
           _$GetProductsImpl value, $Res Function(_$GetProductsImpl) then) =
       __$$GetProductsImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String? searchTerm});
+  $Res call({String? searchTerm, String? engineerId});
 }
 
 /// @nodoc
@@ -205,11 +257,16 @@ class __$$GetProductsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? searchTerm = freezed,
+    Object? engineerId = freezed,
   }) {
     return _then(_$GetProductsImpl(
       searchTerm: freezed == searchTerm
           ? _value.searchTerm
           : searchTerm // ignore: cast_nullable_to_non_nullable
+              as String?,
+      engineerId: freezed == engineerId
+          ? _value.engineerId
+          : engineerId // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -218,14 +275,16 @@ class __$$GetProductsImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$GetProductsImpl implements _GetProducts {
-  const _$GetProductsImpl({this.searchTerm});
+  const _$GetProductsImpl({this.searchTerm, this.engineerId});
 
   @override
   final String? searchTerm;
+  @override
+  final String? engineerId;
 
   @override
   String toString() {
-    return 'ProductsEvent.getProducts(searchTerm: $searchTerm)';
+    return 'ProductsEvent.getProducts(searchTerm: $searchTerm, engineerId: $engineerId)';
   }
 
   @override
@@ -234,11 +293,13 @@ class _$GetProductsImpl implements _GetProducts {
         (other.runtimeType == runtimeType &&
             other is _$GetProductsImpl &&
             (identical(other.searchTerm, searchTerm) ||
-                other.searchTerm == searchTerm));
+                other.searchTerm == searchTerm) &&
+            (identical(other.engineerId, engineerId) ||
+                other.engineerId == engineerId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, searchTerm);
+  int get hashCode => Object.hash(runtimeType, searchTerm, engineerId);
 
   /// Create a copy of ProductsEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -252,29 +313,42 @@ class _$GetProductsImpl implements _GetProducts {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String? searchTerm) getProducts,
+    required TResult Function(String? searchTerm, String? engineerId)
+        getProducts,
+    required TResult Function(String productId) getProduct,
+    required TResult Function() getStoresAndEngineer,
+    required TResult Function(Engineer? enginer) setSelectedEngineer,
+    required TResult Function(Store? store) setSelectedStore,
   }) {
-    return getProducts(searchTerm);
+    return getProducts(searchTerm, engineerId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String? searchTerm)? getProducts,
+    TResult? Function(String? searchTerm, String? engineerId)? getProducts,
+    TResult? Function(String productId)? getProduct,
+    TResult? Function()? getStoresAndEngineer,
+    TResult? Function(Engineer? enginer)? setSelectedEngineer,
+    TResult? Function(Store? store)? setSelectedStore,
   }) {
-    return getProducts?.call(searchTerm);
+    return getProducts?.call(searchTerm, engineerId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String? searchTerm)? getProducts,
+    TResult Function(String? searchTerm, String? engineerId)? getProducts,
+    TResult Function(String productId)? getProduct,
+    TResult Function()? getStoresAndEngineer,
+    TResult Function(Engineer? enginer)? setSelectedEngineer,
+    TResult Function(Store? store)? setSelectedStore,
     required TResult orElse(),
   }) {
     if (getProducts != null) {
-      return getProducts(searchTerm);
+      return getProducts(searchTerm, engineerId);
     }
     return orElse();
   }
@@ -284,6 +358,11 @@ class _$GetProductsImpl implements _GetProducts {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GetProducts value) getProducts,
+    required TResult Function(_GetProduct value) getProduct,
+    required TResult Function(_GetStoresAndEngineers value)
+        getStoresAndEngineer,
+    required TResult Function(_OnSetSelectedEngineer value) setSelectedEngineer,
+    required TResult Function(_OnSetSelectedStore value) setSelectedStore,
   }) {
     return getProducts(this);
   }
@@ -293,6 +372,10 @@ class _$GetProductsImpl implements _GetProducts {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GetProducts value)? getProducts,
+    TResult? Function(_GetProduct value)? getProduct,
+    TResult? Function(_GetStoresAndEngineers value)? getStoresAndEngineer,
+    TResult? Function(_OnSetSelectedEngineer value)? setSelectedEngineer,
+    TResult? Function(_OnSetSelectedStore value)? setSelectedStore,
   }) {
     return getProducts?.call(this);
   }
@@ -302,6 +385,10 @@ class _$GetProductsImpl implements _GetProducts {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GetProducts value)? getProducts,
+    TResult Function(_GetProduct value)? getProduct,
+    TResult Function(_GetStoresAndEngineers value)? getStoresAndEngineer,
+    TResult Function(_OnSetSelectedEngineer value)? setSelectedEngineer,
+    TResult Function(_OnSetSelectedStore value)? setSelectedStore,
     required TResult orElse(),
   }) {
     if (getProducts != null) {
@@ -312,14 +399,654 @@ class _$GetProductsImpl implements _GetProducts {
 }
 
 abstract class _GetProducts implements ProductsEvent {
-  const factory _GetProducts({final String? searchTerm}) = _$GetProductsImpl;
+  const factory _GetProducts(
+      {final String? searchTerm, final String? engineerId}) = _$GetProductsImpl;
 
   String? get searchTerm;
+  String? get engineerId;
 
   /// Create a copy of ProductsEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GetProductsImplCopyWith<_$GetProductsImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GetProductImplCopyWith<$Res> {
+  factory _$$GetProductImplCopyWith(
+          _$GetProductImpl value, $Res Function(_$GetProductImpl) then) =
+      __$$GetProductImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String productId});
+}
+
+/// @nodoc
+class __$$GetProductImplCopyWithImpl<$Res>
+    extends _$ProductsEventCopyWithImpl<$Res, _$GetProductImpl>
+    implements _$$GetProductImplCopyWith<$Res> {
+  __$$GetProductImplCopyWithImpl(
+      _$GetProductImpl _value, $Res Function(_$GetProductImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ProductsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? productId = null,
+  }) {
+    return _then(_$GetProductImpl(
+      productId: null == productId
+          ? _value.productId
+          : productId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GetProductImpl implements _GetProduct {
+  const _$GetProductImpl({required this.productId});
+
+  @override
+  final String productId;
+
+  @override
+  String toString() {
+    return 'ProductsEvent.getProduct(productId: $productId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetProductImpl &&
+            (identical(other.productId, productId) ||
+                other.productId == productId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, productId);
+
+  /// Create a copy of ProductsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetProductImplCopyWith<_$GetProductImpl> get copyWith =>
+      __$$GetProductImplCopyWithImpl<_$GetProductImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(String? searchTerm, String? engineerId)
+        getProducts,
+    required TResult Function(String productId) getProduct,
+    required TResult Function() getStoresAndEngineer,
+    required TResult Function(Engineer? enginer) setSelectedEngineer,
+    required TResult Function(Store? store) setSelectedStore,
+  }) {
+    return getProduct(productId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(String? searchTerm, String? engineerId)? getProducts,
+    TResult? Function(String productId)? getProduct,
+    TResult? Function()? getStoresAndEngineer,
+    TResult? Function(Engineer? enginer)? setSelectedEngineer,
+    TResult? Function(Store? store)? setSelectedStore,
+  }) {
+    return getProduct?.call(productId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(String? searchTerm, String? engineerId)? getProducts,
+    TResult Function(String productId)? getProduct,
+    TResult Function()? getStoresAndEngineer,
+    TResult Function(Engineer? enginer)? setSelectedEngineer,
+    TResult Function(Store? store)? setSelectedStore,
+    required TResult orElse(),
+  }) {
+    if (getProduct != null) {
+      return getProduct(productId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_GetProducts value) getProducts,
+    required TResult Function(_GetProduct value) getProduct,
+    required TResult Function(_GetStoresAndEngineers value)
+        getStoresAndEngineer,
+    required TResult Function(_OnSetSelectedEngineer value) setSelectedEngineer,
+    required TResult Function(_OnSetSelectedStore value) setSelectedStore,
+  }) {
+    return getProduct(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_GetProducts value)? getProducts,
+    TResult? Function(_GetProduct value)? getProduct,
+    TResult? Function(_GetStoresAndEngineers value)? getStoresAndEngineer,
+    TResult? Function(_OnSetSelectedEngineer value)? setSelectedEngineer,
+    TResult? Function(_OnSetSelectedStore value)? setSelectedStore,
+  }) {
+    return getProduct?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_GetProducts value)? getProducts,
+    TResult Function(_GetProduct value)? getProduct,
+    TResult Function(_GetStoresAndEngineers value)? getStoresAndEngineer,
+    TResult Function(_OnSetSelectedEngineer value)? setSelectedEngineer,
+    TResult Function(_OnSetSelectedStore value)? setSelectedStore,
+    required TResult orElse(),
+  }) {
+    if (getProduct != null) {
+      return getProduct(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetProduct implements ProductsEvent {
+  const factory _GetProduct({required final String productId}) =
+      _$GetProductImpl;
+
+  String get productId;
+
+  /// Create a copy of ProductsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$GetProductImplCopyWith<_$GetProductImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GetStoresAndEngineersImplCopyWith<$Res> {
+  factory _$$GetStoresAndEngineersImplCopyWith(
+          _$GetStoresAndEngineersImpl value,
+          $Res Function(_$GetStoresAndEngineersImpl) then) =
+      __$$GetStoresAndEngineersImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$GetStoresAndEngineersImplCopyWithImpl<$Res>
+    extends _$ProductsEventCopyWithImpl<$Res, _$GetStoresAndEngineersImpl>
+    implements _$$GetStoresAndEngineersImplCopyWith<$Res> {
+  __$$GetStoresAndEngineersImplCopyWithImpl(_$GetStoresAndEngineersImpl _value,
+      $Res Function(_$GetStoresAndEngineersImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ProductsEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$GetStoresAndEngineersImpl implements _GetStoresAndEngineers {
+  const _$GetStoresAndEngineersImpl();
+
+  @override
+  String toString() {
+    return 'ProductsEvent.getStoresAndEngineer()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetStoresAndEngineersImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(String? searchTerm, String? engineerId)
+        getProducts,
+    required TResult Function(String productId) getProduct,
+    required TResult Function() getStoresAndEngineer,
+    required TResult Function(Engineer? enginer) setSelectedEngineer,
+    required TResult Function(Store? store) setSelectedStore,
+  }) {
+    return getStoresAndEngineer();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(String? searchTerm, String? engineerId)? getProducts,
+    TResult? Function(String productId)? getProduct,
+    TResult? Function()? getStoresAndEngineer,
+    TResult? Function(Engineer? enginer)? setSelectedEngineer,
+    TResult? Function(Store? store)? setSelectedStore,
+  }) {
+    return getStoresAndEngineer?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(String? searchTerm, String? engineerId)? getProducts,
+    TResult Function(String productId)? getProduct,
+    TResult Function()? getStoresAndEngineer,
+    TResult Function(Engineer? enginer)? setSelectedEngineer,
+    TResult Function(Store? store)? setSelectedStore,
+    required TResult orElse(),
+  }) {
+    if (getStoresAndEngineer != null) {
+      return getStoresAndEngineer();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_GetProducts value) getProducts,
+    required TResult Function(_GetProduct value) getProduct,
+    required TResult Function(_GetStoresAndEngineers value)
+        getStoresAndEngineer,
+    required TResult Function(_OnSetSelectedEngineer value) setSelectedEngineer,
+    required TResult Function(_OnSetSelectedStore value) setSelectedStore,
+  }) {
+    return getStoresAndEngineer(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_GetProducts value)? getProducts,
+    TResult? Function(_GetProduct value)? getProduct,
+    TResult? Function(_GetStoresAndEngineers value)? getStoresAndEngineer,
+    TResult? Function(_OnSetSelectedEngineer value)? setSelectedEngineer,
+    TResult? Function(_OnSetSelectedStore value)? setSelectedStore,
+  }) {
+    return getStoresAndEngineer?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_GetProducts value)? getProducts,
+    TResult Function(_GetProduct value)? getProduct,
+    TResult Function(_GetStoresAndEngineers value)? getStoresAndEngineer,
+    TResult Function(_OnSetSelectedEngineer value)? setSelectedEngineer,
+    TResult Function(_OnSetSelectedStore value)? setSelectedStore,
+    required TResult orElse(),
+  }) {
+    if (getStoresAndEngineer != null) {
+      return getStoresAndEngineer(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetStoresAndEngineers implements ProductsEvent {
+  const factory _GetStoresAndEngineers() = _$GetStoresAndEngineersImpl;
+}
+
+/// @nodoc
+abstract class _$$OnSetSelectedEngineerImplCopyWith<$Res> {
+  factory _$$OnSetSelectedEngineerImplCopyWith(
+          _$OnSetSelectedEngineerImpl value,
+          $Res Function(_$OnSetSelectedEngineerImpl) then) =
+      __$$OnSetSelectedEngineerImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Engineer? enginer});
+}
+
+/// @nodoc
+class __$$OnSetSelectedEngineerImplCopyWithImpl<$Res>
+    extends _$ProductsEventCopyWithImpl<$Res, _$OnSetSelectedEngineerImpl>
+    implements _$$OnSetSelectedEngineerImplCopyWith<$Res> {
+  __$$OnSetSelectedEngineerImplCopyWithImpl(_$OnSetSelectedEngineerImpl _value,
+      $Res Function(_$OnSetSelectedEngineerImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ProductsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? enginer = freezed,
+  }) {
+    return _then(_$OnSetSelectedEngineerImpl(
+      freezed == enginer
+          ? _value.enginer
+          : enginer // ignore: cast_nullable_to_non_nullable
+              as Engineer?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$OnSetSelectedEngineerImpl implements _OnSetSelectedEngineer {
+  const _$OnSetSelectedEngineerImpl(this.enginer);
+
+  @override
+  final Engineer? enginer;
+
+  @override
+  String toString() {
+    return 'ProductsEvent.setSelectedEngineer(enginer: $enginer)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OnSetSelectedEngineerImpl &&
+            (identical(other.enginer, enginer) || other.enginer == enginer));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, enginer);
+
+  /// Create a copy of ProductsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OnSetSelectedEngineerImplCopyWith<_$OnSetSelectedEngineerImpl>
+      get copyWith => __$$OnSetSelectedEngineerImplCopyWithImpl<
+          _$OnSetSelectedEngineerImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(String? searchTerm, String? engineerId)
+        getProducts,
+    required TResult Function(String productId) getProduct,
+    required TResult Function() getStoresAndEngineer,
+    required TResult Function(Engineer? enginer) setSelectedEngineer,
+    required TResult Function(Store? store) setSelectedStore,
+  }) {
+    return setSelectedEngineer(enginer);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(String? searchTerm, String? engineerId)? getProducts,
+    TResult? Function(String productId)? getProduct,
+    TResult? Function()? getStoresAndEngineer,
+    TResult? Function(Engineer? enginer)? setSelectedEngineer,
+    TResult? Function(Store? store)? setSelectedStore,
+  }) {
+    return setSelectedEngineer?.call(enginer);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(String? searchTerm, String? engineerId)? getProducts,
+    TResult Function(String productId)? getProduct,
+    TResult Function()? getStoresAndEngineer,
+    TResult Function(Engineer? enginer)? setSelectedEngineer,
+    TResult Function(Store? store)? setSelectedStore,
+    required TResult orElse(),
+  }) {
+    if (setSelectedEngineer != null) {
+      return setSelectedEngineer(enginer);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_GetProducts value) getProducts,
+    required TResult Function(_GetProduct value) getProduct,
+    required TResult Function(_GetStoresAndEngineers value)
+        getStoresAndEngineer,
+    required TResult Function(_OnSetSelectedEngineer value) setSelectedEngineer,
+    required TResult Function(_OnSetSelectedStore value) setSelectedStore,
+  }) {
+    return setSelectedEngineer(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_GetProducts value)? getProducts,
+    TResult? Function(_GetProduct value)? getProduct,
+    TResult? Function(_GetStoresAndEngineers value)? getStoresAndEngineer,
+    TResult? Function(_OnSetSelectedEngineer value)? setSelectedEngineer,
+    TResult? Function(_OnSetSelectedStore value)? setSelectedStore,
+  }) {
+    return setSelectedEngineer?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_GetProducts value)? getProducts,
+    TResult Function(_GetProduct value)? getProduct,
+    TResult Function(_GetStoresAndEngineers value)? getStoresAndEngineer,
+    TResult Function(_OnSetSelectedEngineer value)? setSelectedEngineer,
+    TResult Function(_OnSetSelectedStore value)? setSelectedStore,
+    required TResult orElse(),
+  }) {
+    if (setSelectedEngineer != null) {
+      return setSelectedEngineer(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _OnSetSelectedEngineer implements ProductsEvent {
+  const factory _OnSetSelectedEngineer(final Engineer? enginer) =
+      _$OnSetSelectedEngineerImpl;
+
+  Engineer? get enginer;
+
+  /// Create a copy of ProductsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$OnSetSelectedEngineerImplCopyWith<_$OnSetSelectedEngineerImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$OnSetSelectedStoreImplCopyWith<$Res> {
+  factory _$$OnSetSelectedStoreImplCopyWith(_$OnSetSelectedStoreImpl value,
+          $Res Function(_$OnSetSelectedStoreImpl) then) =
+      __$$OnSetSelectedStoreImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Store? store});
+}
+
+/// @nodoc
+class __$$OnSetSelectedStoreImplCopyWithImpl<$Res>
+    extends _$ProductsEventCopyWithImpl<$Res, _$OnSetSelectedStoreImpl>
+    implements _$$OnSetSelectedStoreImplCopyWith<$Res> {
+  __$$OnSetSelectedStoreImplCopyWithImpl(_$OnSetSelectedStoreImpl _value,
+      $Res Function(_$OnSetSelectedStoreImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ProductsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? store = freezed,
+  }) {
+    return _then(_$OnSetSelectedStoreImpl(
+      freezed == store
+          ? _value.store
+          : store // ignore: cast_nullable_to_non_nullable
+              as Store?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$OnSetSelectedStoreImpl implements _OnSetSelectedStore {
+  const _$OnSetSelectedStoreImpl(this.store);
+
+  @override
+  final Store? store;
+
+  @override
+  String toString() {
+    return 'ProductsEvent.setSelectedStore(store: $store)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OnSetSelectedStoreImpl &&
+            (identical(other.store, store) || other.store == store));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, store);
+
+  /// Create a copy of ProductsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OnSetSelectedStoreImplCopyWith<_$OnSetSelectedStoreImpl> get copyWith =>
+      __$$OnSetSelectedStoreImplCopyWithImpl<_$OnSetSelectedStoreImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(String? searchTerm, String? engineerId)
+        getProducts,
+    required TResult Function(String productId) getProduct,
+    required TResult Function() getStoresAndEngineer,
+    required TResult Function(Engineer? enginer) setSelectedEngineer,
+    required TResult Function(Store? store) setSelectedStore,
+  }) {
+    return setSelectedStore(store);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(String? searchTerm, String? engineerId)? getProducts,
+    TResult? Function(String productId)? getProduct,
+    TResult? Function()? getStoresAndEngineer,
+    TResult? Function(Engineer? enginer)? setSelectedEngineer,
+    TResult? Function(Store? store)? setSelectedStore,
+  }) {
+    return setSelectedStore?.call(store);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(String? searchTerm, String? engineerId)? getProducts,
+    TResult Function(String productId)? getProduct,
+    TResult Function()? getStoresAndEngineer,
+    TResult Function(Engineer? enginer)? setSelectedEngineer,
+    TResult Function(Store? store)? setSelectedStore,
+    required TResult orElse(),
+  }) {
+    if (setSelectedStore != null) {
+      return setSelectedStore(store);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_GetProducts value) getProducts,
+    required TResult Function(_GetProduct value) getProduct,
+    required TResult Function(_GetStoresAndEngineers value)
+        getStoresAndEngineer,
+    required TResult Function(_OnSetSelectedEngineer value) setSelectedEngineer,
+    required TResult Function(_OnSetSelectedStore value) setSelectedStore,
+  }) {
+    return setSelectedStore(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_GetProducts value)? getProducts,
+    TResult? Function(_GetProduct value)? getProduct,
+    TResult? Function(_GetStoresAndEngineers value)? getStoresAndEngineer,
+    TResult? Function(_OnSetSelectedEngineer value)? setSelectedEngineer,
+    TResult? Function(_OnSetSelectedStore value)? setSelectedStore,
+  }) {
+    return setSelectedStore?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_GetProducts value)? getProducts,
+    TResult Function(_GetProduct value)? getProduct,
+    TResult Function(_GetStoresAndEngineers value)? getStoresAndEngineer,
+    TResult Function(_OnSetSelectedEngineer value)? setSelectedEngineer,
+    TResult Function(_OnSetSelectedStore value)? setSelectedStore,
+    required TResult orElse(),
+  }) {
+    if (setSelectedStore != null) {
+      return setSelectedStore(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _OnSetSelectedStore implements ProductsEvent {
+  const factory _OnSetSelectedStore(final Store? store) =
+      _$OnSetSelectedStoreImpl;
+
+  Store? get store;
+
+  /// Create a copy of ProductsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$OnSetSelectedStoreImplCopyWith<_$OnSetSelectedStoreImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -330,6 +1057,15 @@ mixin _$ProductsState {
   String? get searchTerm => throw _privateConstructorUsedError;
   Option<Either<AppFailure, List<Product>>> get productListFailureOrSuccess =>
       throw _privateConstructorUsedError;
+  Option<Either<AppFailure, Map<String, dynamic>>>
+      get productFailureOrSuccess => throw _privateConstructorUsedError;
+  Option<Either<AppFailure, Map<String, dynamic>>>
+      get storesAndEngineersFailureOrSuccess =>
+          throw _privateConstructorUsedError;
+  Engineer? get selectedEngineer => throw _privateConstructorUsedError;
+  Store? get selectedStore => throw _privateConstructorUsedError;
+  List<Store> get stores => throw _privateConstructorUsedError;
+  List<Engineer> get engineers => throw _privateConstructorUsedError;
 
   /// Create a copy of ProductsState
   /// with the given fields replaced by the non-null parameter values.
@@ -348,7 +1084,14 @@ abstract class $ProductsStateCopyWith<$Res> {
       {bool isloading,
       List<Product> products,
       String? searchTerm,
-      Option<Either<AppFailure, List<Product>>> productListFailureOrSuccess});
+      Option<Either<AppFailure, List<Product>>> productListFailureOrSuccess,
+      Option<Either<AppFailure, Map<String, dynamic>>> productFailureOrSuccess,
+      Option<Either<AppFailure, Map<String, dynamic>>>
+          storesAndEngineersFailureOrSuccess,
+      Engineer? selectedEngineer,
+      Store? selectedStore,
+      List<Store> stores,
+      List<Engineer> engineers});
 }
 
 /// @nodoc
@@ -370,6 +1113,12 @@ class _$ProductsStateCopyWithImpl<$Res, $Val extends ProductsState>
     Object? products = null,
     Object? searchTerm = freezed,
     Object? productListFailureOrSuccess = null,
+    Object? productFailureOrSuccess = null,
+    Object? storesAndEngineersFailureOrSuccess = null,
+    Object? selectedEngineer = freezed,
+    Object? selectedStore = freezed,
+    Object? stores = null,
+    Object? engineers = null,
   }) {
     return _then(_value.copyWith(
       isloading: null == isloading
@@ -388,6 +1137,31 @@ class _$ProductsStateCopyWithImpl<$Res, $Val extends ProductsState>
           ? _value.productListFailureOrSuccess
           : productListFailureOrSuccess // ignore: cast_nullable_to_non_nullable
               as Option<Either<AppFailure, List<Product>>>,
+      productFailureOrSuccess: null == productFailureOrSuccess
+          ? _value.productFailureOrSuccess
+          : productFailureOrSuccess // ignore: cast_nullable_to_non_nullable
+              as Option<Either<AppFailure, Map<String, dynamic>>>,
+      storesAndEngineersFailureOrSuccess: null ==
+              storesAndEngineersFailureOrSuccess
+          ? _value.storesAndEngineersFailureOrSuccess
+          : storesAndEngineersFailureOrSuccess // ignore: cast_nullable_to_non_nullable
+              as Option<Either<AppFailure, Map<String, dynamic>>>,
+      selectedEngineer: freezed == selectedEngineer
+          ? _value.selectedEngineer
+          : selectedEngineer // ignore: cast_nullable_to_non_nullable
+              as Engineer?,
+      selectedStore: freezed == selectedStore
+          ? _value.selectedStore
+          : selectedStore // ignore: cast_nullable_to_non_nullable
+              as Store?,
+      stores: null == stores
+          ? _value.stores
+          : stores // ignore: cast_nullable_to_non_nullable
+              as List<Store>,
+      engineers: null == engineers
+          ? _value.engineers
+          : engineers // ignore: cast_nullable_to_non_nullable
+              as List<Engineer>,
     ) as $Val);
   }
 }
@@ -404,7 +1178,14 @@ abstract class _$$ProductsStateImplCopyWith<$Res>
       {bool isloading,
       List<Product> products,
       String? searchTerm,
-      Option<Either<AppFailure, List<Product>>> productListFailureOrSuccess});
+      Option<Either<AppFailure, List<Product>>> productListFailureOrSuccess,
+      Option<Either<AppFailure, Map<String, dynamic>>> productFailureOrSuccess,
+      Option<Either<AppFailure, Map<String, dynamic>>>
+          storesAndEngineersFailureOrSuccess,
+      Engineer? selectedEngineer,
+      Store? selectedStore,
+      List<Store> stores,
+      List<Engineer> engineers});
 }
 
 /// @nodoc
@@ -424,6 +1205,12 @@ class __$$ProductsStateImplCopyWithImpl<$Res>
     Object? products = null,
     Object? searchTerm = freezed,
     Object? productListFailureOrSuccess = null,
+    Object? productFailureOrSuccess = null,
+    Object? storesAndEngineersFailureOrSuccess = null,
+    Object? selectedEngineer = freezed,
+    Object? selectedStore = freezed,
+    Object? stores = null,
+    Object? engineers = null,
   }) {
     return _then(_$ProductsStateImpl(
       isloading: null == isloading
@@ -442,6 +1229,31 @@ class __$$ProductsStateImplCopyWithImpl<$Res>
           ? _value.productListFailureOrSuccess
           : productListFailureOrSuccess // ignore: cast_nullable_to_non_nullable
               as Option<Either<AppFailure, List<Product>>>,
+      productFailureOrSuccess: null == productFailureOrSuccess
+          ? _value.productFailureOrSuccess
+          : productFailureOrSuccess // ignore: cast_nullable_to_non_nullable
+              as Option<Either<AppFailure, Map<String, dynamic>>>,
+      storesAndEngineersFailureOrSuccess: null ==
+              storesAndEngineersFailureOrSuccess
+          ? _value.storesAndEngineersFailureOrSuccess
+          : storesAndEngineersFailureOrSuccess // ignore: cast_nullable_to_non_nullable
+              as Option<Either<AppFailure, Map<String, dynamic>>>,
+      selectedEngineer: freezed == selectedEngineer
+          ? _value.selectedEngineer
+          : selectedEngineer // ignore: cast_nullable_to_non_nullable
+              as Engineer?,
+      selectedStore: freezed == selectedStore
+          ? _value.selectedStore
+          : selectedStore // ignore: cast_nullable_to_non_nullable
+              as Store?,
+      stores: null == stores
+          ? _value._stores
+          : stores // ignore: cast_nullable_to_non_nullable
+              as List<Store>,
+      engineers: null == engineers
+          ? _value._engineers
+          : engineers // ignore: cast_nullable_to_non_nullable
+              as List<Engineer>,
     ));
   }
 }
@@ -453,8 +1265,16 @@ class _$ProductsStateImpl implements _ProductsState {
       {required this.isloading,
       required final List<Product> products,
       required this.searchTerm,
-      required this.productListFailureOrSuccess})
-      : _products = products;
+      required this.productListFailureOrSuccess,
+      required this.productFailureOrSuccess,
+      required this.storesAndEngineersFailureOrSuccess,
+      required this.selectedEngineer,
+      required this.selectedStore,
+      required final List<Store> stores,
+      required final List<Engineer> engineers})
+      : _products = products,
+        _stores = stores,
+        _engineers = engineers;
 
   @override
   final bool isloading;
@@ -470,10 +1290,35 @@ class _$ProductsStateImpl implements _ProductsState {
   final String? searchTerm;
   @override
   final Option<Either<AppFailure, List<Product>>> productListFailureOrSuccess;
+  @override
+  final Option<Either<AppFailure, Map<String, dynamic>>>
+      productFailureOrSuccess;
+  @override
+  final Option<Either<AppFailure, Map<String, dynamic>>>
+      storesAndEngineersFailureOrSuccess;
+  @override
+  final Engineer? selectedEngineer;
+  @override
+  final Store? selectedStore;
+  final List<Store> _stores;
+  @override
+  List<Store> get stores {
+    if (_stores is EqualUnmodifiableListView) return _stores;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_stores);
+  }
+
+  final List<Engineer> _engineers;
+  @override
+  List<Engineer> get engineers {
+    if (_engineers is EqualUnmodifiableListView) return _engineers;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_engineers);
+  }
 
   @override
   String toString() {
-    return 'ProductsState(isloading: $isloading, products: $products, searchTerm: $searchTerm, productListFailureOrSuccess: $productListFailureOrSuccess)';
+    return 'ProductsState(isloading: $isloading, products: $products, searchTerm: $searchTerm, productListFailureOrSuccess: $productListFailureOrSuccess, productFailureOrSuccess: $productFailureOrSuccess, storesAndEngineersFailureOrSuccess: $storesAndEngineersFailureOrSuccess, selectedEngineer: $selectedEngineer, selectedStore: $selectedStore, stores: $stores, engineers: $engineers)';
   }
 
   @override
@@ -489,7 +1334,21 @@ class _$ProductsStateImpl implements _ProductsState {
             (identical(other.productListFailureOrSuccess,
                     productListFailureOrSuccess) ||
                 other.productListFailureOrSuccess ==
-                    productListFailureOrSuccess));
+                    productListFailureOrSuccess) &&
+            (identical(
+                    other.productFailureOrSuccess, productFailureOrSuccess) ||
+                other.productFailureOrSuccess == productFailureOrSuccess) &&
+            (identical(other.storesAndEngineersFailureOrSuccess,
+                    storesAndEngineersFailureOrSuccess) ||
+                other.storesAndEngineersFailureOrSuccess ==
+                    storesAndEngineersFailureOrSuccess) &&
+            (identical(other.selectedEngineer, selectedEngineer) ||
+                other.selectedEngineer == selectedEngineer) &&
+            (identical(other.selectedStore, selectedStore) ||
+                other.selectedStore == selectedStore) &&
+            const DeepCollectionEquality().equals(other._stores, _stores) &&
+            const DeepCollectionEquality()
+                .equals(other._engineers, _engineers));
   }
 
   @override
@@ -498,7 +1357,13 @@ class _$ProductsStateImpl implements _ProductsState {
       isloading,
       const DeepCollectionEquality().hash(_products),
       searchTerm,
-      productListFailureOrSuccess);
+      productListFailureOrSuccess,
+      productFailureOrSuccess,
+      storesAndEngineersFailureOrSuccess,
+      selectedEngineer,
+      selectedStore,
+      const DeepCollectionEquality().hash(_stores),
+      const DeepCollectionEquality().hash(_engineers));
 
   /// Create a copy of ProductsState
   /// with the given fields replaced by the non-null parameter values.
@@ -515,7 +1380,15 @@ abstract class _ProductsState implements ProductsState {
       required final List<Product> products,
       required final String? searchTerm,
       required final Option<Either<AppFailure, List<Product>>>
-          productListFailureOrSuccess}) = _$ProductsStateImpl;
+          productListFailureOrSuccess,
+      required final Option<Either<AppFailure, Map<String, dynamic>>>
+          productFailureOrSuccess,
+      required final Option<Either<AppFailure, Map<String, dynamic>>>
+          storesAndEngineersFailureOrSuccess,
+      required final Engineer? selectedEngineer,
+      required final Store? selectedStore,
+      required final List<Store> stores,
+      required final List<Engineer> engineers}) = _$ProductsStateImpl;
 
   @override
   bool get isloading;
@@ -525,6 +1398,19 @@ abstract class _ProductsState implements ProductsState {
   String? get searchTerm;
   @override
   Option<Either<AppFailure, List<Product>>> get productListFailureOrSuccess;
+  @override
+  Option<Either<AppFailure, Map<String, dynamic>>> get productFailureOrSuccess;
+  @override
+  Option<Either<AppFailure, Map<String, dynamic>>>
+      get storesAndEngineersFailureOrSuccess;
+  @override
+  Engineer? get selectedEngineer;
+  @override
+  Store? get selectedStore;
+  @override
+  List<Store> get stores;
+  @override
+  List<Engineer> get engineers;
 
   /// Create a copy of ProductsState
   /// with the given fields replaced by the non-null parameter values.
