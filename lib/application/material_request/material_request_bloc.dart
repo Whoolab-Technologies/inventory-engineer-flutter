@@ -56,11 +56,11 @@ class MaterialRequestBloc
 
       // Make a mutable copy of the materialRequests list
       final updatedMaterialRequests =
-          List<MaterialRequest>.of(state.materialRequests);
+          List<MaterialRequest>.from(state.materialRequests);
 
       // Add new request if successful
       result.fold(
-        (failure) => null,
+        (failure) => updatedMaterialRequests,
         (newRequest) => updatedMaterialRequests.insert(0, newRequest),
       );
       // Emit updated state
@@ -84,11 +84,12 @@ class MaterialRequestBloc
     Either<AppFailure, List<MaterialRequest>> result =
         await _iMaterialRequestRepo.fetchMaterialRequests();
     Utils.handleApiResponse("Material requests", result);
+    List<MaterialRequest> materialRequests = result.fold((_) => [], (r) => r);
 
     emit(state.copyWith(
       isLoading: false,
+      materialRequests: materialRequests,
       materialRequestsFailureOrSuccess: optionOf(result),
-      materialRequests: result.fold((_) => [], (requests) => requests),
     ));
   }
 }

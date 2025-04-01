@@ -20,6 +20,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _obscureText = true;
+  bool _isLoading = false;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -85,6 +86,9 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _submit(String email, String password) {
+    setState(() {
+      _isLoading = true;
+    });
     context.read<LoginBloc>().add(
           LoginEvent.onSubmit(email: email, password: password),
         );
@@ -184,10 +188,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
-                              onPressed: _validateAndSubmit,
-                              child: const Text(
-                                'Login',
-                              ),
+                              onPressed: _isLoading ? null : _validateAndSubmit,
+                              child: _isLoading
+                                  ? const CircularProgressIndicator(
+                                      color: Colors.white,
+                                    )
+                                  : const Text(
+                                      'Login',
+                                    ),
                             ),
                           ),
                         ],
@@ -204,6 +212,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         () => null,
                         (a) => a.fold(
                           (l) {
+                            setState(() {
+                              _isLoading = false;
+                            });
                             Utils.handleAuthError(context, l);
                           },
                           (_) {
@@ -218,6 +229,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
                             _emailController.clear();
                             _passwordController.clear();
+                            setState(() {
+                              _isLoading = false;
+                            });
                           },
                         ),
                       );

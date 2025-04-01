@@ -43,13 +43,7 @@ class _MaterialRequestScreenState extends State<MaterialRequestScreen> {
                     return const MaterialRequestCreateScreen();
                   },
                 ),
-              ).then((value) {
-                if (value != null) {
-                  context
-                      .read<MaterialRequestBloc>()
-                      .add(const MaterialRequestEvent.fetchMaterialRequests());
-                }
-              });
+              );
             },
             icon: const Icon(
               Icons.add_circle_outline,

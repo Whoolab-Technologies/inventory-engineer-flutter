@@ -7,7 +7,6 @@ import 'package:mvp_engineer/core/utils/utils.dart';
 import 'package:mvp_engineer/core/values/strings.dart';
 import 'package:mvp_engineer/domain/models/material_request_item/material_request_item.dart';
 import 'package:mvp_engineer/domain/models/product/product.dart';
-import 'package:mvp_engineer/injection/injection.dart';
 import 'package:mvp_shared_components/widgets/app_custom_dropdown.dart';
 import 'package:mvp_shared_components/widgets/app_shimmer.dart';
 
@@ -25,12 +24,9 @@ class MaterialRequestCreateScreen extends StatelessWidget {
           fontWeight: FontWeight.bold,
         ),
       )),
-      body: BlocProvider(
-        create: (context) => getIt<MaterialRequestBloc>(),
-        child: Padding(
-          padding: EdgeInsets.all(8.w),
-          child: const MaterialRequestForm(),
-        ),
+      body: Padding(
+        padding: EdgeInsets.all(8.w),
+        child: const MaterialRequestForm(),
       ),
     );
   }
@@ -197,15 +193,26 @@ class _MaterialRequestFormState extends State<MaterialRequestForm> {
                 },
               ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  context
-                      .read<MaterialRequestBloc>()
-                      .add(const MaterialRequestSubmitted());
-                }
+            BlocBuilder<MaterialRequestBloc, MaterialRequestState>(
+              builder: (context, state) {
+                return ElevatedButton(
+                  onPressed: state.isLoading
+                      ? null
+                      : () {
+                          if (_formKey.currentState!.validate() &&
+                              state.mrItems.isNotEmpty) {
+                            context
+                                .read<MaterialRequestBloc>()
+                                .add(const MaterialRequestSubmitted());
+                          }
+                        },
+                  child: state.isLoading
+                      ? const CircularProgressIndicator(
+                          color: Colors.white,
+                        )
+                      : const Text(Strings.submit),
+                );
               },
-              child: const Text(Strings.submit),
             )
           ],
         ),
