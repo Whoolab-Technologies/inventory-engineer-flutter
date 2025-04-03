@@ -61,6 +61,7 @@ class DioClient {
           options.headers["Authorization"] = "Bearer $_token";
         }
         options.headers['Accept'] = 'application/json';
+        log("MVP Request Type: ${options.method}");
         log("MVP ${options.uri}");
         log("MVP token => $_token");
         return handler.next(options);

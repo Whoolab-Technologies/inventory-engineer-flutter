@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -158,18 +156,28 @@ class _QRCodeScannerPageState extends State<QRCodeScannerPage>
 
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
-    controller.scannedDataStream.listen((scanData) async {
-      // Utils.handleError(context, scanData.code ?? 'No Data');
-      await controller.pauseCamera();
+    Future.delayed(const Duration(seconds: 1), () async {
       _animationController.stop();
+      await controller.pauseCamera();
       setState(() {
         _showReloadButton = true;
-        qrText = scanData.code ?? 'No Data';
-        _showPopup(scanData.code ?? "-1");
+        qrText = 'O5';
+        _showPopup('05');
       });
-    }, onError: (error, s) {
-      log(error.toString());
     });
+
+    // controller.scannedDataStream.listen((scanData) async {
+    //   // Utils.handleError(context, scanData.code ?? 'No Data');
+    //   await controller.pauseCamera();
+    //   _animationController.stop();
+    //   setState(() {
+    //     _showReloadButton = true;
+    //     qrText = scanData.code ?? 'No Data';
+    //     _showPopup(scanData.code ?? "-1");
+    //   });
+    // }, onError: (error, s) {
+    //   log(error.toString());
+    // });
   }
 
   void _showPopup(String productId) {

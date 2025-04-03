@@ -11,8 +11,8 @@ import 'package:mvp_shared_components/widgets/app_custom_dropdown.dart';
 import 'package:mvp_shared_components/widgets/app_shimmer.dart';
 
 class MaterialRequestCreateScreen extends StatelessWidget {
-  const MaterialRequestCreateScreen({super.key});
-
+  const MaterialRequestCreateScreen({super.key, this.selectedProduct});
+  final Product? selectedProduct;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,14 +26,15 @@ class MaterialRequestCreateScreen extends StatelessWidget {
       )),
       body: Padding(
         padding: EdgeInsets.all(8.w),
-        child: const MaterialRequestForm(),
+        child: MaterialRequestForm(selectedProduct: selectedProduct),
       ),
     );
   }
 }
 
 class MaterialRequestForm extends StatefulWidget {
-  const MaterialRequestForm({super.key});
+  const MaterialRequestForm({super.key, required this.selectedProduct});
+  final Product? selectedProduct;
 
   @override
   State<MaterialRequestForm> createState() => _MaterialRequestFormState();
@@ -105,7 +106,7 @@ class _MaterialRequestFormState extends State<MaterialRequestForm> {
                 padding: EdgeInsets.symmetric(horizontal: 8.w),
                 child: Column(
                   children: [
-                    BlocBuilder<ProductsBloc, ProductsState>(
+                    BlocConsumer<ProductsBloc, ProductsState>(
                       builder: (context, state) {
                         return state.isloading
                             ? AppShimmer(
@@ -132,6 +133,24 @@ class _MaterialRequestFormState extends State<MaterialRequestForm> {
                                   },
                                 ),
                               );
+                      },
+                      listenWhen: (previous, current) =>
+                          previous.isloading != current.isloading ||
+                          previous.products != current.products ||
+                          previous.products.length != current.products.length,
+                      listener: (BuildContext context, ProductsState state) {
+                        setState(() {
+                          if (state.products.isNotEmpty &&
+                              widget.selectedProduct != null) {
+                            selectedProduct = state.products.any((product) =>
+                                    product.id == widget.selectedProduct?.id)
+                                ? state.products.firstWhere((product) =>
+                                    product.id == widget.selectedProduct?.id)
+                                : null;
+                          } else {
+                            selectedProduct = null;
+                          }
+                        });
                       },
                     ),
                     Padding(

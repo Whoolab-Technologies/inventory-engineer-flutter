@@ -93,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       );
                                   context
                                       .read<ProductsBloc>()
-                                      .add(const ProductsEvent.getProducts());
+                                      .add(ProductsEvent.getProducts());
                                   Navigator.of(context)
                                       .pushNamed(AppRoutes.PRODUCTS);
                                 },

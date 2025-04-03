@@ -58,4 +58,9 @@ class Product {
   Map<String, dynamic> toJson() => _$ProductToJson(this);
 
   bool get isStockIn => (myStock ?? 0) > 0;
+
+  @override
+  String toString() {
+    return 'Product(id: $id, item: $item, description: $description, unitId: $unitId, qrCode: $qrCode, image: $image, remarks: $remarks, totalStock: $totalStock, engineerStock: $engineerStock, code: $code, symbol: $symbol, imageUrl: $imageUrl, myStock: $myStock, stockWithOthers: $stockWithOthers)';
+  }
 }

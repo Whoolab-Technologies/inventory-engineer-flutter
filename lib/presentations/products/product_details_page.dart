@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvp_engineer/application/products/products_bloc.dart';
 import 'package:mvp_engineer/core/utils/utils.dart';
+import 'package:mvp_engineer/domain/models/product/product.dart';
+import 'package:mvp_engineer/presentations/material_requests/material_requests_create_screen.dart';
 
 class ProductDetailsPage extends StatelessWidget {
   const ProductDetailsPage({
@@ -79,7 +81,7 @@ class ProductDetailsPage extends StatelessWidget {
               _buildInfoRow("Item:", productData['item']),
               _buildInfoRow("Category ID:", productData['cat_id']),
               _buildInfoRow("Description:", productData['description']),
-              _buildInfoRow("Symbol:", productData['symbol']),
+              _buildInfoRow("Unit:", productData['symbol']),
 
               // // QR Code
               // _buildSectionTitle("QR Code"),
@@ -111,6 +113,27 @@ class ProductDetailsPage extends StatelessWidget {
                 productData['engineer_stocks'],
                 context,
               ),
+              SizedBox(height: 16.h),
+              ElevatedButton(
+                onPressed: () {
+                  context.read<ProductsBloc>().add(
+                        ProductsEvent.getProducts(
+                          all: true,
+                        ),
+                      );
+
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return MaterialRequestCreateScreen(
+                          selectedProduct: Product.fromJson(productData),
+                        );
+                      },
+                    ),
+                  );
+                },
+                child: const Text("Create MR"),
+              )
             ],
           ),
         );

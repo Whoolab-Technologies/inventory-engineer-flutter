@@ -18,11 +18,15 @@ class ProductRepo implements IProductFacade {
 
   @override
   Future<Either<AppFailure, List<Product>>> getProducts({
+    bool? all,
     String? searchTerm,
     String? engineerId,
   }) async {
     try {
       Map<String, dynamic> queryParams = <String, dynamic>{};
+      if (all != null) {
+        queryParams.putIfAbsent("all", () => all);
+      }
       if (searchTerm != null && searchTerm.isNotEmpty) {
         queryParams.putIfAbsent("search", () => searchTerm);
       }

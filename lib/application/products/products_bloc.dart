@@ -82,7 +82,10 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
 
     Either<AppFailure, List<Product>> productListFailureOrSuccess =
         await _iProductFacade.getProducts(
-            searchTerm: event.searchTerm, engineerId: event.engineerId);
+      all: event.all,
+      searchTerm: event.searchTerm,
+      engineerId: event.engineerId,
+    );
 
     emit(
       state.copyWith(

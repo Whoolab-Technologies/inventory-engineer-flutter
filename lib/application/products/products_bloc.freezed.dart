@@ -19,7 +19,7 @@ mixin _$ProductsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String? searchTerm, String? engineerId)
+    required TResult Function(bool? all, String? searchTerm, String? engineerId)
         getProducts,
     required TResult Function(String productId) getProduct,
     required TResult Function() getStoresAndEngineer,
@@ -30,7 +30,8 @@ mixin _$ProductsEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String? searchTerm, String? engineerId)? getProducts,
+    TResult? Function(bool? all, String? searchTerm, String? engineerId)?
+        getProducts,
     TResult? Function(String productId)? getProduct,
     TResult? Function()? getStoresAndEngineer,
     TResult? Function(Engineer? enginer)? setSelectedEngineer,
@@ -40,7 +41,8 @@ mixin _$ProductsEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String? searchTerm, String? engineerId)? getProducts,
+    TResult Function(bool? all, String? searchTerm, String? engineerId)?
+        getProducts,
     TResult Function(String productId)? getProduct,
     TResult Function()? getStoresAndEngineer,
     TResult Function(Engineer? enginer)? setSelectedEngineer,
@@ -145,7 +147,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String? searchTerm, String? engineerId)
+    required TResult Function(bool? all, String? searchTerm, String? engineerId)
         getProducts,
     required TResult Function(String productId) getProduct,
     required TResult Function() getStoresAndEngineer,
@@ -159,7 +161,8 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String? searchTerm, String? engineerId)? getProducts,
+    TResult? Function(bool? all, String? searchTerm, String? engineerId)?
+        getProducts,
     TResult? Function(String productId)? getProduct,
     TResult? Function()? getStoresAndEngineer,
     TResult? Function(Engineer? enginer)? setSelectedEngineer,
@@ -172,7 +175,8 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String? searchTerm, String? engineerId)? getProducts,
+    TResult Function(bool? all, String? searchTerm, String? engineerId)?
+        getProducts,
     TResult Function(String productId)? getProduct,
     TResult Function()? getStoresAndEngineer,
     TResult Function(Engineer? enginer)? setSelectedEngineer,
@@ -240,7 +244,7 @@ abstract class _$$GetProductsImplCopyWith<$Res> {
           _$GetProductsImpl value, $Res Function(_$GetProductsImpl) then) =
       __$$GetProductsImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String? searchTerm, String? engineerId});
+  $Res call({bool? all, String? searchTerm, String? engineerId});
 }
 
 /// @nodoc
@@ -256,10 +260,15 @@ class __$$GetProductsImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? all = freezed,
     Object? searchTerm = freezed,
     Object? engineerId = freezed,
   }) {
     return _then(_$GetProductsImpl(
+      all: freezed == all
+          ? _value.all
+          : all // ignore: cast_nullable_to_non_nullable
+              as bool?,
       searchTerm: freezed == searchTerm
           ? _value.searchTerm
           : searchTerm // ignore: cast_nullable_to_non_nullable
@@ -275,8 +284,10 @@ class __$$GetProductsImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$GetProductsImpl implements _GetProducts {
-  const _$GetProductsImpl({this.searchTerm, this.engineerId});
+  _$GetProductsImpl({this.all, this.searchTerm, this.engineerId});
 
+  @override
+  final bool? all;
   @override
   final String? searchTerm;
   @override
@@ -284,7 +295,7 @@ class _$GetProductsImpl implements _GetProducts {
 
   @override
   String toString() {
-    return 'ProductsEvent.getProducts(searchTerm: $searchTerm, engineerId: $engineerId)';
+    return 'ProductsEvent.getProducts(all: $all, searchTerm: $searchTerm, engineerId: $engineerId)';
   }
 
   @override
@@ -292,6 +303,7 @@ class _$GetProductsImpl implements _GetProducts {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GetProductsImpl &&
+            (identical(other.all, all) || other.all == all) &&
             (identical(other.searchTerm, searchTerm) ||
                 other.searchTerm == searchTerm) &&
             (identical(other.engineerId, engineerId) ||
@@ -299,7 +311,7 @@ class _$GetProductsImpl implements _GetProducts {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, searchTerm, engineerId);
+  int get hashCode => Object.hash(runtimeType, all, searchTerm, engineerId);
 
   /// Create a copy of ProductsEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -313,34 +325,36 @@ class _$GetProductsImpl implements _GetProducts {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String? searchTerm, String? engineerId)
+    required TResult Function(bool? all, String? searchTerm, String? engineerId)
         getProducts,
     required TResult Function(String productId) getProduct,
     required TResult Function() getStoresAndEngineer,
     required TResult Function(Engineer? enginer) setSelectedEngineer,
     required TResult Function(Store? store) setSelectedStore,
   }) {
-    return getProducts(searchTerm, engineerId);
+    return getProducts(all, searchTerm, engineerId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String? searchTerm, String? engineerId)? getProducts,
+    TResult? Function(bool? all, String? searchTerm, String? engineerId)?
+        getProducts,
     TResult? Function(String productId)? getProduct,
     TResult? Function()? getStoresAndEngineer,
     TResult? Function(Engineer? enginer)? setSelectedEngineer,
     TResult? Function(Store? store)? setSelectedStore,
   }) {
-    return getProducts?.call(searchTerm, engineerId);
+    return getProducts?.call(all, searchTerm, engineerId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String? searchTerm, String? engineerId)? getProducts,
+    TResult Function(bool? all, String? searchTerm, String? engineerId)?
+        getProducts,
     TResult Function(String productId)? getProduct,
     TResult Function()? getStoresAndEngineer,
     TResult Function(Engineer? enginer)? setSelectedEngineer,
@@ -348,7 +362,7 @@ class _$GetProductsImpl implements _GetProducts {
     required TResult orElse(),
   }) {
     if (getProducts != null) {
-      return getProducts(searchTerm, engineerId);
+      return getProducts(all, searchTerm, engineerId);
     }
     return orElse();
   }
@@ -399,9 +413,12 @@ class _$GetProductsImpl implements _GetProducts {
 }
 
 abstract class _GetProducts implements ProductsEvent {
-  const factory _GetProducts(
-      {final String? searchTerm, final String? engineerId}) = _$GetProductsImpl;
+  factory _GetProducts(
+      {final bool? all,
+      final String? searchTerm,
+      final String? engineerId}) = _$GetProductsImpl;
 
+  bool? get all;
   String? get searchTerm;
   String? get engineerId;
 
@@ -482,7 +499,7 @@ class _$GetProductImpl implements _GetProduct {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String? searchTerm, String? engineerId)
+    required TResult Function(bool? all, String? searchTerm, String? engineerId)
         getProducts,
     required TResult Function(String productId) getProduct,
     required TResult Function() getStoresAndEngineer,
@@ -496,7 +513,8 @@ class _$GetProductImpl implements _GetProduct {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String? searchTerm, String? engineerId)? getProducts,
+    TResult? Function(bool? all, String? searchTerm, String? engineerId)?
+        getProducts,
     TResult? Function(String productId)? getProduct,
     TResult? Function()? getStoresAndEngineer,
     TResult? Function(Engineer? enginer)? setSelectedEngineer,
@@ -509,7 +527,8 @@ class _$GetProductImpl implements _GetProduct {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String? searchTerm, String? engineerId)? getProducts,
+    TResult Function(bool? all, String? searchTerm, String? engineerId)?
+        getProducts,
     TResult Function(String productId)? getProduct,
     TResult Function()? getStoresAndEngineer,
     TResult Function(Engineer? enginer)? setSelectedEngineer,
@@ -624,7 +643,7 @@ class _$GetStoresAndEngineersImpl implements _GetStoresAndEngineers {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String? searchTerm, String? engineerId)
+    required TResult Function(bool? all, String? searchTerm, String? engineerId)
         getProducts,
     required TResult Function(String productId) getProduct,
     required TResult Function() getStoresAndEngineer,
@@ -638,7 +657,8 @@ class _$GetStoresAndEngineersImpl implements _GetStoresAndEngineers {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String? searchTerm, String? engineerId)? getProducts,
+    TResult? Function(bool? all, String? searchTerm, String? engineerId)?
+        getProducts,
     TResult? Function(String productId)? getProduct,
     TResult? Function()? getStoresAndEngineer,
     TResult? Function(Engineer? enginer)? setSelectedEngineer,
@@ -651,7 +671,8 @@ class _$GetStoresAndEngineersImpl implements _GetStoresAndEngineers {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String? searchTerm, String? engineerId)? getProducts,
+    TResult Function(bool? all, String? searchTerm, String? engineerId)?
+        getProducts,
     TResult Function(String productId)? getProduct,
     TResult Function()? getStoresAndEngineer,
     TResult Function(Engineer? enginer)? setSelectedEngineer,
@@ -784,7 +805,7 @@ class _$OnSetSelectedEngineerImpl implements _OnSetSelectedEngineer {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String? searchTerm, String? engineerId)
+    required TResult Function(bool? all, String? searchTerm, String? engineerId)
         getProducts,
     required TResult Function(String productId) getProduct,
     required TResult Function() getStoresAndEngineer,
@@ -798,7 +819,8 @@ class _$OnSetSelectedEngineerImpl implements _OnSetSelectedEngineer {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String? searchTerm, String? engineerId)? getProducts,
+    TResult? Function(bool? all, String? searchTerm, String? engineerId)?
+        getProducts,
     TResult? Function(String productId)? getProduct,
     TResult? Function()? getStoresAndEngineer,
     TResult? Function(Engineer? enginer)? setSelectedEngineer,
@@ -811,7 +833,8 @@ class _$OnSetSelectedEngineerImpl implements _OnSetSelectedEngineer {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String? searchTerm, String? engineerId)? getProducts,
+    TResult Function(bool? all, String? searchTerm, String? engineerId)?
+        getProducts,
     TResult Function(String productId)? getProduct,
     TResult Function()? getStoresAndEngineer,
     TResult Function(Engineer? enginer)? setSelectedEngineer,
@@ -952,7 +975,7 @@ class _$OnSetSelectedStoreImpl implements _OnSetSelectedStore {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String? searchTerm, String? engineerId)
+    required TResult Function(bool? all, String? searchTerm, String? engineerId)
         getProducts,
     required TResult Function(String productId) getProduct,
     required TResult Function() getStoresAndEngineer,
@@ -966,7 +989,8 @@ class _$OnSetSelectedStoreImpl implements _OnSetSelectedStore {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String? searchTerm, String? engineerId)? getProducts,
+    TResult? Function(bool? all, String? searchTerm, String? engineerId)?
+        getProducts,
     TResult? Function(String productId)? getProduct,
     TResult? Function()? getStoresAndEngineer,
     TResult? Function(Engineer? enginer)? setSelectedEngineer,
@@ -979,7 +1003,8 @@ class _$OnSetSelectedStoreImpl implements _OnSetSelectedStore {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String? searchTerm, String? engineerId)? getProducts,
+    TResult Function(bool? all, String? searchTerm, String? engineerId)?
+        getProducts,
     TResult Function(String productId)? getProduct,
     TResult Function()? getStoresAndEngineer,
     TResult Function(Engineer? enginer)? setSelectedEngineer,
