@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -50,6 +48,7 @@ class ProductDetailsPage extends StatelessWidget {
                   state.productFailureOrSuccess.fold(
                       () => null,
                       (ifSome) => ifSome.fold((l) {
+                            Navigator.of(context).pop();
                             String message =
                                 l.map(customError: (error) => error.message);
                             Utils.handleError(context, message);
@@ -67,7 +66,7 @@ class ProductDetailsPage extends StatelessWidget {
     return state.productFailureOrSuccess.fold(
       () => const SizedBox.shrink(),
       (a) => a.fold((l) {
-        log(l.map(customError: (error) => error.message));
+        // log(l.map(customError: (error) => error.message));
         return const Center(child: CircularProgressIndicator());
       }, (productData) {
         return Padding(

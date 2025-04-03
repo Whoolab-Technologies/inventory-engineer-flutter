@@ -35,7 +35,6 @@ class _QRCodeScannerPageState extends State<QRCodeScannerPage>
   void initState() {
     super.initState();
 
-    // Create an animation controller for scanning effect
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 2),
@@ -54,19 +53,14 @@ class _QRCodeScannerPageState extends State<QRCodeScannerPage>
           QRView(
             key: qrKey,
             onQRViewCreated: _onQRViewCreated,
-            // overlay: QrScannerOverlayShape(),
           ),
 
-          //  Overlay with a transparent square at the center
           Positioned.fill(
             child: Column(
               children: [
                 Expanded(
                   child: Container(
                     color: Colors.black.withOpacity(0.6),
-                    // color: _showReloadButton
-                    //     ? Colors.white
-                    //     : Colors.black.withOpacity(0.6),
                   ),
                 ),
                 Row(
@@ -75,9 +69,6 @@ class _QRCodeScannerPageState extends State<QRCodeScannerPage>
                       child: Container(
                         height: width,
                         color: Colors.black.withOpacity(0.6),
-                        // color: _showReloadButton
-                        //     ? Colors.white
-                        //     : Colors.black.withOpacity(0.6),
                       ),
                     ),
                     (_showReloadButton)
@@ -113,9 +104,6 @@ class _QRCodeScannerPageState extends State<QRCodeScannerPage>
                       child: Container(
                         height: width,
                         color: Colors.black.withOpacity(0.6),
-                        // color: _showReloadButton
-                        //     ? Colors.white
-                        //     : Colors.black.withOpacity(0.6),
                       ),
                     ),
                   ],
@@ -156,28 +144,25 @@ class _QRCodeScannerPageState extends State<QRCodeScannerPage>
 
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
-    Future.delayed(const Duration(seconds: 1), () async {
-      _animationController.stop();
-      await controller.pauseCamera();
-      setState(() {
-        _showReloadButton = true;
-        qrText = 'O5';
-        _showPopup('05');
-      });
-    });
-
-    // controller.scannedDataStream.listen((scanData) async {
-    //   // Utils.handleError(context, scanData.code ?? 'No Data');
-    //   await controller.pauseCamera();
+    // Future.delayed(const Duration(seconds: 1), () async {
     //   _animationController.stop();
+    //   await controller.pauseCamera();
     //   setState(() {
     //     _showReloadButton = true;
-    //     qrText = scanData.code ?? 'No Data';
-    //     _showPopup(scanData.code ?? "-1");
+    //     qrText = 'O5';
+    //     _showPopup('05');
     //   });
-    // }, onError: (error, s) {
-    //   log(error.toString());
     // });
+
+    controller.scannedDataStream.listen((scanData) async {
+      await controller.pauseCamera();
+      _animationController.stop();
+      setState(() {
+        _showReloadButton = true;
+        qrText = scanData.code ?? 'No Data';
+        _showPopup(scanData.code ?? "-1");
+      });
+    }, onError: (error, s) {});
   }
 
   void _showPopup(String productId) {
