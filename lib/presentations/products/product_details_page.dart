@@ -116,6 +116,7 @@ class ProductDetailsPage extends StatelessWidget {
               SizedBox(height: 16.h),
               ElevatedButton(
                 onPressed: () {
+                  Navigator.of(context).pop();
                   context.read<ProductsBloc>().add(
                         ProductsEvent.getProducts(
                           all: true,
