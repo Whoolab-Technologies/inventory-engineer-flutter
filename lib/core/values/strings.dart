@@ -56,4 +56,21 @@ class Strings {
 
   static const String noTransferAvailable =
       "No MR transfers available at the moment";
+
+  static const String transactionDetails = "Transaction Details";
+
+  static const String mrNumber = "MR Number";
+
+  static const String notes = "Notes";
+
+  static const String items = "Items";
+
+  static const String close = "Close";
+
+  static const String store = "Store";
+
+  static const String requested = "Requested";
+  static const String issued = "Issued";
+
+  static const String received = "Received";
 }

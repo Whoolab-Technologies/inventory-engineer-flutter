@@ -16,19 +16,23 @@ class TransferListViewer extends StatelessWidget {
   Widget build(BuildContext context) {
     return transfers.isEmpty
         ? const AppEmptyListContainer(message: Strings.noTransferAvailable)
-        : ListView.separated(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              Transfer item = transfers[index];
-              return TransferItem(item: item);
-            },
-            separatorBuilder: (context, index) {
-              return SizedBox(
-                height: 8.h,
-              );
-            },
-            itemCount: transfers.length,
+        : Container(
+            constraints: BoxConstraints(
+                minHeight: MediaQuery.of(context).size.height * 0.8),
+            child: ListView.separated(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                Transfer item = transfers[index];
+                return TransferItem(item: item);
+              },
+              separatorBuilder: (context, index) {
+                return SizedBox(
+                  height: 8.h,
+                );
+              },
+              itemCount: transfers.length,
+            ),
           );
   }
 }
