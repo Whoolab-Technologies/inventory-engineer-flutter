@@ -15,6 +15,10 @@ MaterialRequest _$MaterialRequestFromJson(Map<String, dynamic> json) =>
       items: (json['items'] as List<dynamic>?)
           ?.map((e) => MaterialRequestItem.fromJson(e as Map<String, dynamic>))
           .toList(),
+      stockTransfer: json['stock_transfer'] == null
+          ? null
+          : StockTransfer.fromJson(
+              json['stock_transfer'] as Map<String, dynamic>),
     )..createdAt = json['created_at'] == null
         ? null
         : DateTime.parse(json['created_at'] as String);
@@ -27,4 +31,5 @@ Map<String, dynamic> _$MaterialRequestToJson(MaterialRequest instance) =>
       'created_at': instance.createdAt?.toIso8601String(),
       'status': instance.status,
       'items': instance.items,
+      'stock_transfer': instance.stockTransfer,
     };

@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:mvp_engineer/domain/models/material_request/stock_transfer/stock_transfer.dart';
 import 'package:mvp_engineer/domain/models/material_request_item/material_request_item.dart';
 import 'package:intl/intl.dart';
 part 'material_request.g.dart';
@@ -13,6 +14,8 @@ class MaterialRequest {
   DateTime? createdAt;
   String? status;
   List<MaterialRequestItem>? items;
+  @JsonKey(name: 'stock_transfer')
+  StockTransfer? stockTransfer;
 
   MaterialRequest({
     this.id,
@@ -20,6 +23,7 @@ class MaterialRequest {
     this.description,
     this.status,
     this.items,
+    this.stockTransfer,
   });
 
   factory MaterialRequest.fromJson(Map<String, dynamic> json) =>
