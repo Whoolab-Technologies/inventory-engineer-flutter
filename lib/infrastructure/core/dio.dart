@@ -42,7 +42,12 @@ class DioClient {
     //   setBaseUrl();
     // }
     if (!_isInterceptorsSetup) {
-      _dio.options.baseUrl = _baseUrl;
+      _dio.options = BaseOptions(
+        baseUrl: _baseUrl,
+        connectTimeout: const Duration(seconds: 10), // Timeout for connection
+        receiveTimeout: const Duration(seconds: 20), // Timeout for response
+        sendTimeout: const Duration(seconds: 10), // Timeout for sending data
+      );
       setupInterceptors();
       _isInterceptorsSetup = true;
     }
@@ -74,9 +79,20 @@ class DioClient {
           String jsonString = utf8.decode(e.response?.data);
           e.response?.data = json.decode(jsonString);
         }
+        String errorMessage = "Something went wrong. Please try again.";
+
+        // Handle Timeout Errors
+        if (e.type == DioExceptionType.connectionTimeout) {
+          errorMessage = "Connection timeout. Please check your internet.";
+        } else if (e.type == DioExceptionType.receiveTimeout) {
+          errorMessage = "Server took too long to respond. Please try again.";
+        } else if (e.response != null) {
+          errorMessage = BaseResponse.fromJson(e.response?.data).message;
+        }
+
         final exception = DioException(
           type: e.type,
-          message: BaseResponse.fromJson(e.response?.data).message,
+          message: errorMessage,
           requestOptions: e.requestOptions,
         );
 
@@ -84,6 +100,7 @@ class DioClient {
           final shouldExclude = excludedEndpoints
               .any((endpoint) => e.requestOptions.path.contains(endpoint));
           if (!shouldExclude) {
+            await AppGlobal.storageService.clearAll();
             Utils.onServerLogOut(exception.message ?? "Something went wrong.");
           }
         }
