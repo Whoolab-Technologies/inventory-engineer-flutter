@@ -8,6 +8,9 @@ VERSION=$(grep '^version:' pubspec.yaml | awk '{print $2}' | cut -d+ -f1)  # Ext
 APK_DIR="build/app/outputs/flutter-apk"
 APK_NAME="$APP_NAME-$VERSION-release.apk"
 
+fvm flutter clean
+fvm flutter pub get
+
 # Build APK
 fvm flutter build apk --release 
 

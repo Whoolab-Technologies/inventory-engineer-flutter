@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvp_engineer/domain/models/material_request/material_request.dart';
+import 'package:mvp_shared_components/core/extensions.dart';
 import 'package:mvp_shared_components/widgets/app_status_container.dart';
 
 class RecentRequestItem extends StatelessWidget {
@@ -10,7 +9,6 @@ class RecentRequestItem extends StatelessWidget {
   final MaterialRequest materialRequest;
   @override
   Widget build(BuildContext context) {
-    log("${materialRequest.stockTransfer?.status}");
     return AspectRatio(
       aspectRatio: 1.75,
       child: Container(
@@ -68,7 +66,7 @@ class RecentRequestItem extends StatelessWidget {
                   AppStatusContainer(
                     status: _getStatustext(materialRequest),
                     child: Text(
-                      _getStatustext(materialRequest).toUpperCase(),
+                      _getStatustext(materialRequest).toUpperCaseWithSpace(),
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 14.sp,
@@ -102,7 +100,7 @@ class RecentRequestItem extends StatelessWidget {
     );
   }
 
-  _getStatustext(MaterialRequest materialRequest) {
+  String _getStatustext(MaterialRequest materialRequest) {
     if (materialRequest.stockTransfer != null) {
       return materialRequest.stockTransfer?.status ?? "";
     } else {
