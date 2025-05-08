@@ -78,8 +78,8 @@ class ProductDetailsPage extends StatelessWidget {
               // Product Information
               _buildSectionTitle("Product Information", context),
               _buildInfoRow("Item:", productData['item']),
-              _buildInfoRow("Category ID:", productData['cat_id']),
-              _buildInfoRow("Description:", productData['description']),
+              _buildInfoRow("Category ID:", "${productData['cat_id']}"),
+              _buildInfoRow("Description:", productData['description'] ?? ""),
               _buildInfoRow("Unit:", productData['symbol']),
 
               // // QR Code
