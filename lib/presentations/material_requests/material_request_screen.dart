@@ -50,15 +50,21 @@ class _MaterialRequestScreenState extends State<MaterialRequestScreen> {
           )
         ],
       ),
-      body: Padding(
-        padding: EdgeInsets.all(8.w),
-        child: RefreshIndicator(
-          onRefresh: () async {
-            context.read<MaterialRequestBloc>().add(
-                  const MaterialRequestEvent.fetchMaterialRequests(),
-                );
-          },
-          child: const MaterialRequestList(),
+      body: RefreshIndicator(
+        onRefresh: () async {
+          context.read<MaterialRequestBloc>().add(
+                const MaterialRequestEvent.fetchMaterialRequests(),
+              );
+        },
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                  padding: EdgeInsets.all(8.w),
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: const MaterialRequestList()),
+            ),
+          ],
         ),
       ),
     );
@@ -89,31 +95,28 @@ class MaterialRequestList extends StatelessWidget {
                     ),
                   );
                 }, (requests) {
-                  return SingleChildScrollView(
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    child: Column(
-                      children: [
-                        requests.isEmpty
-                            ? const AppEmptyListContainer(
-                                message: Strings.noMRsAvailable)
-                            : ListView.separated(
-                                physics: const NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount: requests.length,
-                                separatorBuilder: (context, index) {
-                                  return SizedBox(
-                                    height: 8.h,
-                                  );
-                                },
-                                itemBuilder: (context, index) {
-                                  final request = requests[index];
-                                  return MaterialRequestTile(
-                                    request: request,
-                                  );
-                                },
-                              ),
-                      ],
-                    ),
+                  return Column(
+                    children: [
+                      requests.isEmpty
+                          ? const AppEmptyListContainer(
+                              message: Strings.noMRsAvailable)
+                          : ListView.separated(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: requests.length,
+                              separatorBuilder: (context, index) {
+                                return SizedBox(
+                                  height: 8.h,
+                                );
+                              },
+                              itemBuilder: (context, index) {
+                                final request = requests[index];
+                                return MaterialRequestTile(
+                                  request: request,
+                                );
+                              },
+                            ),
+                    ],
                   );
                 }),
               );
@@ -123,6 +126,8 @@ class MaterialRequestList extends StatelessWidget {
 
   Widget _buildShimmerLoading() {
     return ListView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
         itemCount: 6,
         itemBuilder: (_, __) {
           return Card(
