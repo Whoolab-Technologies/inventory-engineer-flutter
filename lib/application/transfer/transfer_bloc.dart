@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -14,30 +15,39 @@ part 'transfer_state.dart';
 @injectable
 class TransferBloc extends Bloc<TransferEvent, TransferState> {
   final ITransferFacade _iTransferFacade;
+  final Map<String, CancelToken> _cancelTokens = {};
+
   TransferBloc(this._iTransferFacade) : super(TransferState.initial()) {
     on<_GetTransfers>(_onGetTransfers, transformer: restartable());
   }
 
   FutureOr<void> _onGetTransfers(
       _GetTransfers event, Emitter<TransferState> emit) async {
-    emit(
-      state.copyWith(
-        isLoading: true,
-        transfers: [],
-        transfersListFailureOrSuccess: none(),
-      ),
-    );
-    Either<AppFailure, List<Transfer>> transfersListFailureOrSuccess =
-        await _iTransferFacade.getTransfers();
-    emit(
-      state.copyWith(
-        isLoading: false,
-        transfers: transfersListFailureOrSuccess.fold(
-          (_) => [],
-          (list) => list,
+    _cancelTokens['transfers']?.cancel();
+    _cancelTokens['transfers'] = CancelToken();
+    try {
+      emit(
+        state.copyWith(
+          isLoading: true,
+          transfers: [],
+          transfersListFailureOrSuccess: none(),
         ),
-        transfersListFailureOrSuccess: optionOf(transfersListFailureOrSuccess),
-      ),
-    );
+      );
+      Either<AppFailure, List<Transfer>> transfersListFailureOrSuccess =
+          await _iTransferFacade.getTransfers();
+      emit(
+        state.copyWith(
+          isLoading: false,
+          transfers: transfersListFailureOrSuccess.fold(
+            (_) => [],
+            (list) => list,
+          ),
+          transfersListFailureOrSuccess:
+              optionOf(transfersListFailureOrSuccess),
+        ),
+      );
+    } finally {
+      _cancelTokens.remove('transfers');
+    }
   }
 }

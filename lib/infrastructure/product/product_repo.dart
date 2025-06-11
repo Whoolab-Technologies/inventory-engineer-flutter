@@ -21,6 +21,7 @@ class ProductRepo implements IProductFacade {
     bool? all,
     String? searchTerm,
     String? engineerId,
+    CancelToken? cancelToken,
   }) async {
     try {
       Map<String, dynamic> queryParams = <String, dynamic>{};
@@ -36,6 +37,7 @@ class ProductRepo implements IProductFacade {
       Response response = await _client.dio.get(
         Api.endPoints["products"]!,
         queryParameters: queryParams,
+        cancelToken: cancelToken,
       );
       ProductResponse productResponse = ProductResponse.fromJson(response.data);
       if (!productResponse.error) {
@@ -60,10 +62,12 @@ class ProductRepo implements IProductFacade {
   @override
   Future<Either<AppFailure, Map<String, dynamic>>> getProduct({
     required String productId,
+    CancelToken? cancelToken,
   }) async {
     try {
       Response response = await _client.dio.get(
         '${Api.endPoints["products"]!}/$productId',
+        cancelToken: cancelToken,
       );
       ProductResponse productResponse = ProductResponse.fromJson(response.data);
       if (!productResponse.error) {
@@ -83,13 +87,13 @@ class ProductRepo implements IProductFacade {
   }
 
   @override
-  Future<Either<AppFailure, Map<String, dynamic>>>
-      getStoresAndEngineer() async {
+  Future<Either<AppFailure, Map<String, dynamic>>> getStoresAndEngineer(
+      {CancelToken? cancelToken}) async {
     try {
       List<Store> stores = [];
       List<Engineer> engineers = [];
-      Response response =
-          await _client.dio.get(Api.endPoints["stores_engineers"]!);
+      Response response = await _client.dio
+          .get(Api.endPoints["stores_engineers"]!, cancelToken: cancelToken);
       ProductResponse productResponse = ProductResponse.fromJson(response.data);
       if (!productResponse.error) {
         if (productResponse.data != null) {

@@ -17,10 +17,13 @@ class MaterialRequestRepo implements IMaterialRequestFacade {
   MaterialRequestRepo(this._client);
 
   @override
-  Future<Either<AppFailure, List<MaterialRequest>>>
-      fetchMaterialRequests() async {
+  Future<Either<AppFailure, List<MaterialRequest>>> fetchMaterialRequests(
+      {CancelToken? cancelToken}) async {
     try {
-      Response response = await _client.dio.get(Api.endPoints["mr"]!);
+      Response response = await _client.dio.get(
+        Api.endPoints["mr"]!,
+        cancelToken: cancelToken,
+      );
       MaterialRequestListResponse materialRequestListResponse =
           MaterialRequestListResponse.fromJson(response.data);
       if (!materialRequestListResponse.error) {

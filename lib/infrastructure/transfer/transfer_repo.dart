@@ -14,10 +14,13 @@ class TransferRepo implements ITransferFacade {
   final DioClient _dioClient;
   TransferRepo(this._dioClient);
   @override
-  Future<Either<AppFailure, List<Transfer>>> getTransfers() async {
+  Future<Either<AppFailure, List<Transfer>>> getTransfers(
+      {CancelToken? cancelToken}) async {
     try {
-      final Response response =
-          await _dioClient.dio.get(Api.endPoints["transactions"]!);
+      final Response response = await _dioClient.dio.get(
+        Api.endPoints["transactions"]!,
+        cancelToken: cancelToken,
+      );
       TransferResponse transferResponse =
           TransferResponse.fromJson(response.data);
       if (transferResponse.error) {

@@ -15,10 +15,12 @@ class HomeRepo implements IHomeFacade {
   HomeRepo(this._dioClient);
 
   @override
-  Future<Either<AppFailure, HomeData>> fetchData() async {
+  Future<Either<AppFailure, HomeData>> fetchData(
+      {CancelToken? cancelToken}) async {
     try {
       Response response = await _dioClient.dio.get(
         Api.endPoints["home"]!,
+        cancelToken: cancelToken,
       );
       HomeResponse homeResponse = HomeResponse.fromJson(response.data);
       if (!homeResponse.error) {

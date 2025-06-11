@@ -55,6 +55,7 @@ class DioClient {
   void setupInterceptors() {
     _dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) async {
+        await Future.delayed(const Duration(milliseconds: 300));
         options.headers['Accept'] = 'application/json';
 
         final shouldExclude = excludedEndpoints
@@ -75,6 +76,10 @@ class DioClient {
         return handler.next(response);
       },
       onError: (DioException e, handler) async {
+        if (e.type == DioExceptionType.cancel) {
+          log("request Cancelled");
+          return handler.next(e); // Let Dio handle it as a cancellation
+        }
         // Decode Uint8List response if needed
         if (e.response?.data is Uint8List) {
           String jsonString = utf8.decode(e.response!.data);
@@ -137,10 +142,6 @@ class DioClient {
             errorMessage = "Unknown error occurred.";
             break;
         }
-        log("Dio error type: ${e.type}");
-        log("Dio error: ${e.message}");
-        log("Dio stacktrace: ${e.stackTrace}");
-        log("Dio response: ${e.response?.data}");
 
         final exception = DioException(
           type: e.type,

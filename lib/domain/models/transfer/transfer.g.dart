@@ -25,6 +25,7 @@ Transfer _$TransferFromJson(Map<String, dynamic> json) => Transfer(
           ? null
           : MaterialRequest.fromJson(
               json['material_request'] as Map<String, dynamic>),
+      dnNumber: json['dn_number'],
     );
 
 Map<String, dynamic> _$TransferToJson(Transfer instance) => <String, dynamic>{
@@ -37,4 +38,5 @@ Map<String, dynamic> _$TransferToJson(Transfer instance) => <String, dynamic>{
       'notes': instance.notes,
       'items': instance.items,
       'material_request': instance.materialRequest,
+      'dn_number': instance.dnNumber,
     };

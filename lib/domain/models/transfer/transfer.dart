@@ -21,18 +21,20 @@ class Transfer {
   List<Item>? items;
   @JsonKey(name: 'material_request')
   MaterialRequest? materialRequest;
+  @JsonKey(name: 'dn_number')
+  dynamic dnNumber;
 
-  Transfer({
-    this.id,
-    this.fromStoreId,
-    this.toStoreId,
-    this.status,
-    this.remarks,
-    this.createdAt,
-    this.notes,
-    this.items,
-    this.materialRequest,
-  });
+  Transfer(
+      {this.id,
+      this.fromStoreId,
+      this.toStoreId,
+      this.status,
+      this.remarks,
+      this.createdAt,
+      this.notes,
+      this.items,
+      this.materialRequest,
+      this.dnNumber});
 
   @override
   String toString() {

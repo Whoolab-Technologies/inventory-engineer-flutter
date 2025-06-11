@@ -69,6 +69,26 @@ class TransferItem extends StatelessWidget {
                 )
               ],
             ),
+            SizedBox(height: 6.h),
+            Row(
+              children: [
+                const Icon(
+                  Icons.receipt_long_outlined,
+                  color: const Color.fromARGB(255, 95, 95, 95),
+                ),
+                SizedBox(
+                  width: 6.w,
+                ),
+                Text(
+                  item.dnNumber ?? "",
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 6.h),
             ...(item.notes ?? []).map(
               (el) => Column(
                 children: [
