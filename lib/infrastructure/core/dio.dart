@@ -1,5 +1,4 @@
 import "dart:convert";
-import "dart:developer";
 
 import "package:dio/dio.dart";
 import "package:flutter/foundation.dart";
@@ -67,9 +66,6 @@ class DioClient {
           options.headers["Authorization"] = "Bearer $_token";
         }
 
-        log("MVP Request URI => ${options.uri}");
-        log("MVP Token => $_token");
-
         return handler.next(options);
       },
       onResponse: (response, handler) {
@@ -77,7 +73,6 @@ class DioClient {
       },
       onError: (DioException e, handler) async {
         if (e.type == DioExceptionType.cancel) {
-          log("request Cancelled");
           return handler.next(e); // Let Dio handle it as a cancellation
         }
         // Decode Uint8List response if needed
@@ -94,7 +89,6 @@ class DioClient {
           if (e.type == DioExceptionType.connectionTimeout ||
               e.type == DioExceptionType.sendTimeout) {
             retryCount++;
-            log("Retrying request... Attempt: $retryCount");
             try {
               // Retry the request
               final response = await _dio.fetch(e.requestOptions);

@@ -66,7 +66,6 @@ class ProductDetailsPage extends StatelessWidget {
     return state.productFailureOrSuccess.fold(
       () => const SizedBox.shrink(),
       (a) => a.fold((l) {
-        // log(l.map(customError: (error) => error.message));
         return const Center(child: CircularProgressIndicator());
       }, (productData) {
         return Padding(
