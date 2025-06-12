@@ -15,6 +15,8 @@ import 'package:mvp_engineer/application/home/home_bloc.dart' as _i1014;
 import 'package:mvp_engineer/application/login/login_bloc.dart' as _i837;
 import 'package:mvp_engineer/application/material_request/material_request_bloc.dart'
     as _i566;
+import 'package:mvp_engineer/application/password_reset/password_reset_bloc.dart'
+    as _i550;
 import 'package:mvp_engineer/application/products/products_bloc.dart' as _i992;
 import 'package:mvp_engineer/application/transfer/transfer_bloc.dart' as _i68;
 import 'package:mvp_engineer/domain/app-data/app_data.dart' as _i554;
@@ -54,6 +56,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i49.MaterialRequestRepo(gh<_i429.DioClient>()));
     gh.lazySingleton<_i983.IProductFacade>(
         () => _i127.ProductRepo(gh<_i429.DioClient>()));
+    gh.factory<_i550.PasswordResetBloc>(
+        () => _i550.PasswordResetBloc(gh<_i129.IAuthFacade>()));
     gh.factory<_i730.AuthBloc>(() => _i730.AuthBloc(gh<_i129.IAuthFacade>()));
     gh.lazySingleton<_i172.IHomeFacade>(
         () => _i264.HomeRepo(gh<_i429.DioClient>()));

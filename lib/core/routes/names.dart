@@ -6,6 +6,7 @@ class AppRoutes {
   static String PRODUCTS = "products";
   static String TRANSFERS = "transfers";
   static String REPORTS = "reports";
+  static String RESET = "reset";
   static String MR = "mr";
 
   // static String SETTINGS = "settings";

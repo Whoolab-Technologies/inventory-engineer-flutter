@@ -19,8 +19,9 @@ abstract class IAuthFacade {
   Future<Either<AuthFailures, Unit>> signOut();
   Future<void> forcedSignOut();
 
-  Future<Either<AuthFailures, Unit>> sendPasswordResetRequest(
-      {required EmailAddress emailAddress});
+  Future<Either<AuthFailures, Unit>> sendPasswordResetRequest({
+    required String email,
+  });
   Future<Either<AuthFailures, Unit>> sendCodeVerificationRequest({
     required EmailAddress emailAddress,
     required VerificationCode code,

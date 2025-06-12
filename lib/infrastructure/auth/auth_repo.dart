@@ -157,13 +157,11 @@ class AuthRepo implements IAuthFacade {
 
   @override
   Future<Either<AuthFailures, Unit>> sendPasswordResetRequest(
-      {required EmailAddress emailAddress}) async {
+      {required String email}) async {
     try {
-      final emailAddressString =
-          emailAddress.value.fold((l) => throw UnExpectedValueError(l), id);
-
       Map<String, dynamic> data = {
-        "email": emailAddressString,
+        "email": email,
+        "user_type": 'engineer',
       };
 
       Response response =

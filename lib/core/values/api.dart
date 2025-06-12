@@ -8,12 +8,12 @@ class Api {
     "register": "/register",
     "login": "/login",
     "logout": "/logout",
-    "sendLink": "/sendLink",
     "reset": "/reset",
     "products": "/products",
     "mr": "/mr",
     "home": "/home",
     "transactions": "/transactions",
+    "sendLink": "/password/reset",
     "stores_engineers": "/stores_engineers",
   };
 }

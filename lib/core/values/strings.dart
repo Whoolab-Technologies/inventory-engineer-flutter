@@ -73,4 +73,6 @@ class Strings {
   static const String issued = "Issued";
 
   static const String received = "Received";
+  static const String passwordResetLinkSent =
+      "Password reset link sent successfully.";
 }
