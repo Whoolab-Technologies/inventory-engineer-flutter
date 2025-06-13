@@ -1,5 +1,4 @@
 import "dart:convert";
-
 import "package:dio/dio.dart";
 import "package:flutter/foundation.dart";
 import "package:mvp_engineer/core/utils/utils.dart";
@@ -56,6 +55,16 @@ class DioClient {
       onRequest: (options, handler) async {
         await Future.delayed(const Duration(milliseconds: 300));
         options.headers['Accept'] = 'application/json';
+
+        // Handle password endpoint URL modification
+        String path = options.path;
+        String baseUrl = options.baseUrl;
+        final isPasswordEndpoint = path.contains('password/reset') ||
+            path.contains('password/confirm');
+        if (isPasswordEndpoint && baseUrl.contains('/v1/engineer')) {
+          baseUrl = baseUrl.replaceFirst('/v1/engineer', '/v1');
+          options.baseUrl = baseUrl;
+        }
 
         final shouldExclude = excludedEndpoints
             .any((endpoint) => options.path.contains(endpoint));
