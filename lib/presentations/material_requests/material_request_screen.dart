@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -5,6 +6,7 @@ import 'package:mvp_engineer/application/material_request/material_request_bloc.
 import 'package:mvp_engineer/application/products/products_bloc.dart';
 import 'package:mvp_engineer/core/values/strings.dart';
 import 'package:mvp_engineer/domain/models/material_request/material_request.dart';
+import 'package:mvp_engineer/domain/models/material_request_item/material_request_item.dart';
 import 'package:mvp_engineer/presentations/material_requests/material_requests_create_screen.dart';
 import 'package:mvp_shared_components/widgets/app_empty_list_container.dart';
 import 'package:mvp_shared_components/widgets/app_shimmer.dart';
@@ -157,20 +159,6 @@ class MaterialRequestList extends StatelessWidget {
               ),
             ),
           );
-          //   Padding(
-          //   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          //   child: Shimmer.fromColors(
-          //     baseColor: Colors.grey[300]!,
-          //     highlightColor: Colors.grey[100]!,
-          //     child: Container(
-          //       height: 70,
-          //       decoration: BoxDecoration(
-          //         color: Colors.white,
-          //         borderRadius: BorderRadius.circular(8),
-          //       ),
-          //     ),
-          //   ),
-          // ),
         });
   }
 }
@@ -249,7 +237,10 @@ class MaterialRequestTile extends StatelessWidget {
             const SizedBox(height: 10),
             Text(
               "${request.requestNumber}",
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.sp,
+                  color: Theme.of(context).colorScheme.primary),
             ),
             Text(request.description ?? ""),
             const Divider(),
@@ -261,39 +252,132 @@ class MaterialRequestTile extends StatelessWidget {
               },
               itemBuilder: (context, index) {
                 final prdt = request.items![index];
-                return ListTile(
-                  leading: SizedBox(
-                    width: 24.w,
-                    height: 24.w,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10.r),
-                      child: prdt.productImage != null &&
-                              prdt.productImage!.isNotEmpty
-                          ? Image.network(
-                              prdt.productImage!,
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Icon(Icons.image,
-                                    size: 24.sp, color: Colors.grey);
-                              },
-                            )
-                          : Icon(Icons.image, size: 24.sp, color: Colors.grey),
-                    ),
-                  ),
-                  title: Text(
-                    prdt.productName ?? "",
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                  ),
-                  trailing: Text(
-                    "Qty: ${prdt.quantity} (${prdt.unit ?? ""})",
-                    style: const TextStyle(
-                      color: Colors.black,
-                    ),
-                  ),
-                );
+                return MaterialRequestProductItem(item: prdt);
               },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class MaterialRequestProductItem extends StatelessWidget {
+  const MaterialRequestProductItem({
+    super.key,
+    required this.item,
+  });
+
+  final MaterialRequestItem? item;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(10.r),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey.shade300),
+        borderRadius: BorderRadius.circular(10.r),
+      ),
+      child: Row(
+        children: [
+          // Image
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8.r),
+            child: Container(
+              width: 50.w,
+              height: 50.w,
+              color: Colors.grey[200],
+              child:
+                  item!.productImage != null && item!.productImage!.isNotEmpty
+                      ? CachedNetworkImage(
+                          imageUrl: item!.productImage!, fit: BoxFit.cover)
+                      : Icon(Icons.image, color: Colors.grey, size: 24.sp),
+            ),
+          ),
+          SizedBox(width: 12.w),
+
+          // Info
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  item!.productName ?? "",
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 4.h),
+                Wrap(
+                  spacing: 6,
+                  runSpacing: 6,
+                  children: [
+                    _tag("Cat.Id", item!.catId),
+                    _tag("Cat", item!.categoryName),
+                    _tag("Brand", item!.brandName),
+                    _tag("Unit", item!.unit),
+                  ],
+                ),
+                SizedBox(height: 6.h),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                  decoration: BoxDecoration(
+                    color: Colors.blue.shade50,
+                    borderRadius: BorderRadius.circular(6.r),
+                  ),
+                  child: Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: "Quantity: ",
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blueGrey.shade700,
+                          ),
+                        ),
+                        TextSpan(
+                          text: "${item!.quantity} ${item!.unit ?? ''}",
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            color: Colors.blueGrey.shade900,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _tag(String label, String? value) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h),
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius: BorderRadius.circular(6.r),
+      ),
+      child: Text.rich(
+        TextSpan(
+          children: [
+            TextSpan(
+              text: "$label: ",
+              style: TextStyle(
+                fontSize: 11.sp,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+            ),
+            TextSpan(
+              text: value ?? '-',
+              style: TextStyle(
+                fontSize: 11.sp,
+                fontWeight: FontWeight.normal,
+                color: Colors.blueGrey,
+              ),
             ),
           ],
         ),

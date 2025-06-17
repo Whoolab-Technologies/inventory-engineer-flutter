@@ -5,6 +5,38 @@ import 'package:mvp_engineer/domain/models/transfer/item.dart';
 import 'package:mvp_engineer/domain/models/transfer/note.dart';
 import 'package:mvp_engineer/domain/models/transfer/transfer.dart';
 
+Widget _tag(String label, String? value) {
+  return Container(
+    padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h),
+    decoration: BoxDecoration(
+      color: Colors.grey[200],
+      borderRadius: BorderRadius.circular(6.r),
+    ),
+    child: Text.rich(
+      TextSpan(
+        children: [
+          TextSpan(
+            text: "$label: ",
+            style: TextStyle(
+              fontSize: 11.sp,
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
+            ),
+          ),
+          TextSpan(
+            text: value ?? '-',
+            style: TextStyle(
+              fontSize: 11.sp,
+              fontWeight: FontWeight.normal,
+              color: Colors.blueGrey,
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
 Widget _buildTransferItemRow(Item item, BuildContext context) {
   return Container(
     margin: EdgeInsets.symmetric(vertical: 4.h),
@@ -17,16 +49,36 @@ Widget _buildTransferItemRow(Item item, BuildContext context) {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(
-              item.productName ?? "",
-              style: TextStyle(
-                color: Theme.of(context).primaryColor,
-                fontSize: 12.sp,
-                fontWeight: FontWeight.w600,
+            Expanded(
+              child: Text(
+                item.productName ?? "",
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontSize: 12.sp,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
+          ],
+        ),
+        Wrap(
+          spacing: 6,
+          runSpacing: 6,
+          children: [
+            _tag("Cat.id", item.catId),
+            _tag("Cat", item.categoryName),
+            _tag("Brand", item.brandName),
+            _tag("Unit", item.unit),
+          ],
+        ),
+        SizedBox(
+          height: 4.h,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
             Row(
               children: [
                 Text(

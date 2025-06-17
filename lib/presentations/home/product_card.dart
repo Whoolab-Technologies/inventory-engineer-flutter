@@ -31,8 +31,8 @@ class ProductCard extends StatelessWidget {
             ),
           ],
         ),
-        child: SizedBox(
-          width: 120.w,
+        child: AspectRatio(
+          aspectRatio: 1.15,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -49,14 +49,22 @@ class ProductCard extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.all(8.0.w),
-                child: Text(
-                  product.item ?? '',
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.bold,
-                    color: primaryColor,
-                  ),
-                  textAlign: TextAlign.center,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        product.item ?? '',
+                        maxLines: 1,
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.bold,
+                          color: primaryColor,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],

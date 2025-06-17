@@ -7,7 +7,7 @@ import 'package:mvp_engineer/core/utils/utils.dart';
 import 'package:mvp_engineer/core/values/strings.dart';
 import 'package:mvp_engineer/domain/models/material_request_item/material_request_item.dart';
 import 'package:mvp_engineer/domain/models/product/product.dart';
-import 'package:mvp_shared_components/widgets/app_custom_dropdown.dart';
+import 'package:mvp_shared_components/widgets/app_searchable_dropdown.dart';
 import 'package:mvp_shared_components/widgets/app_shimmer.dart';
 
 class MaterialRequestCreateScreen extends StatelessWidget {
@@ -117,22 +117,66 @@ class _MaterialRequestFormState extends State<MaterialRequestForm> {
                               )
                             : Padding(
                                 padding: EdgeInsets.symmetric(vertical: 8.h),
-                                child: AppCustomDropdown<Product>(
+                                child: GenericSearchableDropdown<Product>(
+                                  matchItem: (item, query) {
+                                    final queryLower = query.toLowerCase();
+                                    return [
+                                      item.catId,
+                                      item.brandName,
+                                      item.productCategory,
+                                      item.item,
+                                    ].whereType<String>().any((val) =>
+                                        val.toLowerCase().contains(queryLower));
+                                  },
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12.r),
+                                    border: Border.all(
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                    ),
+                                  ),
                                   items: state.products,
-                                  value: selectedProduct,
-                                  label: Strings.productLabel,
-                                  placeholder: Strings.productPlaceHolder,
-                                  itemToString: (p0) => p0.toString(),
+                                  hintText: Strings.productPlaceHolder,
+                                  searchHint: "Search products..",
+                                  displayStringForOption: (p0) {
+                                    return "${p0!.item} (${(p0.symbol ?? "").toUpperCase()})";
+                                  },
+                                  displaySubStringForOption: (p0) {
+                                    final parts = [
+                                      p0?.catId,
+                                      p0?.brandName,
+                                      p0?.productCategory,
+                                    ]
+                                        .where((e) =>
+                                            e != null &&
+                                            e.toString().trim().isNotEmpty)
+                                        .toList();
+
+                                    return parts.join(" | ");
+                                  },
                                   onChanged: (p0) {
                                     setState(() {
                                       selectedProduct = p0;
                                     });
                                   },
-                                  itemDisplayText: (p0) {
-                                    return "${p0.item} (${(p0.symbol ?? "").toUpperCase()})";
-                                  },
                                 ),
                               );
+                        //   child: AppCustomDropdown<Product>(
+                        //     items: state.products,
+                        //     value: selectedProduct,
+                        //     label: Strings.productLabel,
+                        //     placeholder: Strings.productPlaceHolder,
+                        //     itemToString: (p0) => p0.toString(),
+                        //     onChanged: (p0) {
+                        //       setState(() {
+                        //         selectedProduct = p0;
+                        //       });
+                        //     },
+                        //     itemDisplayText: (p0) {
+                        //       return "${p0.item} (${(p0.symbol ?? "").toUpperCase()})";
+                        //     },
+                        //   ),
+                        // );
                       },
                       listenWhen: (previous, current) =>
                           previous.isloading != current.isloading ||

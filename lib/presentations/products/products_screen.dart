@@ -9,9 +9,9 @@ import 'package:mvp_engineer/domain/models/engineer/engineer.dart';
 import 'package:mvp_engineer/presentations/products/product_item_widget.dart';
 import 'package:mvp_engineer/presentations/products/product_list_viewer.dart';
 import 'package:mvp_engineer/presentations/scanner/qr_code_scanner_page.dart';
-import 'package:mvp_shared_components/widgets/app_custom_dropdown.dart';
 import 'package:mvp_shared_components/widgets/app_search_field.dart';
 import 'package:mvp_shared_components/widgets/app_empty_list_container.dart';
+import 'package:mvp_shared_components/widgets/app_searchable_dropdown.dart';
 
 class ProductsScreen extends StatelessWidget {
   const ProductsScreen({super.key});
@@ -56,12 +56,29 @@ class ProductsScreen extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8.w),
-                child: AppCustomDropdown<Engineer>(
-                  emptyMessage: "No engineers available",
+                child: GenericSearchableDropdown<Engineer>(
+                  matchItem: (item, query) {
+                    final queryLower = query.toLowerCase();
+                    return [
+                      item.name,
+                      item.firstName,
+                      item.lastName,
+                    ]
+                        .whereType<String>()
+                        .any((val) => val.toLowerCase().contains(queryLower));
+                  },
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12.r),
+                    border: Border.all(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                  hintText: "Engineers",
+                  searchHint: "Search engineers..",
                   items: state.engineers,
-                  value: state.selectedEngineer,
-                  label: "Select Engineer",
-                  placeholder: "Select Engineer",
+                  displayStringForOption: (engineer) {
+                    return engineer!.name;
+                  },
                   onChanged: (engineer) {
                     context.read<ProductsBloc>().add(
                           ProductsEvent.setSelectedEngineer(engineer),
@@ -73,9 +90,6 @@ class ProductsScreen extends StatelessWidget {
                           ),
                         );
                   },
-                  showClear: true,
-                  itemToString: (enginer) => enginer.toString(),
-                  itemDisplayText: (engineer) => engineer.name,
                 ),
               ),
               Expanded(

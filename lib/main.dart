@@ -47,6 +47,13 @@ class MyApp extends StatelessWidget {
               onGenerateRoute: AppPages.onGenerateRoute,
               navigatorKey: AppContext.instance.getNavigatorKey(),
               initialRoute: AppRoutes.INITIAL,
+              builder: (context, widget) {
+                return MediaQuery(
+                  data: MediaQuery.of(context)
+                      .copyWith(textScaler: const TextScaler.linear(1.0)),
+                  child: widget!,
+                );
+              },
             );
           }),
     );

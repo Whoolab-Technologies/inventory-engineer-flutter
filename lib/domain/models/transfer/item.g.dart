@@ -15,6 +15,11 @@ Item _$ItemFromJson(Map<String, dynamic> json) => Item(
       requestedQuantity: (json['requested_quantity'] as num?)?.toInt(),
       issuedQuantity: (json['issued_quantity'] as num?)?.toInt(),
       receivedQuantity: (json['received_quantity'] as num?)?.toInt(),
+      categoryName: json['category_name'] as String?,
+      productCategory: json['product_category'] as String?,
+      brandName: json['brand_name'] as String?,
+      categoryId: json['category_id'] as String?,
+      catId: json['cat_id'] as String?,
     );
 
 Map<String, dynamic> _$ItemToJson(Item instance) => <String, dynamic>{
@@ -26,4 +31,9 @@ Map<String, dynamic> _$ItemToJson(Item instance) => <String, dynamic>{
       'requested_quantity': instance.requestedQuantity,
       'issued_quantity': instance.issuedQuantity,
       'received_quantity': instance.receivedQuantity,
+      'category_id': instance.categoryId,
+      'cat_id': instance.catId,
+      'category_name': instance.categoryName,
+      'brand_name': instance.brandName,
+      'product_category': instance.productCategory,
     };

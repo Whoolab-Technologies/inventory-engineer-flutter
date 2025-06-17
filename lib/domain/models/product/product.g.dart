@@ -27,7 +27,10 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
           .toList(),
       myStock: (json['my_stock'] as num?)?.toInt(),
       stockWithOthers: (json['stock_with_others'] as num?)?.toInt(),
-    );
+      categoryName: json['category_name'] as String?,
+      productCategory: json['product_category'] as String?,
+      brandName: json['brand_name'] as String?,
+    )..catId = json['cat_id'] as String?;
 
 Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
       'id': instance.id,
@@ -46,4 +49,8 @@ Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
       'stocks': instance.stocks,
       'my_stock': instance.myStock,
       'stock_with_others': instance.stockWithOthers,
+      'cat_id': instance.catId,
+      'category_name': instance.categoryName,
+      'brand_name': instance.brandName,
+      'product_category': instance.productCategory,
     };

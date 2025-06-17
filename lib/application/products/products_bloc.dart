@@ -39,24 +39,39 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     );
   }
 
-  FutureOr<void> _onGetStoresAndEngineers(
-      _GetStoresAndEngineers event, Emitter<ProductsState> emit) async {
-    try {
-      _cancelTokens['stores_engineers']?.cancel();
-      _cancelTokens['stores_engineers'] = CancelToken();
-      emit(state.copyWith(storesAndEngineersFailureOrSuccess: none()));
+  Future<void> _onGetStoresAndEngineers(
+    _GetStoresAndEngineers event,
+    Emitter<ProductsState> emit,
+  ) async {
+    _cancelTokens['stores_engineers']?.cancel();
+    final token = CancelToken();
+    _cancelTokens['stores_engineers'] = token;
 
-      Either<AppFailure, Map<String, dynamic>>
-          storesAndEngineersFailureOrSuccess =
-          await _iProductFacade.getStoresAndEngineer(
-              cancelToken: _cancelTokens['stores_engineers']);
-      emit(storesAndEngineersFailureOrSuccess
-          .fold((_) => state.copyWith(stores: [], engineers: []), (data) {
-        return state.copyWith(
-          stores: data['stores'] ?? [],
-          engineers: data['engineers'] ?? [],
-        );
-      }));
+    emit(state.copyWith(storesAndEngineersFailureOrSuccess: none()));
+
+    try {
+      final result = await _iProductFacade.getStoresAndEngineer(
+        cancelToken: token,
+      );
+
+      // prepare new values depending on success / failure
+      final newStores = result.fold<List<Store>>(
+        (_) => [],
+        (data) => data['stores'] ?? [],
+      );
+
+      final newEngineers = result.fold<List<Engineer>>(
+        (_) => [],
+        (data) => data['engineers'] ?? [],
+      );
+
+      emit(
+        state.copyWith(
+          stores: newStores,
+          engineers: newEngineers,
+          storesAndEngineersFailureOrSuccess: optionOf(result),
+        ),
+      );
     } finally {
       _cancelTokens.remove('stores_engineers');
     }

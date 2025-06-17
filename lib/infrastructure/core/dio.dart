@@ -1,4 +1,5 @@
 import "dart:convert";
+import "dart:developer";
 import "package:dio/dio.dart";
 import "package:flutter/foundation.dart";
 import "package:mvp_engineer/core/utils/utils.dart";
@@ -53,7 +54,6 @@ class DioClient {
   void setupInterceptors() {
     _dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) async {
-        await Future.delayed(const Duration(milliseconds: 300));
         options.headers['Accept'] = 'application/json';
 
         // Handle password endpoint URL modification
@@ -74,7 +74,8 @@ class DioClient {
           }
           options.headers["Authorization"] = "Bearer $_token";
         }
-
+        log("${options.uri}");
+        log(_token);
         return handler.next(options);
       },
       onResponse: (response, handler) {

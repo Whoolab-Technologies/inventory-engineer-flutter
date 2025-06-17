@@ -32,6 +32,15 @@ class Product {
   @JsonKey(name: 'stock_with_others')
   int? stockWithOthers;
 
+  @JsonKey(name: 'cat_id')
+  String? catId;
+  @JsonKey(name: 'category_name')
+  String? categoryName;
+  @JsonKey(name: 'brand_name')
+  String? brandName;
+  @JsonKey(name: 'product_category')
+  String? productCategory;
+
   Product({
     this.id,
     this.item,
@@ -49,6 +58,9 @@ class Product {
     this.stocks,
     this.myStock,
     this.stockWithOthers,
+    this.categoryName,
+    this.productCategory,
+    this.brandName,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {

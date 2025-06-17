@@ -18,6 +18,16 @@ class Item {
   int? issuedQuantity;
   @JsonKey(name: 'received_quantity')
   int? receivedQuantity;
+  @JsonKey(name: 'category_id')
+  String? categoryId;
+  @JsonKey(name: 'cat_id')
+  String? catId;
+  @JsonKey(name: 'category_name')
+  String? categoryName;
+  @JsonKey(name: 'brand_name')
+  String? brandName;
+  @JsonKey(name: 'product_category')
+  String? productCategory;
 
   Item({
     this.id,
@@ -28,6 +38,11 @@ class Item {
     this.requestedQuantity,
     this.issuedQuantity,
     this.receivedQuantity,
+    this.categoryName,
+    this.productCategory,
+    this.brandName,
+    this.categoryId,
+    this.catId,
   });
 
   @override

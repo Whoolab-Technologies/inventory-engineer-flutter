@@ -14,6 +14,10 @@ MaterialRequestItem _$MaterialRequestItemFromJson(Map<String, dynamic> json) =>
       productImage: json['product_image'] as String?,
       unit: json['unit'] as String?,
       quantity: (json['quantity'] as num?)?.toInt(),
+      catId: json['cat_id'] as String?,
+      categoryName: json['category_name'] as String?,
+      productCategory: json['product_category'] as String?,
+      brandName: json['brand_name'] as String?,
     );
 
 Map<String, dynamic> _$MaterialRequestItemToJson(
@@ -25,4 +29,8 @@ Map<String, dynamic> _$MaterialRequestItemToJson(
       'product_image': instance.productImage,
       'unit': instance.unit,
       'quantity': instance.quantity,
+      'cat_id': instance.catId,
+      'category_name': instance.categoryName,
+      'brand_name': instance.brandName,
+      'product_category': instance.productCategory,
     };
