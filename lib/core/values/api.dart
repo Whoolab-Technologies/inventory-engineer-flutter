@@ -11,6 +11,7 @@ class Api {
     "reset": "/reset",
     "products": "/products",
     "mr": "/mr",
+    "material-returns": "/material-returns",
     "home": "/home",
     "transactions": "/transactions",
     "sendLink": "/password/reset",

@@ -118,6 +118,7 @@ class _MaterialRequestFormState extends State<MaterialRequestForm> {
                             : Padding(
                                 padding: EdgeInsets.symmetric(vertical: 8.h),
                                 child: GenericSearchableDropdown<Product>(
+                                  selectedItem: selectedProduct,
                                   matchItem: (item, query) {
                                     final queryLower = query.toLowerCase();
                                     return [
@@ -128,16 +129,6 @@ class _MaterialRequestFormState extends State<MaterialRequestForm> {
                                     ].whereType<String>().any((val) =>
                                         val.toLowerCase().contains(queryLower));
                                   },
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12.r),
-                                    border: Border.all(
-                                      color:
-                                          Theme.of(context).colorScheme.primary,
-                                    ),
-                                  ),
-                                  items: state.products,
-                                  hintText: Strings.productPlaceHolder,
-                                  searchHint: "Search products..",
                                   displayStringForOption: (p0) {
                                     return "${p0!.item} (${(p0.symbol ?? "").toUpperCase()})";
                                   },
@@ -154,6 +145,16 @@ class _MaterialRequestFormState extends State<MaterialRequestForm> {
 
                                     return parts.join(" | ");
                                   },
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12.r),
+                                    border: Border.all(
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                    ),
+                                  ),
+                                  items: state.products,
+                                  hintText: Strings.productPlaceHolder,
+                                  searchHint: "Search products..",
                                   onChanged: (p0) {
                                     setState(() {
                                       selectedProduct = p0;

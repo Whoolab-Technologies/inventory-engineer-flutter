@@ -15,6 +15,8 @@ import 'package:mvp_engineer/application/home/home_bloc.dart' as _i1014;
 import 'package:mvp_engineer/application/login/login_bloc.dart' as _i837;
 import 'package:mvp_engineer/application/material_request/material_request_bloc.dart'
     as _i566;
+import 'package:mvp_engineer/application/material_return/material_return_bloc.dart'
+    as _i459;
 import 'package:mvp_engineer/application/password_reset/password_reset_bloc.dart'
     as _i550;
 import 'package:mvp_engineer/application/products/products_bloc.dart' as _i992;
@@ -22,6 +24,8 @@ import 'package:mvp_engineer/application/transfer/transfer_bloc.dart' as _i68;
 import 'package:mvp_engineer/domain/app-data/app_data.dart' as _i554;
 import 'package:mvp_engineer/domain/auth/i_auth_facade.dart' as _i129;
 import 'package:mvp_engineer/domain/home/i_home_facade.dart' as _i172;
+import 'package:mvp_engineer/domain/materal_return/i_material_return_facade.dart'
+    as _i645;
 import 'package:mvp_engineer/domain/material_request/i_material_request_facade.dart'
     as _i973;
 import 'package:mvp_engineer/domain/product/i_product_facade.dart' as _i983;
@@ -31,6 +35,8 @@ import 'package:mvp_engineer/infrastructure/core/dio.dart' as _i429;
 import 'package:mvp_engineer/infrastructure/home/home_repo.dart' as _i264;
 import 'package:mvp_engineer/infrastructure/material_request/material_request_repo.dart'
     as _i49;
+import 'package:mvp_engineer/infrastructure/material_return/material_return_repo.dart'
+    as _i603;
 import 'package:mvp_engineer/infrastructure/product/product_repo.dart' as _i127;
 import 'package:mvp_engineer/infrastructure/transfer/transfer_repo.dart'
     as _i911;
@@ -50,6 +56,10 @@ extension GetItInjectableX on _i174.GetIt {
     final injectionModule = _$InjectionModule();
     gh.lazySingleton<_i554.AppData>(() => injectionModule.appData);
     gh.lazySingleton<_i429.DioClient>(() => injectionModule.dioClient);
+    gh.lazySingleton<_i645.IMaterialReturnFacade>(
+        () => _i603.MaterialReturnRepo(gh<_i429.DioClient>()));
+    gh.factory<_i459.MaterialReturnBloc>(
+        () => _i459.MaterialReturnBloc(gh<_i645.IMaterialReturnFacade>()));
     gh.lazySingleton<_i129.IAuthFacade>(
         () => _i597.AuthRepo(gh<_i554.AppData>()));
     gh.lazySingleton<_i973.IMaterialRequestFacade>(

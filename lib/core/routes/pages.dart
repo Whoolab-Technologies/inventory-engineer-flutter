@@ -4,6 +4,7 @@ import 'package:mvp_engineer/application/auth/auth_bloc.dart';
 import 'package:mvp_engineer/application/home/home_bloc.dart';
 import 'package:mvp_engineer/application/login/login_bloc.dart';
 import 'package:mvp_engineer/application/material_request/material_request_bloc.dart';
+import 'package:mvp_engineer/application/material_return/material_return_bloc.dart';
 import 'package:mvp_engineer/application/password_reset/password_reset_bloc.dart';
 import 'package:mvp_engineer/application/products/products_bloc.dart';
 import 'package:mvp_engineer/application/transfer/transfer_bloc.dart';
@@ -12,6 +13,7 @@ import 'package:mvp_engineer/injection/injection.dart';
 import 'package:mvp_engineer/presentations/home/home_screen.dart';
 import 'package:mvp_engineer/presentations/login/login_screen.dart';
 import 'package:mvp_engineer/presentations/material_requests/material_request_screen.dart';
+import 'package:mvp_engineer/presentations/material_return/material_return_screen.dart';
 import 'package:mvp_engineer/presentations/password-reset/password_reset_screen.dart';
 import 'package:mvp_engineer/presentations/products/products_screen.dart';
 import 'package:mvp_engineer/presentations/transfer/transfer_screen.dart';
@@ -76,6 +78,13 @@ class AppPages {
           page: const TransferScreen(),
           bloc: BlocProvider(
             create: (context) => getIt<TransferBloc>(),
+          ),
+        ),
+        PageEntity(
+          route: AppRoutes.MATERIAL_RETURN,
+          page: const MaterialReturnScreen(),
+          bloc: BlocProvider(
+            create: (context) => getIt<MaterialReturnBloc>(),
           ),
         ),
       ];
