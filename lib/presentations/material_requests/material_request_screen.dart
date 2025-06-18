@@ -8,6 +8,7 @@ import 'package:mvp_engineer/core/values/strings.dart';
 import 'package:mvp_engineer/domain/models/material_request/material_request.dart';
 import 'package:mvp_engineer/domain/models/material_request_item/material_request_item.dart';
 import 'package:mvp_engineer/presentations/material_requests/material_requests_create_screen.dart';
+import 'package:mvp_shared_components/core/extensions.dart';
 import 'package:mvp_shared_components/widgets/app_empty_list_container.dart';
 import 'package:mvp_shared_components/widgets/app_shimmer.dart';
 import 'package:mvp_shared_components/widgets/app_status_container.dart';
@@ -190,7 +191,7 @@ class MaterialRequestTile extends StatelessWidget {
                 AppStatusContainer(
                     status: (request.status ?? ""),
                     child: Text(
-                      (request.status ?? "").toUpperCase(),
+                      (request.status ?? "").toUpperCaseWithSpace(),
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 12.sp,
@@ -225,6 +226,7 @@ class MaterialRequestTile extends StatelessWidget {
 
   void _showMaterialRequestDetails(
       BuildContext context, MaterialRequest request) {
+    final items = [...(request.items ?? [])];
     showModalBottomSheet(
       context: context,
       builder: (_) => Padding(
@@ -235,25 +237,42 @@ class MaterialRequestTile extends StatelessWidget {
             Text("Material Request Details",
                 style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 10),
-            Text(
-              "${request.requestNumber}",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16.sp,
-                  color: Theme.of(context).colorScheme.primary),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "${request.requestNumber}",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.sp,
+                      color: Theme.of(context).colorScheme.primary),
+                ),
+                AppStatusContainer(
+                    status: (request.status ?? ""),
+                    child: Text(
+                      ("${items.length} Items").toUpperCase(),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12.sp,
+                      ),
+                    )),
+              ],
             ),
             Text(request.description ?? ""),
             const Divider(),
-            ListView.separated(
-              shrinkWrap: true,
-              itemCount: (request.items ?? []).length,
-              separatorBuilder: (context, index) {
-                return const Divider();
-              },
-              itemBuilder: (context, index) {
-                final prdt = request.items![index];
-                return MaterialRequestProductItem(item: prdt);
-              },
+            Expanded(
+              child: ListView.separated(
+                shrinkWrap: true,
+                itemCount: (items).length,
+                separatorBuilder: (context, index) {
+                  return const Divider();
+                },
+                itemBuilder: (context, index) {
+                  final prdt = items[index];
+                  return MaterialRequestProductItem(item: prdt);
+                },
+              ),
             ),
           ],
         ),
@@ -272,6 +291,9 @@ class MaterialRequestProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final requestedQty = item?.quantity ?? 0;
+    final issuedQty = item?.issuedQuantity ?? 0;
+    final isPartialIssue = issuedQty < requestedQty;
     return Container(
       padding: EdgeInsets.all(10.r),
       decoration: BoxDecoration(
@@ -345,6 +367,18 @@ class MaterialRequestProductItem extends StatelessWidget {
                     ),
                   ),
                 ),
+                if (isPartialIssue)
+                  Padding(
+                    padding: EdgeInsets.only(top: 6.h),
+                    child: Text(
+                      "Partial quantity issued ($issuedQty), awaiting procurement for remaining ${requestedQty - issuedQty}.",
+                      style: TextStyle(
+                        fontSize: 11.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.orange.shade800,
+                      ),
+                    ),
+                  ),
               ],
             ),
           ),

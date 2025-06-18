@@ -22,6 +22,14 @@ class MaterialRequestItem {
   @JsonKey(name: 'product_category')
   String? productCategory;
 
+  @JsonKey(name: 'requested_quantity')
+  dynamic requestedQuantity;
+
+  @JsonKey(name: 'issued_quantity')
+  dynamic issuedQuantity;
+  @JsonKey(name: 'received_quantity')
+  dynamic receivedQuantity;
+
   MaterialRequestItem({
     this.id,
     this.productId,
@@ -33,6 +41,9 @@ class MaterialRequestItem {
     this.categoryName,
     this.productCategory,
     this.brandName,
+    this.requestedQuantity,
+    this.issuedQuantity,
+    this.receivedQuantity,
   });
 
   factory MaterialRequestItem.fromJson(Map<String, dynamic> json) =>
