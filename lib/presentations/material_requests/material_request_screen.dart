@@ -270,7 +270,8 @@ class MaterialRequestTile extends StatelessWidget {
                 },
                 itemBuilder: (context, index) {
                   final prdt = items[index];
-                  return MaterialRequestProductItem(item: prdt);
+                  return MaterialRequestProductItem(
+                      item: prdt, status: request.status);
                 },
               ),
             ),
@@ -285,9 +286,11 @@ class MaterialRequestProductItem extends StatelessWidget {
   const MaterialRequestProductItem({
     super.key,
     required this.item,
+    required this.status,
   });
 
   final MaterialRequestItem? item;
+  final String? status;
 
   @override
   Widget build(BuildContext context) {
@@ -367,7 +370,7 @@ class MaterialRequestProductItem extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (isPartialIssue)
+                if (status == 'awaiting_procurement' && isPartialIssue)
                   Padding(
                     padding: EdgeInsets.only(top: 6.h),
                     child: Text(
