@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mvp_engineer/application/material_return/material_return_bloc.dart';
 import 'package:mvp_engineer/application/products/products_bloc.dart';
+import 'package:mvp_engineer/core/routes/routes.dart';
 import 'package:mvp_engineer/core/utils/utils.dart';
 import 'package:mvp_engineer/core/values/strings.dart';
 import 'package:mvp_engineer/domain/models/engineer/engineer.dart';
@@ -113,19 +115,37 @@ class ProductsScreen extends StatelessWidget {
                           itemCount: 5,
                         );
                       }
-                      return SingleChildScrollView(
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        child: Column(
-                          children: [
-                            state.products.isEmpty
-                                ? const AppEmptyListContainer(
-                                    message: Strings.noProductsAvailable,
-                                  )
-                                : ProductListViewer(
-                                    products: state.products,
-                                  )
-                          ],
-                        ),
+                      return Stack(
+                        children: [
+                          SizedBox.expand(
+                            child: SingleChildScrollView(
+                              physics: const AlwaysScrollableScrollPhysics(),
+                              child: Column(
+                                children: [
+                                  state.products.isEmpty
+                                      ? const AppEmptyListContainer(
+                                          message: Strings.noProductsAvailable,
+                                        )
+                                      : ProductListViewer(
+                                          products: state.products,
+                                        ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                              bottom: 12.h,
+                              right: 8.w,
+                              child: FloatingActionButton(
+                                  child: const Icon(Icons.compare_arrows),
+                                  onPressed: () {
+                                    context.read<MaterialReturnBloc>().add(
+                                        const MaterialReturnEvent
+                                            .getMaterialReturnList());
+                                    Navigator.of(context)
+                                        .pushNamed(AppRoutes.MATERIAL_RETURN);
+                                  }))
+                        ],
                       );
                     },
                   ),

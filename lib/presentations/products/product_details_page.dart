@@ -15,6 +15,9 @@ class ProductDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        SizedBox(
+          height: 12.h,
+        ),
         Expanded(
           child: SingleChildScrollView(
             //  controller: scrollController,
@@ -27,11 +30,9 @@ class ProductDetailsPage extends StatelessWidget {
                     previous.isloading != current.isloading,
                 builder: (context, state) {
                   if (state.isloading) {
-                    return const Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CircularProgressIndicator(),
-                      ],
+                    return Center(
+                      heightFactor: 5.h,
+                      child: const CircularProgressIndicator(),
                     );
                   }
                   return Column(
@@ -116,9 +117,7 @@ class ProductDetailsPage extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).pop();
                   context.read<ProductsBloc>().add(
-                        ProductsEvent.getProducts(
-                          all: true,
-                        ),
+                        ProductsEvent.getAllProducts(),
                       );
 
                   Navigator.of(context).push(

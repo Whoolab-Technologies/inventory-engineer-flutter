@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -48,6 +50,8 @@ class _MaterialRequestFormState extends State<MaterialRequestForm> {
   TextEditingController quantityController = TextEditingController();
 
   void _addProduct() {
+    log('selectedProduct ${selectedProduct!.id}');
+    log('selectedProduct ${quantityController.text}');
     if (selectedProduct != null && quantityController.text.isNotEmpty) {
       List<MaterialRequestItem>? existingItem =
           items.where((item) => item.productId == selectedProduct!.id).toList();
@@ -55,9 +59,14 @@ class _MaterialRequestFormState extends State<MaterialRequestForm> {
         Utils.handleError(context, Strings.productAlreadyAdded);
       } else {
         MaterialRequestItem item = MaterialRequestItem(
-            productId: selectedProduct!.id,
-            productName: selectedProduct!.item,
-            quantity: int.parse(quantityController.text));
+          productId: selectedProduct!.id,
+          productName: selectedProduct!.item,
+          quantity: int.parse(quantityController.text),
+          catId: selectedProduct!.catId,
+          categoryName: selectedProduct!.categoryName,
+          brandName: selectedProduct!.brandName,
+          productCategory: selectedProduct!.productCategory,
+        );
         items.add(item);
 
         quantityController.clear();
@@ -152,7 +161,7 @@ class _MaterialRequestFormState extends State<MaterialRequestForm> {
                                           Theme.of(context).colorScheme.primary,
                                     ),
                                   ),
-                                  items: state.products,
+                                  items: state.allProducts,
                                   hintText: Strings.productPlaceHolder,
                                   searchHint: "Search products..",
                                   onChanged: (p0) {
@@ -223,20 +232,63 @@ class _MaterialRequestFormState extends State<MaterialRequestForm> {
                 padding: EdgeInsets.only(top: 24.h),
                 itemCount: items.length,
                 itemBuilder: (context, index) {
+                  final item = items[index];
                   return Card(
                     child: ListTile(
-                      title: Text(
-                        items[index].productName ?? "",
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w600,
-                        ),
+                      title: Column(
+                        children: [
+                          Text(
+                            item.productName ?? "",
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.primary,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 4.h,
+                          ),
+                          RichText(
+                            text: TextSpan(
+                              style: TextStyle(
+                                  fontSize: 12.sp, color: Colors.grey[700]),
+                              children: [
+                                TextSpan(
+                                  text: item.catId ?? '-',
+                                  style: const TextStyle(color: Colors.black),
+                                ),
+                                const TextSpan(
+                                    text: ' | ',
+                                    style: TextStyle(color: Colors.grey)),
+                                TextSpan(
+                                  text: item.productCategory ?? '-',
+                                  style: const TextStyle(color: Colors.black),
+                                ),
+                                const TextSpan(
+                                    text: ' | ',
+                                    style: TextStyle(color: Colors.grey)),
+                                TextSpan(
+                                  text: item.categoryName ?? '-',
+                                  style: const TextStyle(color: Colors.black),
+                                ),
+                                const TextSpan(
+                                    text: ' | ',
+                                    style: TextStyle(color: Colors.grey)),
+                                TextSpan(
+                                  text: item.brandName ?? '-',
+                                  style: const TextStyle(color: Colors.black),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                       subtitle: Text(
                         '${Strings.quantityLabel}: ${items[index].quantity}',
                         style: TextStyle(
-                            fontSize: 12.sp, fontWeight: FontWeight.w400),
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                       trailing: IconButton(
                         icon: Icon(

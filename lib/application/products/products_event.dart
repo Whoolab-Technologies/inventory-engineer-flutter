@@ -5,6 +5,7 @@ class ProductsEvent with _$ProductsEvent {
   const factory ProductsEvent.started() = _Started;
   factory ProductsEvent.getProducts(
       {bool? all, String? searchTerm, String? engineerId}) = _GetProducts;
+  factory ProductsEvent.getAllProducts() = _GetAllProducts;
   const factory ProductsEvent.getProduct({required String productId}) =
       _GetProduct;
   const factory ProductsEvent.getStoresAndEngineer() = _GetStoresAndEngineers;

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mvp_engineer/application/products/products_bloc.dart';
 import 'package:mvp_engineer/domain/models/product/product.dart';
+import 'package:mvp_engineer/presentations/products/product_details_page.dart';
 import 'package:mvp_engineer/presentations/products/product_item_widget.dart';
 
 class ProductListViewer extends StatelessWidget {
@@ -22,9 +25,28 @@ class ProductListViewer extends StatelessWidget {
           isStockIn: product.isStockIn,
           stockCount: product.myStock ?? 0,
           stockWithOthers: product.stockWithOthers ?? 0,
+          brandName: product.brandName,
+          catId: product.catId,
+          categoryName: product.categoryName,
+          categoryId: product.productCategory,
+          onTap: () {
+            _showPopup(context, "${product.id ?? ""}");
+          },
         );
       },
       separatorBuilder: (context, i) => const Divider(),
+    );
+  }
+
+  void _showPopup(BuildContext context, String productId) {
+    context
+        .read<ProductsBloc>()
+        .add(ProductsEvent.getProduct(productId: productId));
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return const ProductDetailsPage();
+      },
     );
   }
 }

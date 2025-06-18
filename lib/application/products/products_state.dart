@@ -5,9 +5,12 @@ class ProductsState with _$ProductsState {
   const factory ProductsState({
     required bool isloading,
     required List<Product> products,
+    required List<Product> allProducts,
     required String? searchTerm,
     required Option<Either<AppFailure, List<Product>>>
         productListFailureOrSuccess,
+    required Option<Either<AppFailure, List<Product>>>
+        allProductListFailureOrSuccess,
     required Option<Either<AppFailure, Map<String, dynamic>>>
         productFailureOrSuccess,
     required Option<Either<AppFailure, Map<String, dynamic>>>
@@ -20,12 +23,14 @@ class ProductsState with _$ProductsState {
   factory ProductsState.state() => ProductsState(
         isloading: true,
         products: [],
+        allProducts: [],
         stores: [],
         engineers: [],
         searchTerm: "",
         selectedStore: null,
         selectedEngineer: null,
         productListFailureOrSuccess: none(),
+        allProductListFailureOrSuccess: none(),
         productFailureOrSuccess: none(),
         storesAndEngineersFailureOrSuccess: none(),
       );

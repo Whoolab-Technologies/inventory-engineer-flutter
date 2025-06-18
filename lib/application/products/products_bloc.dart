@@ -20,6 +20,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   final IProductFacade _iProductFacade;
   final Map<String, CancelToken> _cancelTokens = {};
   ProductsBloc(this._iProductFacade) : super(ProductsState.state()) {
+    on<_GetAllProducts>(_onGetAllProducts, transformer: restartable());
     on<_GetProducts>(_onGetProducts, transformer: restartable());
     on<_GetProduct>(_onGetProduct, transformer: restartable());
     on<_GetStoresAndEngineers>(
@@ -130,6 +131,37 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
       );
     } finally {
       _cancelTokens.remove('products');
+    }
+  }
+
+  FutureOr<void> _onGetAllProducts(
+      _GetAllProducts event, Emitter<ProductsState> emit) async {
+    _cancelTokens['all_products']?.cancel();
+    _cancelTokens['all_products'] = CancelToken();
+    try {
+      emit(
+        state.copyWith(
+          isloading: true,
+          allProducts: [],
+          allProductListFailureOrSuccess: none(),
+        ),
+      );
+
+      Either<AppFailure, List<Product>> productListFailureOrSuccess =
+          await _iProductFacade.getProducts(
+        all: true,
+        cancelToken: _cancelTokens['all_products'],
+      );
+
+      emit(
+        state.copyWith(
+          isloading: false,
+          allProducts: productListFailureOrSuccess.fold((l) => [], (r) => r),
+          allProductListFailureOrSuccess: optionOf(productListFailureOrSuccess),
+        ),
+      );
+    } finally {
+      _cancelTokens.remove('all_products');
     }
   }
 }

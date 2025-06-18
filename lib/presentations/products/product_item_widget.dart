@@ -10,7 +10,10 @@ class ProductItemWidget extends StatelessWidget {
   final int? stockCount;
   final int stockWithOthers;
   final VoidCallback? onTap;
-
+  final String? brandName;
+  final String? catId;
+  final String? categoryName;
+  final String? categoryId;
   const ProductItemWidget({
     super.key,
     required this.productName,
@@ -20,6 +23,10 @@ class ProductItemWidget extends StatelessWidget {
     this.stockCount,
     this.onTap,
     required this.stockWithOthers,
+    this.brandName,
+    this.catId,
+    this.categoryName,
+    this.categoryId,
   });
 
   @override
@@ -67,11 +74,45 @@ class ProductItemWidget extends StatelessWidget {
                     Text(
                       productName,
                       style: TextStyle(
-                          fontSize: 16.sp,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.bold,
                           color: Theme.of(context).colorScheme.primary),
                     ),
                     SizedBox(height: 5.h),
+                    RichText(
+                      text: TextSpan(
+                        style:
+                            TextStyle(fontSize: 12.sp, color: Colors.grey[700]),
+                        children: [
+                          TextSpan(
+                            text: catId ?? '-',
+                            style: const TextStyle(color: Colors.black),
+                          ),
+                          const TextSpan(
+                              text: ' | ',
+                              style: TextStyle(color: Colors.grey)),
+                          TextSpan(
+                            text: categoryId ?? '-',
+                            style: const TextStyle(color: Colors.black),
+                          ),
+                          const TextSpan(
+                              text: ' | ',
+                              style: TextStyle(color: Colors.grey)),
+                          TextSpan(
+                            text: categoryName ?? '-',
+                            style: const TextStyle(color: Colors.black),
+                          ),
+                          const TextSpan(
+                              text: ' | ',
+                              style: TextStyle(color: Colors.grey)),
+                          TextSpan(
+                            text: brandName ?? '-',
+                            style: const TextStyle(color: Colors.black),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 4.h),
                     Text(
                       description,
                       style: TextStyle(
