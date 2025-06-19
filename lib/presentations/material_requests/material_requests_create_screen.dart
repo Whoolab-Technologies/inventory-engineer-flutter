@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -50,8 +48,6 @@ class _MaterialRequestFormState extends State<MaterialRequestForm> {
   TextEditingController quantityController = TextEditingController();
 
   void _addProduct() {
-    log('selectedProduct ${selectedProduct!.id}');
-    log('selectedProduct ${quantityController.text}');
     if (selectedProduct != null && quantityController.text.isNotEmpty) {
       List<MaterialRequestItem>? existingItem =
           items.where((item) => item.productId == selectedProduct!.id).toList();
@@ -236,6 +232,8 @@ class _MaterialRequestFormState extends State<MaterialRequestForm> {
                   return Card(
                     child: ListTile(
                       title: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             item.productName ?? "",
