@@ -15,9 +15,6 @@ MaterialReturnDetail _$MaterialReturnDetailFromJson(
       engineer: json['engineer'] == null
           ? null
           : Engineer.fromJson(json['engineer'] as Map<String, dynamic>),
-      items: (json['items'] as List<dynamic>?)
-          ?.map((e) => MaterialReturnItem.fromJson(e as Map<String, dynamic>))
-          .toList(),
     );
 
 Map<String, dynamic> _$MaterialReturnDetailToJson(
@@ -27,5 +24,4 @@ Map<String, dynamic> _$MaterialReturnDetailToJson(
       'material_return_id': instance.materialReturnId,
       'engineer_id': instance.engineerId,
       'engineer': instance.engineer,
-      'items': instance.items,
     };

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
@@ -75,12 +77,17 @@ class MaterialReturnRepo extends IMaterialReturnFacade {
         return left(
             AppFailure.customError(message: materialReturnResponse.message));
       }
+      log("${materialReturnResponse.data?.length}");
       return right(materialReturnResponse.data!);
     } on DioException catch (e) {
+      log("DioException ${e}");
       return left(AppFailure.customError(message: e.message!));
     } on PlatformException catch (e) {
+      log("PlatformException ${e.message}");
+
       return left(AppFailure.customError(message: e.message!));
     } catch (e) {
+      log("ca ${e}");
       return left(AppFailure.customError(message: e.toString()));
     }
   }

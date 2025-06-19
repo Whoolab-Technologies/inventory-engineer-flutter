@@ -1,8 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:mvp_engineer/domain/models/engineer/engineer.dart';
 
-import 'material_return_item.dart';
-
 part 'material_return_detail.g.dart';
 
 @JsonSerializable()
@@ -13,15 +11,12 @@ class MaterialReturnDetail {
   @JsonKey(name: 'engineer_id')
   int? engineerId;
   Engineer? engineer;
-  @JsonKey(name: 'items')
-  List<MaterialReturnItem>? items;
 
   MaterialReturnDetail({
     this.id,
     this.materialReturnId,
     this.engineerId,
     this.engineer,
-    this.items,
   });
 
   factory MaterialReturnDetail.fromJson(Map<String, dynamic> json) {

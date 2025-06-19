@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:mvp_engineer/domain/models/material_return/material_return_item.dart';
 import 'package:mvp_engineer/domain/models/store/store.dart';
 import 'material_return_detail.dart';
 
@@ -20,6 +21,9 @@ class MaterialReturn {
   @JsonKey(name: 'dn_number')
   dynamic dnNumber;
 
+  @JsonKey(name: 'items')
+  List<MaterialReturnItem>? items;
+
   MaterialReturn({
     this.id,
     this.fromStoreId,
@@ -29,6 +33,7 @@ class MaterialReturn {
     this.fromStore,
     this.details,
     this.dnNumber,
+    this.items,
   });
 
   factory MaterialReturn.fromJson(Map<String, dynamic> json) {

@@ -22,6 +22,9 @@ MaterialReturn _$MaterialReturnFromJson(Map<String, dynamic> json) =>
           ?.map((e) => MaterialReturnDetail.fromJson(e as Map<String, dynamic>))
           .toList(),
       dnNumber: json['dn_number'],
+      items: (json['items'] as List<dynamic>?)
+          ?.map((e) => MaterialReturnItem.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$MaterialReturnToJson(MaterialReturn instance) =>
@@ -34,4 +37,5 @@ Map<String, dynamic> _$MaterialReturnToJson(MaterialReturn instance) =>
       'from_store': instance.fromStore,
       'details': instance.details,
       'dn_number': instance.dnNumber,
+      'items': instance.items,
     };

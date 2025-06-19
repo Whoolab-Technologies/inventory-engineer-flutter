@@ -15,7 +15,7 @@ class MaterialReturnState with _$MaterialReturnState {
           getProductsFailureOrSuccess}) = _MaterialReturnState;
   factory MaterialReturnState.initial() => MaterialReturnState(
         isloading: true,
-        uploading: true,
+        uploading: false,
         products: [],
         items: [],
         getProductsFailureOrSuccess: none(),
