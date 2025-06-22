@@ -74,11 +74,5 @@ class ProductCard extends StatelessWidget {
     );
   }
 
-  Widget _buildImagePlaceholder() => AppShimmer(
-        child: Container(
-          height: 40.w,
-          width: 40.w,
-          color: Colors.white,
-        ),
-      );
+  Widget _buildImagePlaceholder() => AppShimmer(height: 40.w, width: 40.w);
 }

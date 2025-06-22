@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:mvp_shared_components/core/models/status/status.dart';
 
 part 'material_request.g.dart';
 
@@ -12,7 +13,10 @@ class MaterialRequest {
   int? engineerId;
   @JsonKey(name: 'store_id')
   int? storeId;
-  String? status;
+
+  @JsonKey(name: 'status_id')
+  int? statusId;
+  Status? status;
   @JsonKey(name: 'created_at')
   DateTime? createdAt;
 
@@ -24,6 +28,7 @@ class MaterialRequest {
     this.storeId,
     this.status,
     this.createdAt,
+    this.statusId,
   });
 
   @override
@@ -43,7 +48,8 @@ class MaterialRequest {
     dynamic description,
     int? engineerId,
     int? storeId,
-    String? status,
+    int? statusId,
+    Status? status,
     DateTime? createdAt,
   }) {
     return MaterialRequest(
@@ -53,6 +59,7 @@ class MaterialRequest {
       engineerId: engineerId ?? this.engineerId,
       storeId: storeId ?? this.storeId,
       status: status ?? this.status,
+      statusId: statusId ?? this.statusId,
       createdAt: createdAt ?? this.createdAt,
     );
   }

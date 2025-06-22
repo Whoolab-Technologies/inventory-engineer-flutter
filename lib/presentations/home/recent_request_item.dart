@@ -7,104 +7,89 @@ import 'package:mvp_shared_components/widgets/app_status_container.dart';
 class RecentRequestItem extends StatelessWidget {
   const RecentRequestItem({super.key, required this.materialRequest});
   final MaterialRequest materialRequest;
+
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 1.75,
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 2,
-              blurRadius: 3,
-              offset: const Offset(0, 3),
+    final theme = Theme.of(context);
+
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 6.h, horizontal: 8.w),
+      padding: EdgeInsets.all(12.w),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12.r),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 5,
+            offset: Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          /// Top Section: Request Number
+          Text(
+            materialRequest.requestNumber ?? "Request #",
+            style: theme.textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: theme.colorScheme.primary,
+              fontSize: 16.sp,
             ),
-          ],
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          ),
+
+          SizedBox(height: 8.h),
+
+          /// Date and Time
+          Row(
             children: [
+              Icon(Icons.calendar_today_outlined,
+                  size: 16.sp, color: Colors.grey),
+              SizedBox(width: 4.w),
               Text(
-                materialRequest.requestNumber ?? "",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).primaryColor,
-                ),
+                materialRequest.createdDate,
+                style: TextStyle(fontSize: 13.sp, color: Colors.black54),
               ),
-              SizedBox(height: 4.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    materialRequest.createdDate,
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      color: Colors.black38,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  Text(
-                    materialRequest.createdTime,
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      color: Colors.black38,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
+              SizedBox(width: 12.w),
+              Icon(Icons.access_time, size: 16.sp, color: Colors.grey),
+              SizedBox(width: 4.w),
+              Text(
+                materialRequest.createdTime,
+                style: TextStyle(fontSize: 13.sp, color: Colors.black54),
               ),
-              SizedBox(height: 4.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  AppStatusContainer(
-                    status: _getStatustext(materialRequest),
-                    child: Text(
-                      _getStatustext(materialRequest).toUpperCaseWithSpace(),
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                  Row(children: [
-                    Icon(
-                      Icons.inventory_2_outlined,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                    SizedBox(
-                      width: 8.w,
-                    ),
-                    Text(
-                      "${(materialRequest.items ?? []).length}",
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.primary,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ]),
-                ],
-              )
             ],
           ),
-        ),
+
+          SizedBox(height: 10.h),
+
+          /// Status (Full Text Visible)
+          AppStatusContainer(
+            status: materialRequest.status!,
+          ),
+
+          SizedBox(height: 10.h),
+
+          /// Item Count
+          Row(
+            children: [
+              Icon(
+                Icons.inventory_2_outlined,
+                color: theme.colorScheme.secondary,
+              ),
+              SizedBox(width: 8.w),
+              Text(
+                "${(materialRequest.items ?? []).length} item(s)",
+                style: TextStyle(
+                  color: theme.colorScheme.secondary,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 14.sp,
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
-  }
-
-  String _getStatustext(MaterialRequest materialRequest) {
-    if (materialRequest.stockTransfer != null) {
-      return materialRequest.stockTransfer?.status ?? "";
-    } else {
-      return materialRequest.status ?? "";
-    }
   }
 }

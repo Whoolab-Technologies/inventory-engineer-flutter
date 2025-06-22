@@ -11,7 +11,9 @@ MaterialReturn _$MaterialReturnFromJson(Map<String, dynamic> json) =>
       id: (json['id'] as num?)?.toInt(),
       fromStoreId: (json['from_store_id'] as num?)?.toInt(),
       toStoreId: (json['to_store_id'] as num?)?.toInt(),
-      status: json['status'] as String?,
+      status: json['status'] == null
+          ? null
+          : Status.fromJson(json['status'] as Map<String, dynamic>),
       toStore: json['to_store'] == null
           ? null
           : Store.fromJson(json['to_store'] as Map<String, dynamic>),
@@ -25,6 +27,7 @@ MaterialReturn _$MaterialReturnFromJson(Map<String, dynamic> json) =>
       items: (json['items'] as List<dynamic>?)
           ?.map((e) => MaterialReturnItem.fromJson(e as Map<String, dynamic>))
           .toList(),
+      statusId: (json['status_id'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$MaterialReturnToJson(MaterialReturn instance) =>
@@ -32,6 +35,7 @@ Map<String, dynamic> _$MaterialReturnToJson(MaterialReturn instance) =>
       'id': instance.id,
       'from_store_id': instance.fromStoreId,
       'to_store_id': instance.toStoreId,
+      'status_id': instance.statusId,
       'status': instance.status,
       'to_store': instance.toStore,
       'from_store': instance.fromStore,

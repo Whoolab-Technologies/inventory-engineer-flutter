@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvp_shared_components/widgets/app_shimmer.dart';
-import 'package:mvp_shared_components/widgets/app_status_container.dart';
 
 class TransferItemShimmer extends StatelessWidget {
   const TransferItemShimmer({super.key});
@@ -30,66 +29,29 @@ class TransferItemShimmer extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                AppShimmer(
-                    child: Container(
-                  color: Colors.white,
-                  height: 16.h,
-                  width: 120.w,
-                )),
-                AppShimmer(
-                  child: AppStatusContainer(
-                    status: "",
-                    child: SizedBox(
-                      height: 18.h,
-                      width: 120.w,
-                    ),
-                  ),
-                ),
+                AppShimmer(height: 16.h, width: 120.w),
+                AppShimmer(height: 18.h, width: 120.w),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                AppShimmer(
-                  child: Container(
-                    color: Colors.white,
-                    height: 16.w,
-                    width: 16.w,
-                  ),
-                ),
+                AppShimmer(height: 16.w, width: 16.w),
                 SizedBox(
                   width: 4.w,
                 ),
-                AppShimmer(
-                  child: Container(
-                    color: Colors.white,
-                    height: 16.w,
-                    width: 130.w,
-                  ),
-                ),
+                AppShimmer(height: 16.w, width: 130.w),
               ],
             ),
             SizedBox(height: 4.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                AppShimmer(
-                  child: Container(
-                    color: Colors.white,
-                    height: 14.w,
-                    width: 16.w,
-                  ),
-                ),
+                AppShimmer(height: 14.w, width: 16.w),
                 SizedBox(
                   width: 4.w,
                 ),
-                AppShimmer(
-                  child: Container(
-                    color: Colors.white,
-                    height: 14.w,
-                    width: 130.w,
-                  ),
-                ),
+                AppShimmer(height: 14.w, width: 130.w),
               ],
             )
           ]),

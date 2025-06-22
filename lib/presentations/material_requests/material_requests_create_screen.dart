@@ -114,12 +114,7 @@ class _MaterialRequestFormState extends State<MaterialRequestForm> {
                     BlocConsumer<ProductsBloc, ProductsState>(
                       builder: (context, state) {
                         return state.isloading
-                            ? AppShimmer(
-                                child: Container(
-                                  height: 54.h,
-                                  color: Colors.grey[300],
-                                ),
-                              )
+                            ? AppShimmer(height: 54.h, width: double.infinity)
                             : Padding(
                                 padding: EdgeInsets.symmetric(vertical: 8.h),
                                 child: GenericSearchableDropdown<Product>(

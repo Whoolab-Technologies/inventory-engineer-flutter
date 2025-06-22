@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvp_engineer/domain/models/transfer/transfer.dart';
 import 'package:mvp_engineer/presentations/widgets.dart';
-import 'package:mvp_shared_components/core/extensions.dart';
 import 'package:mvp_shared_components/widgets/app_status_container.dart';
 
 class TransferItem extends StatelessWidget {
@@ -57,15 +56,7 @@ class TransferItem extends StatelessWidget {
                   ),
                 ),
                 AppStatusContainer(
-                  status: item.status ?? "",
-                  child: Text(
-                    (item.status ?? "").toUpperCaseWithSpace(),
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
+                  status: item.status!,
                 )
               ],
             ),

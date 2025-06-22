@@ -28,33 +28,12 @@ class UserCardShimmer extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AppShimmer(
-                  child: Container(
-                    width: 100.w,
-                    height: 14.h,
-                    color: Colors.white,
-                  ),
-                ),
+                AppShimmer(width: 100.w, height: 14.h),
                 SizedBox(height: 4.h),
-                AppShimmer(
-                  child: Container(
-                    width: 150.w,
-                    height: 20.h,
-                    color: Colors.white,
-                  ),
-                ),
+                AppShimmer(width: 150.w, height: 20.h),
               ],
             ),
-            AppShimmer(
-              child: Container(
-                width: 70.w,
-                height: 70.w,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white,
-                ),
-              ),
-            ),
+            AppShimmer(width: 70.w, height: 70.w, shape: BoxShape.circle),
           ],
         ),
       ),

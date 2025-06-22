@@ -187,62 +187,23 @@ class ProductItemShimmer extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AppShimmer(
-              child: Container(
-                width: 60.w,
-                height: 60.h,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
-                  color: Colors.grey[300],
-                ),
-              ),
-            ),
+            AppShimmer(width: 60.w, height: 60.h),
             SizedBox(width: 10.w),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  AppShimmer(
-                    child: Container(
-                      width: double.infinity,
-                      height: 16.h,
-                      color: Colors.grey[300],
-                    ),
-                  ),
+                  AppShimmer(width: double.infinity, height: 16.h),
                   SizedBox(height: 5.h),
-                  AppShimmer(
-                    child: Container(
-                      width: double.infinity,
-                      height: 14.h,
-                      color: Colors.grey[300],
-                    ),
-                  ),
+                  AppShimmer(width: double.infinity, height: 14.h),
                   SizedBox(height: 5.h),
-                  AppShimmer(
-                    child: Container(
-                      width: double.infinity,
-                      height: 14.h,
-                      color: Colors.grey[300],
-                    ),
-                  ),
+                  AppShimmer(width: double.infinity, height: 14.h),
                   SizedBox(height: 5.h),
                   Row(
                     children: [
-                      AppShimmer(
-                        child: Container(
-                          width: 18.w,
-                          height: 18.h,
-                          color: Colors.grey[300],
-                        ),
-                      ),
+                      AppShimmer(width: 18.w, height: 18.h),
                       SizedBox(width: 5.w),
-                      AppShimmer(
-                        child: Container(
-                          width: 80.w,
-                          height: 14.h,
-                          color: Colors.grey[300],
-                        ),
-                      ),
+                      AppShimmer(width: 80.w, height: 14.h),
                     ],
                   ),
                 ],

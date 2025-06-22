@@ -28,20 +28,12 @@ class ProductCardShimmer extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               AppShimmer(
-                child: Container(
-                  height: 100.h,
-                  color: Colors.white,
-                ),
+                width: double.infinity,
+                height: 100.h,
               ),
               Padding(
                 padding: EdgeInsets.all(8.0.w),
-                child: AppShimmer(
-                  child: Container(
-                    width: double.infinity,
-                    height: 14.h,
-                    color: Colors.white,
-                  ),
-                ),
+                child: AppShimmer(width: double.infinity, height: 14.h),
               ),
             ],
           ),

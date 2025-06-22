@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:mvp_shared_components/core/models/status/status.dart';
 
 import 'item.dart';
 import 'material_request.dart';
@@ -13,7 +14,9 @@ class Transfer {
   int? fromStoreId;
   @JsonKey(name: 'to_store_id')
   int? toStoreId;
-  String? status;
+  @JsonKey(name: 'status_id')
+  int? statusId;
+  Status? status;
   String? remarks;
   @JsonKey(name: 'created_at')
   DateTime? createdAt;
@@ -34,6 +37,7 @@ class Transfer {
       this.notes,
       this.items,
       this.materialRequest,
+      this.statusId,
       this.dnNumber});
 
   @override
@@ -51,7 +55,8 @@ class Transfer {
     int? id,
     int? fromStoreId,
     int? toStoreId,
-    String? status,
+    int? statusId,
+    Status? status,
     String? remarks,
     DateTime? createdAt,
     List<Note>? notes,
@@ -62,6 +67,7 @@ class Transfer {
       id: id ?? this.id,
       fromStoreId: fromStoreId ?? this.fromStoreId,
       toStoreId: toStoreId ?? this.toStoreId,
+      statusId: statusId ?? this.statusId,
       status: status ?? this.status,
       remarks: remarks ?? this.remarks,
       createdAt: createdAt ?? this.createdAt,

@@ -251,7 +251,11 @@ class RecentMaterialRequest extends StatelessWidget {
                   },
                   itemBuilder: (context, index) {
                     final materialRequest = data.materialRequests![index];
-                    return RecentRequestItem(materialRequest: materialRequest);
+                    return FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child:
+                          RecentRequestItem(materialRequest: materialRequest),
+                    );
                   },
                 ),
         ),

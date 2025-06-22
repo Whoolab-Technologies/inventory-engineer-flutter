@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:mvp_engineer/domain/models/material_request/stock_transfer/stock_transfer.dart';
 import 'package:mvp_engineer/domain/models/material_request_item/material_request_item.dart';
 import 'package:intl/intl.dart';
+import 'package:mvp_shared_components/core/models/status/status.dart';
 part 'material_request.g.dart';
 
 @JsonSerializable()
@@ -12,7 +13,8 @@ class MaterialRequest {
   String? description;
   @JsonKey(name: 'created_at')
   DateTime? createdAt;
-  String? status;
+  Status? status;
+  int? statusId;
   List<MaterialRequestItem>? items;
   @JsonKey(name: 'stock_transfer')
   StockTransfer? stockTransfer;
@@ -22,6 +24,7 @@ class MaterialRequest {
     this.requestNumber,
     this.description,
     this.status,
+    this.statusId,
     this.items,
     this.stockTransfer,
   });

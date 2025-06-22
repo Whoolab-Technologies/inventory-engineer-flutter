@@ -13,10 +13,13 @@ MaterialRequest _$MaterialRequestFromJson(Map<String, dynamic> json) =>
       description: json['description'],
       engineerId: (json['engineer_id'] as num?)?.toInt(),
       storeId: (json['store_id'] as num?)?.toInt(),
-      status: json['status'] as String?,
+      status: json['status'] == null
+          ? null
+          : Status.fromJson(json['status'] as Map<String, dynamic>),
       createdAt: json['created_at'] == null
           ? null
           : DateTime.parse(json['created_at'] as String),
+      statusId: (json['status_id'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$MaterialRequestToJson(MaterialRequest instance) =>
@@ -26,6 +29,7 @@ Map<String, dynamic> _$MaterialRequestToJson(MaterialRequest instance) =>
       'description': instance.description,
       'engineer_id': instance.engineerId,
       'store_id': instance.storeId,
+      'status_id': instance.statusId,
       'status': instance.status,
       'created_at': instance.createdAt?.toIso8601String(),
     };

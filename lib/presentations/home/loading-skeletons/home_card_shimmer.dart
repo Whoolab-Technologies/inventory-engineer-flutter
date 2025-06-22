@@ -25,22 +25,13 @@ class HomeCardShimmer extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           AppShimmer(
-            child: Container(
-              width: 58.w,
-              height: 60.w,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white,
-              ),
-            ),
+            width: 58.w,
+            height: 60.w,
           ),
           SizedBox(height: 8.0.h),
           AppShimmer(
-            child: Container(
-              width: 80.w,
-              height: 16.h,
-              color: Colors.white,
-            ),
+            width: 80.w,
+            height: 16.h,
           ),
         ],
       ),

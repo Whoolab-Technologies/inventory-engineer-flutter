@@ -9,12 +9,6 @@ class TitleShimmer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
         alignment: Alignment.centerLeft,
-        child: AppShimmer(
-          child: Container(
-            height: 20.h,
-            width: 100.w,
-            color: Colors.grey,
-          ),
-        ));
+        child: AppShimmer(height: 20.h, width: 100.w));
   }
 }

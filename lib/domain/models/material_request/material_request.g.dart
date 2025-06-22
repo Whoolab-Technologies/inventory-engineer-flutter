@@ -11,7 +11,10 @@ MaterialRequest _$MaterialRequestFromJson(Map<String, dynamic> json) =>
       id: (json['id'] as num?)?.toInt(),
       requestNumber: json['request_number'] as String?,
       description: json['description'] as String?,
-      status: json['status'] as String?,
+      status: json['status'] == null
+          ? null
+          : Status.fromJson(json['status'] as Map<String, dynamic>),
+      statusId: (json['statusId'] as num?)?.toInt(),
       items: (json['items'] as List<dynamic>?)
           ?.map((e) => MaterialRequestItem.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -30,6 +33,7 @@ Map<String, dynamic> _$MaterialRequestToJson(MaterialRequest instance) =>
       'description': instance.description,
       'created_at': instance.createdAt?.toIso8601String(),
       'status': instance.status,
+      'statusId': instance.statusId,
       'items': instance.items,
       'stock_transfer': instance.stockTransfer,
     };

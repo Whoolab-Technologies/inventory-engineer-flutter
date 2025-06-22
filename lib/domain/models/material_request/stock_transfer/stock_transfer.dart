@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:mvp_shared_components/core/models/status/status.dart';
 
 part 'stock_transfer.g.dart';
 
@@ -9,7 +10,9 @@ class StockTransfer {
   int? fromStoreId;
   @JsonKey(name: 'to_store_id')
   int? toStoreId;
-  String? status;
+  Status? status;
+  @JsonKey(name: 'status_id')
+  int? statusId;
   dynamic remarks;
 
   StockTransfer({
@@ -17,6 +20,7 @@ class StockTransfer {
     this.fromStoreId,
     this.toStoreId,
     this.status,
+    this.statusId,
     this.remarks,
   });
 

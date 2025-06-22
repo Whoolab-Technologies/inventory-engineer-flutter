@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:mvp_engineer/domain/models/material_return/material_return_item.dart';
 import 'package:mvp_engineer/domain/models/store/store.dart';
+import 'package:mvp_shared_components/core/models/status/status.dart';
 import 'material_return_detail.dart';
 
 part 'material_return.g.dart';
@@ -12,7 +13,9 @@ class MaterialReturn {
   int? fromStoreId;
   @JsonKey(name: 'to_store_id')
   int? toStoreId;
-  String? status;
+  @JsonKey(name: 'status_id')
+  int? statusId;
+  Status? status;
   @JsonKey(name: 'to_store')
   Store? toStore;
   @JsonKey(name: 'from_store')
@@ -34,6 +37,7 @@ class MaterialReturn {
     this.details,
     this.dnNumber,
     this.items,
+    this.statusId,
   });
 
   factory MaterialReturn.fromJson(Map<String, dynamic> json) {

@@ -10,7 +10,9 @@ Transfer _$TransferFromJson(Map<String, dynamic> json) => Transfer(
       id: (json['id'] as num?)?.toInt(),
       fromStoreId: (json['from_store_id'] as num?)?.toInt(),
       toStoreId: (json['to_store_id'] as num?)?.toInt(),
-      status: json['status'] as String?,
+      status: json['status'] == null
+          ? null
+          : Status.fromJson(json['status'] as Map<String, dynamic>),
       remarks: json['remarks'] as String?,
       createdAt: json['created_at'] == null
           ? null
@@ -25,6 +27,7 @@ Transfer _$TransferFromJson(Map<String, dynamic> json) => Transfer(
           ? null
           : MaterialRequest.fromJson(
               json['material_request'] as Map<String, dynamic>),
+      statusId: (json['status_id'] as num?)?.toInt(),
       dnNumber: json['dn_number'],
     );
 
@@ -32,6 +35,7 @@ Map<String, dynamic> _$TransferToJson(Transfer instance) => <String, dynamic>{
       'id': instance.id,
       'from_store_id': instance.fromStoreId,
       'to_store_id': instance.toStoreId,
+      'status_id': instance.statusId,
       'status': instance.status,
       'remarks': instance.remarks,
       'created_at': instance.createdAt?.toIso8601String(),

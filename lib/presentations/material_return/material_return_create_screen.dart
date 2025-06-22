@@ -111,12 +111,7 @@ class _MaterialReturnCreateScreenState
                       height: 4.h,
                     ),
                     state.isloading
-                        ? AppShimmer(
-                            child: Container(
-                              height: 54.h,
-                              color: Colors.grey[300],
-                            ),
-                          )
+                        ? AppShimmer(width: double.infinity, height: 54.h)
                         : Padding(
                             padding: EdgeInsets.symmetric(vertical: 8.h),
                             child: GenericSearchableDropdown<Product>(

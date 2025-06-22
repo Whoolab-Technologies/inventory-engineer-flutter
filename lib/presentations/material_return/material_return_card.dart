@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvp_engineer/domain/models/material_return/material_return.dart';
+import 'package:mvp_shared_components/core/extensions.dart';
+import 'package:mvp_shared_components/core/models/status/status.dart';
 
 class MaterialReturnCard extends StatelessWidget {
   final MaterialReturn materialReturn;
@@ -38,7 +40,7 @@ class MaterialReturnCard extends StatelessWidget {
             //   'To: ${materialReturn.toStore?.name ?? "-"}',
             //   style: TextStyle(fontSize: 12.sp, color: Colors.grey[700]),
             // ),
-            buildStatusSection(materialReturn.status ?? ""),
+            buildStatusSection(materialReturn.status!),
 
             // if ((materialReturn.details?.isNotEmpty ?? false)) ...[
             //   SizedBox(height: 4.h),
@@ -90,22 +92,8 @@ class MaterialReturnCard extends StatelessWidget {
     );
   }
 
-  Widget buildStatusSection(String status) {
-    Color statusColor;
-
-    switch (status.toUpperCase()) {
-      case 'RECEIVED':
-        statusColor = Colors.green;
-        break;
-      case 'IN TRANSIT':
-        statusColor = Colors.orange;
-        break;
-      case 'PARTIALLY RECEIVED':
-        statusColor = const Color.fromARGB(255, 216, 253, 235);
-        break;
-      default:
-        statusColor = Colors.grey;
-    }
+  Widget buildStatusSection(Status status) {
+    Color statusColor = status.color.toColor();
     return Row(
       children: [
         Text(
