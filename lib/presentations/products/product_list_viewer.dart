@@ -23,7 +23,7 @@ class ProductListViewer extends StatelessWidget {
           description: product.description ?? "No description",
           imageUrl: product.imageUrl ?? "",
           isStockIn: product.isStockIn,
-          stockCount: product.myStock ?? 0,
+          stockCount: product.engineerStock ?? 0,
           stockWithOthers: product.stockWithOthers ?? 0,
           brandName: product.brandName,
           catId: product.catId,

@@ -27,7 +27,7 @@ class Product {
   List<EngineerStocks>? engineerStocks;
   List<Stock>? stocks;
 
-  @JsonKey(name: 'my_stock')
+  @JsonKey(name: 'engineer_stock')
   int? myStock;
   @JsonKey(name: 'stock_with_others')
   int? stockWithOthers;
@@ -69,7 +69,7 @@ class Product {
 
   Map<String, dynamic> toJson() => _$ProductToJson(this);
 
-  bool get isStockIn => (myStock ?? 0) > 0;
+  bool get isStockIn => (engineerStock ?? 0) > 0;
 
   @override
   String toString() {

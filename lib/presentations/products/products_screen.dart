@@ -47,14 +47,17 @@ class ProductsScreen extends StatelessWidget {
         builder: (context, state) {
           return Column(
             children: [
-              AppSearchField(
-                hintText: Strings.seachProduct,
-                suffixIcon: _buildScannerButton(context, primaryColor),
-                onChange: (String? searchTerm) {
-                  context.read<ProductsBloc>().add(
-                        ProductsEvent.getProducts(searchTerm: searchTerm),
-                      );
-                },
+              Padding(
+                padding: EdgeInsets.all(8.w),
+                child: AppSearchField(
+                  hintText: Strings.seachProduct,
+                  suffixIcon: _buildScannerButton(context, primaryColor),
+                  onChange: (String? searchTerm) {
+                    context.read<ProductsBloc>().add(
+                          ProductsEvent.getProducts(searchTerm: searchTerm),
+                        );
+                  },
+                ),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8.w),

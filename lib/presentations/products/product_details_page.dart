@@ -104,12 +104,12 @@ class ProductDetailsPage extends StatelessWidget {
 
               // Stock Details
               _buildSectionTitle("Stocks Available", context),
-              ..._buildStoreStockDetails(productData['stocks'], context),
+              ..._buildStoreStockDetails(productData['stores'], context),
 
               // Engineer Stocks
               _buildSectionTitle("Engineer Stocks", context),
               ..._buildEngineerStockDetails(
-                productData['engineer_stocks'],
+                productData['engineers'],
                 context,
               ),
               SizedBox(height: 16.h),
@@ -175,11 +175,11 @@ class ProductDetailsPage extends StatelessWidget {
   }
 
   List<Widget> _buildStoreStockDetails(
-    List<dynamic> stocks,
+    List<dynamic> stores,
     BuildContext context,
   ) {
-    return stocks.isNotEmpty
-        ? stocks.map((stock) {
+    return stores.isNotEmpty
+        ? stores.map((stock) {
             return Padding(
               padding: EdgeInsets.symmetric(vertical: 4.h),
               child: Row(
@@ -187,8 +187,8 @@ class ProductDetailsPage extends StatelessWidget {
                   Icon(Icons.store,
                       color: Theme.of(context).colorScheme.primary),
                   SizedBox(width: 10.w),
-                  Expanded(child: Text("${stock['store']['name']}")),
-                  Expanded(child: Text("Quantity: ${stock['quantity']}")),
+                  Expanded(child: Text("${stock['store_name']}")),
+                  Expanded(child: Text("Quantity: ${stock['total_quantity']}")),
                 ],
               ),
             );
@@ -197,11 +197,11 @@ class ProductDetailsPage extends StatelessWidget {
   }
 
   List<Widget> _buildEngineerStockDetails(
-    List<dynamic> stocks,
+    List<dynamic> engineers,
     BuildContext context,
   ) {
-    return stocks.isNotEmpty
-        ? stocks.map((stock) {
+    return engineers.isNotEmpty
+        ? engineers.map((stock) {
             return Padding(
               padding: EdgeInsets.symmetric(vertical: 4.h),
               child: Row(
@@ -211,8 +211,8 @@ class ProductDetailsPage extends StatelessWidget {
                   SizedBox(width: 10.w),
                   Expanded(
                       child: Text(
-                          "${stock['engineer']['name']} (${stock['store']['name']})")),
-                  Expanded(child: Text("Quantity: ${stock['quantity']}")),
+                          "${stock['engineer_name']} (${stock['store_name']})")),
+                  Expanded(child: Text("Quantity: ${stock['total_quantity']}")),
                 ],
               ),
             );
