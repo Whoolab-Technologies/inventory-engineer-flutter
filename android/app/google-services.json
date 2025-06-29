@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "6985296895",
+    "project_id": "inventory-manager-57a62",
+    "storage_bucket": "inventory-manager-57a62.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:6985296895:android:9d1c81a5adf49f9a9855ca",
+        "android_client_info": {
+          "package_name": "com.example.fcm_test"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6sYRXPo6fxArbCcwGzkxPpg0gfhQUO6A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:6985296895:android:4311699237236e409855ca",
+        "android_client_info": {
+          "package_name": "com.mvp.engineer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6sYRXPo6fxArbCcwGzkxPpg0gfhQUO6A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:6985296895:android:0faa537b9edcbaee9855ca",
+        "android_client_info": {
+          "package_name": "com.mvp.store_keeper"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6sYRXPo6fxArbCcwGzkxPpg0gfhQUO6A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

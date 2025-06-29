@@ -27,8 +27,8 @@ class Product {
   List<EngineerStocks>? engineerStocks;
   List<Stock>? stocks;
 
-  @JsonKey(name: 'engineer_stock')
-  int? myStock;
+  // @JsonKey(name: 'engineer_stock')
+  // int? myStock;
   @JsonKey(name: 'stock_with_others')
   int? stockWithOthers;
 
@@ -56,7 +56,7 @@ class Product {
     this.imageUrl,
     this.engineerStocks,
     this.stocks,
-    this.myStock,
+    // this.myStock,
     this.stockWithOthers,
     this.categoryName,
     this.productCategory,
@@ -73,6 +73,6 @@ class Product {
 
   @override
   String toString() {
-    return 'Product(id: $id, item: $item, description: $description, unitId: $unitId, qrCode: $qrCode, image: $image, remarks: $remarks, totalStock: $totalStock, engineerStock: $engineerStock, code: $code, symbol: $symbol, imageUrl: $imageUrl, myStock: $myStock, stockWithOthers: $stockWithOthers)';
+    return 'Product(id: $id, item: $item, description: $description, unitId: $unitId, qrCode: $qrCode, image: $image, remarks: $remarks, totalStock: $totalStock, engineerStock: $engineerStock, code: $code, symbol: $symbol, imageUrl: $imageUrl,  stockWithOthers: $stockWithOthers)';
   }
 }

@@ -1,6 +1,7 @@
 import 'package:injectable/injectable.dart';
 import 'package:mvp_engineer/domain/app-data/app_data.dart';
 import 'package:mvp_engineer/infrastructure/core/dio.dart';
+import 'package:mvp_shared_components/core/services/notification_service.dart';
 
 @module
 abstract class InjectionModule {
@@ -16,4 +17,7 @@ abstract class InjectionModule {
   AppData get appData => AppData.instance;
   @lazySingleton
   DioClient get dioClient => DioClient.instance;
+
+  @lazySingleton
+  NotificationService get notificationService => NotificationService.instance;
 }

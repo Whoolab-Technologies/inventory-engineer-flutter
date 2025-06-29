@@ -17,6 +17,8 @@ import 'package:mvp_engineer/application/material_request/material_request_bloc.
     as _i566;
 import 'package:mvp_engineer/application/material_return/material_return_bloc.dart'
     as _i459;
+import 'package:mvp_engineer/application/notification/notification_bloc.dart'
+    as _i1042;
 import 'package:mvp_engineer/application/password_reset/password_reset_bloc.dart'
     as _i550;
 import 'package:mvp_engineer/application/products/products_bloc.dart' as _i992;
@@ -28,6 +30,8 @@ import 'package:mvp_engineer/domain/materal_return/i_material_return_facade.dart
     as _i645;
 import 'package:mvp_engineer/domain/material_request/i_material_request_facade.dart'
     as _i973;
+import 'package:mvp_engineer/domain/notification/i_notification_facade.dart'
+    as _i686;
 import 'package:mvp_engineer/domain/product/i_product_facade.dart' as _i983;
 import 'package:mvp_engineer/domain/transfer/i_transfer_facade.dart' as _i631;
 import 'package:mvp_engineer/infrastructure/auth/auth_repo.dart' as _i597;
@@ -37,10 +41,14 @@ import 'package:mvp_engineer/infrastructure/material_request/material_request_re
     as _i49;
 import 'package:mvp_engineer/infrastructure/material_return/material_return_repo.dart'
     as _i603;
+import 'package:mvp_engineer/infrastructure/notification/notification_repo.dart'
+    as _i3;
 import 'package:mvp_engineer/infrastructure/product/product_repo.dart' as _i127;
 import 'package:mvp_engineer/infrastructure/transfer/transfer_repo.dart'
     as _i911;
 import 'package:mvp_engineer/injection/injection_module.dart' as _i118;
+import 'package:mvp_shared_components/core/services/notification_service.dart'
+    as _i235;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -56,6 +64,8 @@ extension GetItInjectableX on _i174.GetIt {
     final injectionModule = _$InjectionModule();
     gh.lazySingleton<_i554.AppData>(() => injectionModule.appData);
     gh.lazySingleton<_i429.DioClient>(() => injectionModule.dioClient);
+    gh.lazySingleton<_i235.NotificationService>(
+        () => injectionModule.notificationService);
     gh.lazySingleton<_i645.IMaterialReturnFacade>(
         () => _i603.MaterialReturnRepo(gh<_i429.DioClient>()));
     gh.factory<_i459.MaterialReturnBloc>(
@@ -71,6 +81,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i730.AuthBloc>(() => _i730.AuthBloc(gh<_i129.IAuthFacade>()));
     gh.lazySingleton<_i172.IHomeFacade>(
         () => _i264.HomeRepo(gh<_i429.DioClient>()));
+    gh.lazySingleton<_i686.INotificationFacade>(() => _i3.NotificationRepo(
+          gh<_i235.NotificationService>(),
+          gh<_i429.DioClient>(),
+        ));
     gh.factory<_i992.ProductsBloc>(
         () => _i992.ProductsBloc(gh<_i983.IProductFacade>()));
     gh.lazySingleton<_i631.ITransferFacade>(
@@ -81,6 +95,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i1014.HomeBloc>(() => _i1014.HomeBloc(gh<_i172.IHomeFacade>()));
     gh.factory<_i68.TransferBloc>(
         () => _i68.TransferBloc(gh<_i631.ITransferFacade>()));
+    gh.factory<_i1042.NotificationBloc>(
+        () => _i1042.NotificationBloc(gh<_i686.INotificationFacade>()));
     return this;
   }
 }

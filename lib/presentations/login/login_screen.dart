@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvp_engineer/application/login/login_bloc.dart';
+import 'package:mvp_engineer/application/notification/notification_bloc.dart';
 import 'package:mvp_engineer/core/routes/names.dart';
 import 'package:mvp_engineer/core/utils/utils.dart';
 import 'package:mvp_engineer/core/values/strings.dart';
@@ -225,6 +226,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             );
                             AppGlobal.storageService
                                 .setBoolean(STORAGE_IS_LOGGED_IN, true);
+                            context
+                                .read<NotificationBloc>()
+                                .add(const NotificationEvent.started());
                             Navigator.of(context).pushNamedAndRemoveUntil(
                                 AppRoutes.HOME, (_) => false);
 

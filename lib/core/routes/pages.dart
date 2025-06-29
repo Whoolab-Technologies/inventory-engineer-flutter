@@ -5,6 +5,7 @@ import 'package:mvp_engineer/application/home/home_bloc.dart';
 import 'package:mvp_engineer/application/login/login_bloc.dart';
 import 'package:mvp_engineer/application/material_request/material_request_bloc.dart';
 import 'package:mvp_engineer/application/material_return/material_return_bloc.dart';
+import 'package:mvp_engineer/application/notification/notification_bloc.dart';
 import 'package:mvp_engineer/application/password_reset/password_reset_bloc.dart';
 import 'package:mvp_engineer/application/products/products_bloc.dart';
 import 'package:mvp_engineer/application/transfer/transfer_bloc.dart';
@@ -93,9 +94,9 @@ class AppPages {
     List<dynamic> blocProviders = [];
     blocProviders.addAll(
       [
-        // BlocProvider(
-        //   create: (context) => PushNotificationBloc(),
-        // ),
+        BlocProvider(
+          create: (context) => getIt<NotificationBloc>(),
+        ),
       ],
     );
     for (var page in pages()) {
