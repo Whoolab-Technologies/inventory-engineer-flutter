@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mvp_engineer/core/values/api.dart';
 import 'package:mvp_engineer/domain/notification/i_notification_facade.dart';
+import 'package:mvp_engineer/global.dart';
 import 'package:mvp_engineer/infrastructure/core/app_failure.dart';
 import 'package:mvp_engineer/infrastructure/core/base_response/base_response.dart';
 import 'package:mvp_engineer/infrastructure/core/dio.dart';
@@ -26,7 +27,7 @@ class NotificationRepo implements INotificationFacade {
         return left(const AppFailure.customError(
             message: "Failed to retrieve FCM token."));
       }
-
+      await AppGlobal.storageService.writeString(key: token, value: token);
       final deviceInfo = DeviceInfoPlugin();
       String deviceModel = '';
       String deviceBrand = '';
@@ -87,7 +88,8 @@ class NotificationRepo implements INotificationFacade {
   @override
   Future<Either<AppFailure, Unit>> removeToken() async {
     try {
-      String? token = _notificationService.token;
+      String? token = await AppGlobal.storageService.read(key: 'token');
+
       final Response response =
           await _dioClient.dio.delete(Api.endPoints["fcm"]!, data: {token});
 
