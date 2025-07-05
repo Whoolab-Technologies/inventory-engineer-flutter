@@ -1,6 +1,7 @@
 class Api {
-  static const apiUrlDev = "http://192.168.73.33:8000";
+  static const apiUrlDev = "http://10.88.160.33:8000";
   static const apiUrl = "https://inventory.seethis.net";
+  //static const apiUrl = "https://seethis.net/inventory-api/public";
   static const apiPrefix = "/api/v1/engineer";
   static const baseUrlDev = apiUrlDev + apiPrefix;
   static const baseUrl = apiUrl + apiPrefix;
@@ -16,5 +17,6 @@ class Api {
     "transactions": "/transactions",
     "sendLink": "/password/reset",
     "stores_engineers": "/stores_engineers",
+    "fcm": "/fcm",
   };
 }
