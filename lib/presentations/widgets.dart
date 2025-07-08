@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvp_engineer/core/values/strings.dart';
 import 'package:mvp_engineer/domain/models/transfer/item.dart';
+import 'package:mvp_shared_components/core/extensions.dart';
 import 'package:mvp_engineer/domain/models/transfer/note.dart';
 import 'package:mvp_engineer/domain/models/transfer/transfer.dart';
 
@@ -232,6 +233,14 @@ AlertDialog buildTranactionDetailsWidget(
           children: [
             _buildDetailsRow("${Strings.mrNumber} :",
                 transaction.materialRequest?.requestNumber ?? ""),
+            _buildDetailsRow("Date :",
+                transaction.createdAt?.toLocal().toDateString() ?? ""),
+            _buildDetailsRow(
+                "Time :",
+                transaction.createdAt
+                        ?.toLocal()
+                        .toDateString(format: 'h:mm a') ??
+                    ""),
             if ((transaction.notes ?? []).isNotEmpty)
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
