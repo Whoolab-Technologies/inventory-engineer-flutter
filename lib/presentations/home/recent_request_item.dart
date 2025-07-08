@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvp_engineer/domain/models/material_request/material_request.dart';
-import 'package:mvp_shared_components/core/extensions.dart';
+
 import 'package:mvp_shared_components/widgets/app_status_container.dart';
 
 class RecentRequestItem extends StatelessWidget {
@@ -18,7 +18,7 @@ class RecentRequestItem extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12.r),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Colors.black12,
             blurRadius: 5,
