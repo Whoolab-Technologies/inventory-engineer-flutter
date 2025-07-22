@@ -36,6 +36,9 @@ class _MaterialRequestScreenState extends State<MaterialRequestScreen> {
           IconButton(
             onPressed: () {
               context.read<ProductsBloc>().add(ProductsEvent.getAllProducts());
+              context
+                  .read<MaterialRequestBloc>()
+                  .add(const MaterialRequestEvent.start());
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (_) => const MaterialRequestCreateScreen(),

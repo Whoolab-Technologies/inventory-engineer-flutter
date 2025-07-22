@@ -2,6 +2,7 @@ part of 'material_request_bloc.dart';
 
 @freezed
 class MaterialRequestEvent with _$MaterialRequestEvent {
+  const factory MaterialRequestEvent.start() = Started;
   const factory MaterialRequestEvent.fetchMaterialRequests() =
       FetchMaterialRequests;
 

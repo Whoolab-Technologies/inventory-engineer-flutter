@@ -46,9 +46,11 @@ class MaterialRequestRepo implements IMaterialRequestFacade {
   Future<Either<AppFailure, MaterialRequest>> postMaterialRequests(
       List<MaterialRequestItem> mr) async {
     try {
-      MaterialRequest request = MaterialRequest(items: mr);
-      Response response =
-          await _client.dio.post(Api.endPoints["mr"]!, data: request.toJson());
+      List<Map<String, dynamic>> mrItems = mr
+          .map((el) => {"product_id": el.productId, "quantity": el.quantity})
+          .toList();
+      Response response = await _client.dio
+          .post(Api.endPoints["mr"]!, data: {"items": mrItems});
       MaterialRequestCreateResponse mrCreateResponse =
           MaterialRequestCreateResponse.fromJson(response.data);
       if (!mrCreateResponse.error) {

@@ -25,6 +25,9 @@ class MaterialRequestBloc
       _onGetchMaterialRequests,
       transformer: restartable(),
     );
+    on<Started>((event, emit) {
+      emit(state.copyWith(mrItems: []));
+    });
 
     on<MaterialRequestProductAdded>((MaterialRequestProductAdded event,
         Emitter<MaterialRequestState> emit) {
@@ -45,32 +48,25 @@ class MaterialRequestBloc
     });
 
     on<MaterialRequestSubmitted>((event, emit) async {
-      // Show loading state
       emit(state.copyWith(
         isLoading: true,
         materialRequestsFailureOrSuccess: none(),
         materialRequestsCreateFailureOrSuccess: none(),
       ));
 
-      // Call repository
-      final result =
-          await _iMaterialRequestRepo.postMaterialRequests(state.mrItems);
-
-      // Make a mutable copy of the materialRequests list
       final updatedMaterialRequests =
           List<MaterialRequest>.from(state.materialRequests);
 
-      // Add new request if successful
-      result.fold(
-        (failure) => updatedMaterialRequests,
-        (newRequest) => updatedMaterialRequests.insert(0, newRequest),
-      );
-      // Emit updated state
+      final result =
+          await _iMaterialRequestRepo.postMaterialRequests(state.mrItems);
+
+      result.foldRight(null, (mr, _) {
+        updatedMaterialRequests.insert(0, mr);
+      });
+
       emit(state.copyWith(
         isLoading: false,
-        mrItems: result.isRight()
-            ? []
-            : state.mrItems, // Clear items only on success
+        mrItems: result.isRight() ? [] : state.mrItems,
         materialRequests: updatedMaterialRequests,
         materialRequestsFailureOrSuccess:
             optionOf(right(updatedMaterialRequests)),
