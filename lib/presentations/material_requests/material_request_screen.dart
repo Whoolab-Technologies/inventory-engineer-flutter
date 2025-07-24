@@ -199,10 +199,9 @@ class MaterialRequestTile extends StatelessWidget {
   void _showMaterialRequestDetails(
       BuildContext context, MaterialRequest request) {
     List<MaterialRequestItem> items = [...(request.items ?? [])];
-    showModalBottomSheet(
-      context: context,
+    Navigator.of(context).push(MaterialPageRoute(
       builder: (_) =>
           MaterialRequestDetailsWidget(items: items, request: request),
-    );
+    ));
   }
 }

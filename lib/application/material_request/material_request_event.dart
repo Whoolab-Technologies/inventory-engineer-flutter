@@ -12,5 +12,6 @@ class MaterialRequestEvent with _$MaterialRequestEvent {
       MaterialRequestProductRemoved;
   const factory MaterialRequestEvent.descriptionChanged(String description) =
       MaterialRequestDescriptionChanged;
-  const factory MaterialRequestEvent.submitted() = MaterialRequestSubmitted;
+  const factory MaterialRequestEvent.submitted(
+      List<Map<String, dynamic>>? selectedFiles) = MaterialRequestSubmitted;
 }

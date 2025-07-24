@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvp_engineer/core/values/strings.dart';
 import 'package:mvp_engineer/domain/models/transfer/item.dart';
+import 'package:mvp_engineer/domain/models/transfer/transfer_file/transfer_file.dart';
 import 'package:mvp_shared_components/core/extensions.dart';
 import 'package:mvp_engineer/domain/models/transfer/note.dart';
 import 'package:mvp_engineer/domain/models/transfer/transfer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 Widget _tag(String label, String? value) {
   return Container(
@@ -253,6 +255,7 @@ AlertDialog buildTranactionDetailsWidget(
             _buildsectionTitle(Strings.items, context),
             ...(transaction.items ?? [])
                 .map((item) => _buildTransferItemRow(item, context)),
+            buildTransferFile(transaction.filesGroupedByType, context)
           ],
         ),
       ),
@@ -270,6 +273,124 @@ AlertDialog buildTranactionDetailsWidget(
           ),
         ),
       ),
+    ],
+  );
+}
+
+Container buildsectionTitle(String title, BuildContext context) {
+  return Container(
+    margin: EdgeInsets.symmetric(vertical: 4.h),
+    padding: EdgeInsets.all(4.w),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(4),
+      color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+    ),
+    child: Text(
+      title,
+      style: TextStyle(
+        color: Colors.black,
+        fontSize: 14.sp,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+  );
+}
+
+void _openFile(BuildContext context, String url) async {
+  final uri = Uri.parse(url);
+  try {
+    await launchUrl(uri, mode: LaunchMode.externalApplication);
+  } catch (e) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Could not open file')),
+    );
+  }
+}
+
+Widget buildFileGrid(List<Map<String, dynamic>> items, BuildContext context) {
+  return GridView.builder(
+    padding: EdgeInsets.symmetric(vertical: 8.w),
+    shrinkWrap: true,
+    physics: const NeverScrollableScrollPhysics(),
+    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: 3,
+      crossAxisSpacing: 8,
+      mainAxisSpacing: 8,
+    ),
+    itemCount: items.length,
+    itemBuilder: (context, index) {
+      Map<String, dynamic> item = items[index];
+      final fileUrl = item['url'] ?? '';
+      final isImage = item['file_mime_type']?.startsWith('image/') ?? false;
+
+      return GestureDetector(
+        onTap: () => _openFile(context, fileUrl),
+        child: Stack(
+          children: [
+            if (isImage)
+              Image.network(
+                fileUrl,
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: double.infinity,
+              )
+            else
+              Container(
+                width: double.infinity,
+                height: double.infinity,
+                color: Colors.grey[300],
+                child: Icon(
+                  Icons.insert_drive_file,
+                  size: 40.w,
+                  color: Colors.grey[700],
+                ),
+              ),
+          ],
+        ),
+      );
+    },
+  );
+}
+
+Widget noFilesAvailable(BuildContext context) {
+  return Container(
+    alignment: Alignment.center,
+    padding: EdgeInsets.all(16.w),
+    child: Text(
+      Strings.noFilesAvailable,
+      style: TextStyle(
+        fontSize: 14.sp,
+        color: Theme.of(context).colorScheme.error,
+      ),
+      textAlign: TextAlign.center,
+    ),
+  );
+}
+
+Widget buildTransferFile(
+  Map<String, List<TransferFile>> groupedFiles,
+  BuildContext context,
+) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      ...[
+        buildsectionTitle(Strings.transferredMaterialFiles, context),
+        (groupedFiles['transfer']?.isNotEmpty ?? false)
+            ? buildFileGrid(
+                groupedFiles['transfer']!.map((item) => item.toJson()).toList(),
+                context,
+              )
+            : noFilesAvailable(context),
+      ],
+      ...[
+        buildsectionTitle(Strings.receivedMaterialFiles, context),
+        (groupedFiles['receive']?.isNotEmpty ?? false)
+            ? buildFileGrid(
+                groupedFiles['receive']!.map((item) => item.toJson()).toList(),
+                context)
+            : noFilesAvailable(context),
+      ],
     ],
   );
 }

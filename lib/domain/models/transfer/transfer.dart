@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:mvp_engineer/domain/models/transfer/transfer_file/transfer_file.dart';
 import 'package:mvp_shared_components/core/models/status/status.dart';
 
 import 'item.dart';
@@ -22,6 +23,7 @@ class Transfer {
   DateTime? createdAt;
   List<Note>? notes;
   List<Item>? items;
+  List<TransferFile>? files;
   @JsonKey(name: 'material_request')
   MaterialRequest? materialRequest;
   @JsonKey(name: 'dn_number')
@@ -38,6 +40,7 @@ class Transfer {
       this.items,
       this.materialRequest,
       this.statusId,
+      this.files,
       this.dnNumber});
 
   @override
@@ -75,5 +78,25 @@ class Transfer {
       items: items ?? this.items,
       materialRequest: materialRequest ?? this.materialRequest,
     );
+  }
+
+  Map<String, List<TransferFile>> get filesGroupedByType {
+    List<TransferFile> transferFiles = [];
+    List<TransferFile> receiveFiles = [];
+
+    if (files != null) {
+      for (var file in files!) {
+        if (file.transactionType == 'transfer') {
+          transferFiles.add(file);
+        } else if (file.transactionType == 'receive') {
+          receiveFiles.add(file);
+        }
+      }
+    }
+
+    return {
+      'transfer': transferFiles,
+      'receive': receiveFiles,
+    };
   }
 }

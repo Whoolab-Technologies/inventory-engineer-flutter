@@ -28,6 +28,9 @@ Transfer _$TransferFromJson(Map<String, dynamic> json) => Transfer(
           : MaterialRequest.fromJson(
               json['material_request'] as Map<String, dynamic>),
       statusId: (json['status_id'] as num?)?.toInt(),
+      files: (json['files'] as List<dynamic>?)
+          ?.map((e) => TransferFile.fromJson(e as Map<String, dynamic>))
+          .toList(),
       dnNumber: json['dn_number'],
     );
 
@@ -41,6 +44,7 @@ Map<String, dynamic> _$TransferToJson(Transfer instance) => <String, dynamic>{
       'created_at': instance.createdAt?.toIso8601String(),
       'notes': instance.notes,
       'items': instance.items,
+      'files': instance.files,
       'material_request': instance.materialRequest,
       'dn_number': instance.dnNumber,
     };

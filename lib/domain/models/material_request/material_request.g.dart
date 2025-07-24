@@ -22,6 +22,9 @@ MaterialRequest _$MaterialRequestFromJson(Map<String, dynamic> json) =>
           ? null
           : StockTransfer.fromJson(
               json['stock_transfer'] as Map<String, dynamic>),
+      files: (json['files'] as List<dynamic>?)
+          ?.map((e) => MaterialRequestFile.fromJson(e as Map<String, dynamic>))
+          .toList(),
     )..createdAt = json['created_at'] == null
         ? null
         : DateTime.parse(json['created_at'] as String);
@@ -35,5 +38,6 @@ Map<String, dynamic> _$MaterialRequestToJson(MaterialRequest instance) =>
       'status': instance.status,
       'statusId': instance.statusId,
       'items': instance.items,
+      'files': instance.files,
       'stock_transfer': instance.stockTransfer,
     };

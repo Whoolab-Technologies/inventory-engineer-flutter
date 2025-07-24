@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvp_engineer/domain/models/transfer/transfer.dart';
-import 'package:mvp_engineer/presentations/widgets.dart';
+import 'package:mvp_engineer/presentations/widgets/widgets.dart';
 import 'package:mvp_shared_components/widgets/app_status_container.dart';
 
 class TransferItem extends StatelessWidget {

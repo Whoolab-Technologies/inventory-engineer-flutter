@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvp_engineer/application/material_request/material_request_bloc.dart';
@@ -9,6 +10,8 @@ import 'package:mvp_engineer/domain/models/material_request_item/material_reques
 import 'package:mvp_engineer/domain/models/product/product.dart';
 import 'package:mvp_shared_components/widgets/app_searchable_dropdown.dart';
 import 'package:mvp_shared_components/widgets/app_shimmer.dart';
+import 'package:mvp_shared_components/widgets/image_picker_button.dart';
+import 'package:mvp_shared_components/widgets/image_picker_screen.dart';
 
 class MaterialRequestCreateScreen extends StatelessWidget {
   const MaterialRequestCreateScreen({super.key, this.selectedProduct});
@@ -46,6 +49,7 @@ class _MaterialRequestFormState extends State<MaterialRequestForm> {
   List<Product> products = [];
   Product? selectedProduct;
   TextEditingController quantityController = TextEditingController();
+  List<Map<String, dynamic>> _selectedFiles = [];
 
   void _addProduct() {
     if (selectedProduct != null && quantityController.text.isNotEmpty) {
@@ -74,6 +78,25 @@ class _MaterialRequestFormState extends State<MaterialRequestForm> {
       }
 
       FocusScope.of(context).unfocus();
+    }
+  }
+
+  Future<void> _navigateAndPickImages() async {
+    FocusScope.of(context).requestFocus(FocusNode());
+    SystemChannels.textInput.invokeMethod('TextInput.hide');
+    final List<Map<String, dynamic>>? selectedFiles = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ImagePickerScreen(
+          selectedFiles: _selectedFiles,
+        ),
+      ),
+    );
+
+    if (selectedFiles != null) {
+      setState(() {
+        _selectedFiles = selectedFiles;
+      });
     }
   }
 
@@ -111,13 +134,17 @@ class _MaterialRequestFormState extends State<MaterialRequestForm> {
                 padding: EdgeInsets.symmetric(horizontal: 8.w),
                 child: Column(
                   children: [
+                    ImagePickerButton(
+                      selectedFiles: _selectedFiles,
+                      onImagesSelected: _navigateAndPickImages,
+                    ),
                     BlocConsumer<ProductsBloc, ProductsState>(
                       builder: (context, state) {
-                        return state.isloading
-                            ? AppShimmer(height: 54.h, width: double.infinity)
-                            : Padding(
-                                padding: EdgeInsets.symmetric(vertical: 8.h),
-                                child: GenericSearchableDropdown<Product>(
+                        return Padding(
+                          padding: EdgeInsets.symmetric(vertical: 8.h),
+                          child: state.isloading
+                              ? AppShimmer(height: 46.h, width: double.infinity)
+                              : GenericSearchableDropdown<Product>(
                                   selectedItem: selectedProduct,
                                   matchItem: (item, query) {
                                     final queryLower = query.toLowerCase();
@@ -161,7 +188,7 @@ class _MaterialRequestFormState extends State<MaterialRequestForm> {
                                     });
                                   },
                                 ),
-                              );
+                        );
                         //   child: AppCustomDropdown<Product>(
                         //     items: state.products,
                         //     value: selectedProduct,
@@ -312,7 +339,7 @@ class _MaterialRequestFormState extends State<MaterialRequestForm> {
                               state.mrItems.isNotEmpty) {
                             context
                                 .read<MaterialRequestBloc>()
-                                .add(const MaterialRequestSubmitted());
+                                .add(MaterialRequestSubmitted(_selectedFiles));
                           }
                         },
                   child: state.isLoading

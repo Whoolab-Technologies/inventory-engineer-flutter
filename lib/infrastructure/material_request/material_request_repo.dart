@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
@@ -44,13 +46,43 @@ class MaterialRequestRepo implements IMaterialRequestFacade {
 
   @override
   Future<Either<AppFailure, MaterialRequest>> postMaterialRequests(
-      List<MaterialRequestItem> mr) async {
+      List<MaterialRequestItem> mr,
+      List<Map<String, dynamic>>? selectedFiles) async {
     try {
       List<Map<String, dynamic>> mrItems = mr
           .map((el) => {"product_id": el.productId, "quantity": el.quantity})
           .toList();
-      Response response = await _client.dio
-          .post(Api.endPoints["mr"]!, data: {"items": mrItems});
+
+      FormData formData = FormData();
+
+      List<Map<String, dynamic>> _selectedFiles =
+          List<Map<String, dynamic>>.from(selectedFiles ?? []);
+      for (int i = 0; i < _selectedFiles.length; i++) {
+        final file = _selectedFiles[i]['file'];
+        if (file != null) {
+          formData.files.add(
+            MapEntry(
+              'files[]',
+              await MultipartFile.fromFile(
+                file.path,
+                filename: file.path.split('/').last,
+              ),
+            ),
+          );
+        }
+      }
+
+      formData.fields.add(MapEntry("items", jsonEncode(mrItems)));
+
+      Response response = await _client.dio.post(
+        Api.endPoints["mr"]!,
+        data: formData,
+        options: Options(
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        ),
+      );
       MaterialRequestCreateResponse mrCreateResponse =
           MaterialRequestCreateResponse.fromJson(response.data);
       if (!mrCreateResponse.error) {

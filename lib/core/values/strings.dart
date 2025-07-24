@@ -76,4 +76,13 @@ class Strings {
   static const String received = "Received";
   static const String passwordResetLinkSent =
       "Password reset link sent successfully.";
+  static const String uploadedFiles = "Uploaded Files";
+
+  static const String transferredMaterialFiles =
+      "Uploaded Files (Material Transfer)";
+
+  static const String receivedMaterialFiles =
+      "Uploaded Files (Material Received)";
+
+  static const String noFilesAvailable = "No files available";
 }

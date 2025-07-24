@@ -57,8 +57,10 @@ class MaterialRequestBloc
       final updatedMaterialRequests =
           List<MaterialRequest>.from(state.materialRequests);
 
-      final result =
-          await _iMaterialRequestRepo.postMaterialRequests(state.mrItems);
+      final result = await _iMaterialRequestRepo.postMaterialRequests(
+        state.mrItems,
+        event.selectedFiles,
+      );
 
       result.foldRight(null, (mr, _) {
         updatedMaterialRequests.insert(0, mr);

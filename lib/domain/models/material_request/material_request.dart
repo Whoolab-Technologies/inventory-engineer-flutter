@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:mvp_engineer/domain/models/material_request/material_request_file/material_request_file.dart';
 import 'package:mvp_engineer/domain/models/material_request/stock_transfer/stock_transfer.dart';
 import 'package:mvp_engineer/domain/models/material_request_item/material_request_item.dart';
 import 'package:intl/intl.dart';
@@ -16,6 +17,7 @@ class MaterialRequest {
   Status? status;
   int? statusId;
   List<MaterialRequestItem>? items;
+  List<MaterialRequestFile>? files;
   @JsonKey(name: 'stock_transfer')
   StockTransfer? stockTransfer;
 
@@ -27,6 +29,7 @@ class MaterialRequest {
     this.statusId,
     this.items,
     this.stockTransfer,
+    this.files,
   });
 
   factory MaterialRequest.fromJson(Map<String, dynamic> json) =>
@@ -37,4 +40,22 @@ class MaterialRequest {
   String get createdTime => DateFormat('hh:mm a').format(createdAt!.toLocal());
   String get createdDateTime =>
       DateFormat('yyyy-MM-dd hh:mm a').format(createdAt!.toLocal());
+
+  Map<String, List<MaterialRequestFile>> get filesGroupedByType {
+    final transferFiles = <MaterialRequestFile>[];
+    final receiveFiles = <MaterialRequestFile>[];
+
+    for (final file in files ?? []) {
+      if (file.transactionType == 'create') {
+        transferFiles.add(file);
+      } else if (file.transactionType == 'receive') {
+        receiveFiles.add(file);
+      }
+    }
+
+    return {
+      'transfer': transferFiles,
+      'receive': receiveFiles,
+    };
+  }
 }
