@@ -54,7 +54,20 @@ class MaterialRequestDetailsWidget extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(child: Text(request.description ?? "")),
+                Expanded(
+                    child: ((request.description != null))
+                        ? Padding(
+                            padding: EdgeInsets.symmetric(vertical: 4.h),
+                            child: Text(
+                              "${request.description}",
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.secondary,
+                                fontSize: 10.sp,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          )
+                        : const SizedBox()),
                 if ((request.files ?? []).isNotEmpty)
                   TextButton(
                       onPressed: () async {

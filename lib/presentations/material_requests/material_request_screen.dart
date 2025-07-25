@@ -171,8 +171,18 @@ class MaterialRequestTile extends StatelessWidget {
               ],
             ),
             SizedBox(height: 4.h),
-
-            /// Date and item count
+            if ((request.description != null))
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 4.h),
+                child: Text(
+                  "${request.description}",
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.secondary,
+                    fontSize: 10.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
