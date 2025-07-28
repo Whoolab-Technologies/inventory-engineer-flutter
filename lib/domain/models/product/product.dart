@@ -4,7 +4,7 @@ import 'package:mvp_engineer/domain/models/engineer_stocks/engineer_stocks.dart'
 import '../stock/stock.dart';
 part 'product.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Product {
   int? id;
   String? item;

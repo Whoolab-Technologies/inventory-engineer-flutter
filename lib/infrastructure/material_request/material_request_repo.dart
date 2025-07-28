@@ -10,6 +10,8 @@ import 'package:mvp_engineer/domain/models/material_request/material_request.dar
 import 'package:mvp_engineer/domain/models/material_request_item/material_request_item.dart';
 import 'package:mvp_engineer/domain/models/material_request_response/material_request_create_response.dart';
 import 'package:mvp_engineer/domain/models/material_request_response/material_request_list_response.dart';
+import 'package:mvp_engineer/domain/models/product/product.dart';
+import 'package:mvp_engineer/domain/models/product_response/product_response.dart';
 import 'package:mvp_engineer/infrastructure/core/app_failure.dart';
 import 'package:mvp_engineer/infrastructure/core/dio.dart';
 
@@ -92,6 +94,40 @@ class MaterialRequestRepo implements IMaterialRequestFacade {
           AppFailure.customError(message: mrCreateResponse.message),
         );
       }
+    } on DioException catch (e) {
+      return left(AppFailure.customError(message: e.message!));
+    } on PlatformException catch (e) {
+      return left(AppFailure.customError(message: e.message!));
+    } catch (e) {
+      return left(AppFailure.customError(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<AppFailure, List<Product>>> getProducts(
+      {String? searchTerm, CancelToken? cancelToken}) async {
+    try {
+      Map<String, dynamic> queryParameters = {};
+      if (searchTerm != null && searchTerm.isNotEmpty) {
+        queryParameters.putIfAbsent("search", () => searchTerm);
+      }
+      List<Product> products = [];
+      Response response = await _client.dio.get(
+        Api.endPoints["materials"]!,
+        queryParameters: queryParameters,
+        cancelToken: cancelToken,
+      );
+      ProductResponse productsResponse =
+          ProductResponse.fromJson(response.data);
+      if (productsResponse.error) {
+        return left(
+          AppFailure.customError(message: productsResponse.message),
+        );
+      }
+      products = (productsResponse.data ?? [])
+          .map<Product>((el) => Product.fromJson(el))
+          .toList();
+      return right(products);
     } on DioException catch (e) {
       return left(AppFailure.customError(message: e.message!));
     } on PlatformException catch (e) {

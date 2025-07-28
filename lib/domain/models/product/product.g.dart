@@ -44,8 +44,9 @@ Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
       'code': instance.code,
       'symbol': instance.symbol,
       'image_url': instance.imageUrl,
-      'engineers_stock': instance.engineerStocks,
-      'stocks': instance.stocks,
+      'engineers_stock':
+          instance.engineerStocks?.map((e) => e.toJson()).toList(),
+      'stocks': instance.stocks?.map((e) => e.toJson()).toList(),
       'stock_with_others': instance.stockWithOthers,
       'cat_id': instance.catId,
       'category_name': instance.categoryName,

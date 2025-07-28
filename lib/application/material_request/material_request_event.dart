@@ -5,6 +5,8 @@ class MaterialRequestEvent with _$MaterialRequestEvent {
   const factory MaterialRequestEvent.start() = Started;
   const factory MaterialRequestEvent.fetchMaterialRequests() =
       FetchMaterialRequests;
+  const factory MaterialRequestEvent.getProducts({String? searchTerm}) =
+      _OnGetProducts;
 
   const factory MaterialRequestEvent.productAdded(MaterialRequestItem item) =
       MaterialRequestProductAdded;

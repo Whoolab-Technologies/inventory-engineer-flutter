@@ -1,5 +1,5 @@
 class Api {
-  static const apiUrlDev = "http://10.227.3.33:8000";
+  static const apiUrlDev = "http://192.168.1.38:8000";
   static const apiUrl = "https://inventory.seethis.net";
   //static const apiUrl = "https://seethis.net/inventory-api/public";
   static const apiPrefix = "/api/v1/engineer";
@@ -18,5 +18,6 @@ class Api {
     "sendLink": "/password/reset",
     "stores_engineers": "/stores_engineers",
     "fcm": "/fcm",
+    "materials": "/materials",
   };
 }

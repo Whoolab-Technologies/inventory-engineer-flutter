@@ -8,6 +8,7 @@ import 'package:mvp_engineer/core/utils/utils.dart';
 import 'package:mvp_engineer/domain/material_request/i_material_request_facade.dart';
 import 'package:mvp_engineer/domain/models/material_request/material_request.dart';
 import 'package:mvp_engineer/domain/models/material_request_item/material_request_item.dart';
+import 'package:mvp_engineer/domain/models/product/product.dart';
 import 'package:mvp_engineer/infrastructure/core/app_failure.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 part 'material_request_event.dart';
@@ -23,6 +24,10 @@ class MaterialRequestBloc
       : super(MaterialRequestState.initial()) {
     on<FetchMaterialRequests>(
       _onGetchMaterialRequests,
+      transformer: restartable(),
+    );
+    on<_OnGetProducts>(
+      _onGetProducts,
       transformer: restartable(),
     );
     on<Started>((event, emit) {
@@ -75,6 +80,30 @@ class MaterialRequestBloc
         materialRequestsCreateFailureOrSuccess: optionOf(result),
       ));
     });
+  }
+
+  FutureOr<void> _onGetProducts(
+      _OnGetProducts event, Emitter<MaterialRequestState> emit) async {
+    _cancelTokens['products']?.cancel();
+    _cancelTokens['products'] = CancelToken();
+
+    try {
+      emit(
+        state.copyWith(
+          productsFailureOrSuccess: none(),
+        ),
+      );
+
+      Either<AppFailure, List<Product>> result =
+          await _iMaterialRequestRepo.getProducts(searchTerm: event.searchTerm);
+      List<Product> products = result.fold((_) => [], (r) => r);
+      emit(state.copyWith(
+        products: products,
+        productsFailureOrSuccess: optionOf(result),
+      ));
+    } finally {
+      _cancelTokens.remove('requests');
+    }
   }
 
   FutureOr<void> _onGetchMaterialRequests(

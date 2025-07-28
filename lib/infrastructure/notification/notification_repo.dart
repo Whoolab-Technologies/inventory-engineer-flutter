@@ -89,7 +89,6 @@ class NotificationRepo implements INotificationFacade {
   Future<Either<AppFailure, Unit>> removeToken() async {
     try {
       String? token = await AppGlobal.storageService.read(key: 'token');
-
       final Response response =
           await _dioClient.dio.delete(Api.endPoints["fcm"]!, data: {token});
 
