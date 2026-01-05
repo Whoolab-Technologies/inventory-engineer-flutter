@@ -1,16 +1,55 @@
-# mvp_engineer
+# Inventory Platform — Engineer Mobile App (Flutter)
 
-A new Flutter project.
+A mobile app designed for engineers working on different project sites.
 
-## Getting Started
+Engineers can:
 
-This project is a starting point for a Flutter application.
+- Raise material requests (MR)
+- Track approval & fulfillment status
+- Check store stock availability
+- Scan QR-coded product lists
+- View transfer status updates
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 🧩 Part of the Centralized Inventory Platform
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Platform Overview  
+  👉 https://github.com/Whoolab-Technologies/inventory-platform
+- Shared Mobile Components  
+  👉 https://github.com/Whoolab-Technologies/inventory-flutter-common
+- API Server  
+  👉 https://github.com/Whoolab-Technologies/inventory-api
+- Admin Web App  
+  👉 https://github.com/Whoolab-Technologies/inventory-admin-web
+- Storekeeper App  
+  👉 https://github.com/Whoolab-Technologies/inventory-storekeeper-flutter
+
+---
+
+## ✨ Engineer Features
+
+- Scan products via QR
+- Raise MR for required materials
+- View request workflow status
+- Track transfers & delivery stage
+- Check availability before requesting
+
+---
+
+## 🛠️ Tech
+
+- Flutter
+- Shared Component Library
+
+---
+
+## 💼 Business Usage & Enhancements
+
+We support:
+
+- Custom MR workflows
+- Project-based reporting models
+- Organization-specific extensions
+
+📩 mail@whoolab.com
