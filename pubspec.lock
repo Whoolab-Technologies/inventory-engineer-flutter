@@ -840,7 +840,7 @@ packages:
   mvp_shared_components:
     dependency: "direct main"
     description:
-      path: "../mvp_shared_components"
+      path: "../inventory-flutter-common"
       relative: true
     source: path
     version: "0.0.1"

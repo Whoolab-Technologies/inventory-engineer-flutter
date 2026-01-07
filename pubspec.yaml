@@ -46,7 +46,7 @@ dependencies:
   image_picker: ^1.1.2
   flutter_screenutil: ^5.9.3
   mvp_shared_components:
-    path: ../mvp_shared_components
+    path: ../inventory-flutter-common
 
   shimmer: ^3.0.0
   qr_code_dart_scan: ^0.9.8
