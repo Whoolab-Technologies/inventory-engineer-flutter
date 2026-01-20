@@ -23,7 +23,6 @@ class MyApp extends StatelessWidget {
     TextTheme textTheme = createTextTheme(context, "Poppins", "Poppins");
 
     MaterialTheme.init(textTheme);
-
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Theme.of(context).colorScheme.surface,
       statusBarBrightness: Brightness.light,
@@ -48,11 +47,7 @@ class MyApp extends StatelessWidget {
               navigatorKey: AppContext.instance.getNavigatorKey(),
               initialRoute: AppRoutes.INITIAL,
               builder: (context, widget) {
-                return MediaQuery(
-                  data: MediaQuery.of(context)
-                      .copyWith(textScaler: const TextScaler.linear(1.0)),
-                  child: widget!,
-                );
+                return widget!;
               },
             );
           }),

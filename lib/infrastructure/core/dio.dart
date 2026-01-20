@@ -74,8 +74,6 @@ class DioClient {
           }
           options.headers["Authorization"] = "Bearer $_token";
         }
-        log("${options.uri}");
-        log(_token);
         return handler.next(options);
       },
       onResponse: (response, handler) {

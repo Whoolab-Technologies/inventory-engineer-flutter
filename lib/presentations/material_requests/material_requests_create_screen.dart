@@ -362,10 +362,10 @@ class _ProductSelectionSheetState extends State<ProductSelectionSheet> {
           builder: (context, constraints) {
             return Padding(
               padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom,
-                top: 16,
-                left: 16,
-                right: 16,
+                bottom: 16.h,
+                top: 16.h,
+                left: 16.w,
+                right: 16.w,
               ),
               child: ConstrainedBox(
                 constraints: BoxConstraints(
@@ -376,17 +376,19 @@ class _ProductSelectionSheetState extends State<ProductSelectionSheet> {
                       previous.productsFailureOrSuccess !=
                       current.productsFailureOrSuccess,
                   builder: (context, state) {
+                    List<Product> products = state.products;
                     return Scaffold(
+                      backgroundColor: Colors.transparent,
                       body: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Container(
-                            width: 40,
-                            height: 4,
-                            margin: const EdgeInsets.only(bottom: 12),
+                            width: 70.w,
+                            height: 3.h,
+                            margin: EdgeInsets.only(bottom: 12.h),
                             decoration: BoxDecoration(
                               color: Colors.grey[400],
-                              borderRadius: BorderRadius.circular(2),
+                              borderRadius: BorderRadius.circular(2.r),
                             ),
                           ),
                           ProductSearchField(
@@ -411,7 +413,7 @@ class _ProductSelectionSheetState extends State<ProductSelectionSheet> {
                           ),
                           const SizedBox(height: 16),
                           Expanded(
-                            child: state.products.isEmpty
+                            child: products.isEmpty
                                 ? Center(
                                     child: Text(
                                     (_query ?? "").isNotEmpty
@@ -419,9 +421,9 @@ class _ProductSelectionSheetState extends State<ProductSelectionSheet> {
                                         : "Search and select products to continue.",
                                   ))
                                 : ListView.builder(
-                                    itemCount: state.products.length,
+                                    itemCount: products.length,
                                     itemBuilder: (_, index) {
-                                      final product = state.products[index];
+                                      final product = products[index];
                                       return InkWell(
                                         onTap: () {
                                           Navigator.of(context).pop(product);
