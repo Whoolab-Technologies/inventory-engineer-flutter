@@ -24,7 +24,7 @@ def targetSdkVersion = localProperties.getProperty('flutter.targetSdkVersion', '
 def compileSdkVersion = localProperties.getProperty('flutter.compileSdkVersion', '34').toInteger()
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode', '1').toInteger()
 def flutterVersionName = localProperties.getProperty('flutter.versionName','1.0.0')
-def flutterNdkVersion = localProperties.getProperty('flutter.ndkVersion') 
+def flutterNdkVersion = localProperties.getProperty('flutter.ndkVersion') ?: "27.3.13750724"
 
   println("TargetSdkVersion: ${targetSdkVersion}")
   println("CompileSdkVersion: ${compileSdkVersion}")

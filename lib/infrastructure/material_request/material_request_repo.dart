@@ -135,4 +135,33 @@ class MaterialRequestRepo implements IMaterialRequestFacade {
       return left(AppFailure.customError(message: e.toString()));
     }
   }
+
+  @override
+  Future<Either<AppFailure, List<Product>>> getProduct(
+      {required String id, CancelToken? cancelToken}) async {
+    try {
+      List<Product> products = [];
+      Response response = await _client.dio.get(
+        "${Api.endPoints["materials"]}/$id",
+        cancelToken: cancelToken,
+      );
+      ProductResponse productsResponse =
+          ProductResponse.fromJson(response.data);
+      if (productsResponse.error) {
+        return left(
+          AppFailure.customError(message: productsResponse.message),
+        );
+      }
+      products = (productsResponse.data ?? [])
+          .map<Product>((el) => Product.fromJson(el))
+          .toList();
+      return right(products);
+    } on DioException catch (e) {
+      return left(AppFailure.customError(message: e.message!));
+    } on PlatformException catch (e) {
+      return left(AppFailure.customError(message: e.message!));
+    } catch (e) {
+      return left(AppFailure.customError(message: e.toString()));
+    }
+  }
 }

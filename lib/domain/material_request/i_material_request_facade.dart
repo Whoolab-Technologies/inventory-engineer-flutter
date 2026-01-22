@@ -10,6 +10,8 @@ abstract class IMaterialRequestFacade {
       {CancelToken? cancelToken});
   Future<Either<AppFailure, List<Product>>> getProducts(
       {String? searchTerm, CancelToken? cancelToken});
+  Future<Either<AppFailure, List<Product>>> getProduct(
+      {required String id, CancelToken? cancelToken});
   Future<Either<AppFailure, MaterialRequest>> postMaterialRequests(
       List<MaterialRequestItem> mr, List<Map<String, dynamic>>? selectedFiles);
 }

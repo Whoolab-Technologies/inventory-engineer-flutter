@@ -30,6 +30,10 @@ class MaterialRequestBloc
       _onGetProducts,
       transformer: restartable(),
     );
+    on<_OnGetProduct>(
+      _onGetProduct,
+      transformer: restartable(),
+    );
     on<Started>((event, emit) {
       emit(state.copyWith(mrItems: []));
     });
@@ -102,7 +106,31 @@ class MaterialRequestBloc
         productsFailureOrSuccess: optionOf(result),
       ));
     } finally {
-      _cancelTokens.remove('requests');
+      _cancelTokens.remove('products');
+    }
+  }
+
+  FutureOr<void> _onGetProduct(
+      _OnGetProduct event, Emitter<MaterialRequestState> emit) async {
+    _cancelTokens['product']?.cancel();
+    _cancelTokens['product'] = CancelToken();
+
+    try {
+      emit(
+        state.copyWith(
+          productsFailureOrSuccess: none(),
+        ),
+      );
+
+      Either<AppFailure, List<Product>> result =
+          await _iMaterialRequestRepo.getProduct(id: event.id);
+      List<Product> products = result.fold((_) => [], (r) => r);
+      emit(state.copyWith(
+        products: products,
+        productsFailureOrSuccess: optionOf(result),
+      ));
+    } finally {
+      _cancelTokens.remove('product');
     }
   }
 

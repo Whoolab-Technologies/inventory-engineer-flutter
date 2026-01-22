@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,6 +50,12 @@ class _MaterialRequestFormState extends State<MaterialRequestForm> {
   Product? selectedProduct;
   TextEditingController quantityController = TextEditingController();
   List<Map<String, dynamic>> _selectedFiles = [];
+
+  @override
+  void initState() {
+    super.initState();
+    selectedProduct = widget.selectedProduct;
+  }
 
   void _addProduct() {
     if (selectedProduct != null && quantityController.text.isNotEmpty) {
@@ -404,10 +412,9 @@ class _ProductSelectionSheetState extends State<ProductSelectionSheet> {
                             onDecode: (value) {
                               FocusManager.instance.primaryFocus?.unfocus();
                               Navigator.of(context).pop();
+                              log("value $value");
                               context.read<MaterialRequestBloc>().add(
-                                    MaterialRequestEvent.getProducts(
-                                      searchTerm: value,
-                                    ),
+                                    MaterialRequestEvent.getProduct(id: value),
                                   );
                             },
                           ),
