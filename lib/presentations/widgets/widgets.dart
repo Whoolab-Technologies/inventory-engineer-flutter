@@ -70,7 +70,7 @@ Widget _buildTransferItemRow(Item item, BuildContext context) {
           spacing: 6,
           runSpacing: 6,
           children: [
-            _tag("Cat.id", item.catId),
+            _tag("Material Id", item.catId),
             _tag("Cat", item.categoryName),
             _tag("Brand", item.brandName),
             _tag("Unit", item.unit),

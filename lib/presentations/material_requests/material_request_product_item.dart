@@ -57,7 +57,7 @@ class MaterialRequestProductItem extends StatelessWidget {
                   spacing: 6,
                   runSpacing: 6,
                   children: [
-                    _tag("Cat.Id", item!.catId),
+                    _tag("Material Id", item!.catId),
                     _tag("Cat", item!.categoryName),
                     _tag("Brand", item!.brandName),
                     _tag("Unit", item!.unit),
