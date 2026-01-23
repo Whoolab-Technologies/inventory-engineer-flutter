@@ -84,6 +84,7 @@ class ProductsScreen extends StatelessWidget {
                     return engineer!.name;
                   },
                   onChanged: (engineer) {
+                    FocusManager.instance.primaryFocus?.unfocus();
                     context.read<ProductsBloc>().add(
                           ProductsEvent.setSelectedEngineer(engineer),
                         );

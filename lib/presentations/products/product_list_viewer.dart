@@ -30,6 +30,7 @@ class ProductListViewer extends StatelessWidget {
           categoryName: product.categoryName,
           categoryId: product.productCategory,
           onTap: () {
+            FocusManager.instance.primaryFocus?.unfocus();
             _showPopup(context, "${product.id ?? ""}");
           },
         );
