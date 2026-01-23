@@ -410,9 +410,7 @@ class _ProductSelectionSheetState extends State<ProductSelectionSheet> {
                                       searchTerm: value));
                             },
                             onDecode: (value) {
-                              FocusManager.instance.primaryFocus?.unfocus();
                               Navigator.of(context).pop();
-                              log("value $value");
                               context.read<MaterialRequestBloc>().add(
                                     MaterialRequestEvent.getProduct(id: value),
                                   );
