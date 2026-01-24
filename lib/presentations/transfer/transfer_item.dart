@@ -65,7 +65,7 @@ class TransferItem extends StatelessWidget {
               children: [
                 const Icon(
                   Icons.receipt_long_outlined,
-                  color: const Color.fromARGB(255, 95, 95, 95),
+                  color: Color.fromARGB(255, 95, 95, 95),
                 ),
                 SizedBox(
                   width: 6.w,
